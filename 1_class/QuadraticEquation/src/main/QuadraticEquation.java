@@ -17,14 +17,14 @@ public class QuadraticEquation {
         float discrim = discriminant(a, b, c);
 
         if (discrim < 0) {
-            System.out.println("Уравнение не имеет корней.");
+            System.out.println("The equation doesn't has roots.");
         } else if (discrim == 0) {
             x1 = (-b + (float) Math.sqrt(discrim)) / 2 * a;
-            System.out.println("Уравнение имеет 1 корень: " + x1);
+            System.out.println("The equation has one root: " + x1);
         } else {
             x1 = (-b + (float) Math.sqrt(discrim)) / 2 * a;
             x2 = (-b - (float) Math.sqrt(discrim)) / 2 * a;
-            System.out.printf("Уравнение имеет 2 корня: x1= %s x2= %s", x1, x2);
+            System.out.printf("The equation has two roots: x1= %s x2= %s", x1, x2);
         }
     }
 
