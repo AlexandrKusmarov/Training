@@ -1,7 +1,7 @@
-package ru.epam.javacore.lesson_4.homework.transportation;
+package main.java.model.transportation;
 
-import ru.epam.javacore.lesson_4.homework.cargo.Cargo;
-import ru.epam.javacore.lesson_4.homework.carrier.Carrier;
+import main.java.model.cargo.Cargo;
+import main.java.model.carrier.Carrier;
 
 import java.util.Date;
 
@@ -59,5 +59,17 @@ public class Transportation {
 
     public void setCarrier(Carrier carrier) {
         this.carrier = carrier;
+    }
+
+    @Override
+    public String toString() {
+        return "Transportation{" +
+                "id=" + id +
+                ", cargo=" + cargo +
+                ", carrier=" + carrier +
+                ", description='" + description + '\'' +
+                ", billTo='" + billTo + '\'' +
+                ", date=" + date +
+                '}';
     }
 }

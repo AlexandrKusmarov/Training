@@ -1,6 +1,8 @@
-package ru.epam.javacore.lesson_4.homework.carrier;
+package main.java.model.carrier;
 
-import ru.epam.javacore.lesson_4.homework.transportation.Transportation;
+import main.java.model.transportation.Transportation;
+
+import java.util.Arrays;
 
 public class Carrier {
     private Long id;
@@ -47,5 +49,16 @@ public class Carrier {
 
     public void setTransportations(Transportation[] transportations) {
         this.transportations = transportations;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrier{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", carrierType=" + carrierType +
+                ", transportations=" + Arrays.toString(transportations) +
+                '}';
     }
 }

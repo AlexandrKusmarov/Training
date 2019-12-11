@@ -1,4 +1,4 @@
-package ru.epam.javacore.lesson_4.homework.carrier;
+package main.java.model.carrier;
 
 public enum CarrierType {
     SHIP,

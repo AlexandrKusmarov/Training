@@ -1,4 +1,4 @@
-package ru.epam.javacore.lesson_4.homework.cargo;
+package main.java.model.cargo;
 
 public enum CargoType {
     FOOD,
