@@ -14,22 +14,11 @@ public class Storage {
     private int currentIndexCarrier = 0;
     private int currentIndexTransportation = 0;
 
-    private void expandArrCargoCapacity() {
-        Cargo[] tempArrCargo = Arrays.copyOf(arrCargo, arrCargo.length);
-        arrCargo = new Cargo[arrCargo.length * 2];
-        arrCargo = Arrays.copyOf(tempArrCargo, arrCargo.length);
-    }
-
-    private void expandArrCarrierCapacity() {
-        Carrier[] tempArrCarrier = Arrays.copyOf(arrCarrier, arrCarrier.length);
-        arrCarrier = new Carrier[arrCarrier.length * 2];
-        arrCarrier = Arrays.copyOf(tempArrCarrier, arrCarrier.length);
-    }
-
-    private void expandArrTransportationCapacity() {
-        Transportation[] tempArrTransportation = Arrays.copyOf(arrTransportation, arrTransportation.length);
-        arrTransportation = new Transportation[arrTransportation.length * 2];
-        arrTransportation = Arrays.copyOf(tempArrTransportation, arrTransportation.length);
+    private Object[] expandArrCapacity(Object[] array) {
+        Object[] tempArr;
+        tempArr = new Object[array.length * 2];
+        tempArr = Arrays.copyOf(array, tempArr.length);
+        return tempArr;
     }
 
     public void addCargo(Cargo cargo) {
@@ -38,7 +27,7 @@ public class Storage {
                 arrCargo[currentIndexCargo] = cargo;
                 currentIndexCargo++;
             } else {
-                expandArrCargoCapacity();
+                arrCargo = (Cargo[]) expandArrCapacity(arrCargo);
                 addCargo(cargo);
             }
         }
@@ -50,7 +39,7 @@ public class Storage {
                 arrCarrier[currentIndexCarrier] = carrier;
                 currentIndexCarrier++;
             } else {
-                expandArrCarrierCapacity();
+                arrCarrier = (Carrier[]) expandArrCapacity(arrCarrier);
                 addCarrier(carrier);
             }
         }
@@ -62,7 +51,7 @@ public class Storage {
                 arrTransportation[currentIndexTransportation] = transportation;
                 currentIndexTransportation++;
             } else {
-                expandArrTransportationCapacity();
+                arrTransportation = (Transportation[]) expandArrCapacity(arrTransportation);
                 addTransportation(transportation);
             }
         }
