@@ -115,6 +115,52 @@ public class Storage {
         return null;
     }
 
-    
+    public Carrier getCarrierById(Long id){
+        if(id != null && arrCarrier.length != 0){
+            for (Carrier carrier : arrCarrier) {
+                if(id.equals(carrier.getId())){
+                    return carrier;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Carrier getCarrierByName(String name){
+        if(name != null && arrCarrier.length != 0){
+            for (Carrier carrier : arrCarrier) {
+                if(name.equals(carrier.getName())){
+                    return carrier;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Carrier[] getAllCarriers(){
+        if(arrCargo.length != 0){
+            return arrCarrier;
+        }
+        return null;
+    }
+
+    public Transportation getTransportationById(Long id){
+        if(id != null && arrTransportation.length != 0){
+            for (Transportation transportation : arrTransportation) {
+                if(id.equals(transportation.getId())){
+                    return transportation;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    public Transportation[] getAllTransportations(){
+        if(arrTransportation.length != 0){
+            return arrTransportation;
+        }
+        return null;
+    }
 
 }

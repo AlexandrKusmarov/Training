@@ -1,5 +1,6 @@
 package main.java.model.cargo.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class LimitedShelfLife extends Cargo {
@@ -27,4 +28,16 @@ public class LimitedShelfLife extends Cargo {
         this.expires = expires;
     }
 
+    @Override
+    public String toString() {
+        return "Cargo =>> LimitedShelfLife{" +
+                "id=" + super.getId() +
+                ", name='" + super.getName() +
+                ", weight=" + super.getWeight() +
+                ", cargoType=" + super.getCargoType() +
+                ", transportations=" + Arrays.toString(super.getTransportations()) +
+                "produced=" + produced +
+                ", expires=" + expires +
+                '}';
+    }
 }

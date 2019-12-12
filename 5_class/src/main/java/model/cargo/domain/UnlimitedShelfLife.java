@@ -1,5 +1,7 @@
 package main.java.model.cargo.domain;
 
+import java.util.Arrays;
+
 public class UnlimitedShelfLife extends Cargo {
     private boolean isComposite;
     private boolean fragility;
@@ -23,5 +25,18 @@ public class UnlimitedShelfLife extends Cargo {
 
     public void setFragility(boolean fragility) {
         this.fragility = fragility;
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo =>> UnlimitedShelfLife{" +
+                "id=" + super.getId() +
+                ", name='" + super.getName() +
+                ", weight=" + super.getWeight() +
+                ", cargoType=" + super.getCargoType() +
+                ", transportations=" + Arrays.toString(super.getTransportations()) +
+                "isComposite=" + isComposite +
+                ", fragility=" + fragility +
+                '}';
     }
 }

@@ -65,5 +65,35 @@ public class DemoTransportCompany {
         storage.addTransportation(transportation2);
         storage.printAllTransportation();
 
+        System.out.println();
+//----------------------- Все товары -----------------------
+        for (Cargo allCargo : storage.getAllCargos()) {
+            System.out.println(allCargo);
+        }
+//----------------------- Все товары -----------------------
+        System.out.println();
+        System.out.println("Obtain Cargo by id: " + storage.getCargoById(3L));
+        System.out.println("Obtain Cargo by name: " + storage.getCargoByName("banana"));
+        System.out.println("Obtain Cargo by name: " + storage.getCargoByName("ban"));
+        System.out.println();
+//----------------------- Все перевозчики -----------------------
+        for (Carrier allCarrier : storage.getAllCarriers()) {
+            System.out.println(allCarrier);
+        }
+//----------------------- Все перевозчики -----------------------
+        System.out.println();
+        System.out.println("Obtain Carrier by id: " + storage.getCarrierById(5L));
+        System.out.println("Obtain Carrier by name: " + storage.getCarrierByName("Company 2"));
+        System.out.println("Obtain Carrier by name: " + storage.getCarrierByName("Com"));
+        System.out.println();
+//----------------------- Все перевозки -----------------------
+        for (Transportation allTransportation : storage.getAllTransportations()) {
+            System.out.println(allTransportation);
+        }
+//----------------------- Все перевозки -----------------------
+        System.out.println();
+        System.out.println("Obtain Transportation by id: " + storage.getTransportationById(7L));
+        System.out.println("Obtain Transportation by id: " + storage.getTransportationById(8L));
+        System.out.println("Obtain Transportation by id: " + storage.getTransportationById(1L));
     }
 }
