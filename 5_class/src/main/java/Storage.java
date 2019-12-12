@@ -2,6 +2,7 @@ package main.java;
 
 import main.java.model.cargo.domain.Cargo;
 import main.java.model.carrier.domain.Carrier;
+import main.java.model.common.domain.Basic;
 import main.java.model.transportation.domain.Transportation;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ public class Storage {
     private int currentIndexCargo = 0;
     private int currentIndexCarrier = 0;
     private int currentIndexTransportation = 0;
+    private Basic basic;
 
     private Object[] expandArrCapacity(Object[] array) {
         Object[] tempArr;

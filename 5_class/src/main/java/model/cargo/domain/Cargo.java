@@ -4,7 +4,7 @@ import main.java.model.transportation.domain.Transportation;
 
 import java.util.Arrays;
 
-public class Cargo {
+public abstract class Cargo {
     private Long id;
     private String name;
     private int weight;
