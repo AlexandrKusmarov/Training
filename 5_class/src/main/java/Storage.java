@@ -7,9 +7,11 @@ import main.java.model.transportation.domain.Transportation;
 import java.util.Arrays;
 
 public class Storage {
-    private Cargo[] arrCargo = new Cargo[1];
-    private Carrier[] arrCarrier = new Carrier[1];
-    private Transportation[] arrTransportation = new Transportation[1];
+    private static final int ARR_CAPACITY = 1;
+
+    private Cargo[] arrCargo = new Cargo[ARR_CAPACITY];
+    private Carrier[] arrCarrier = new Carrier[ARR_CAPACITY];
+    private Transportation[] arrTransportation = new Transportation[ARR_CAPACITY];
     private int currentIndexCargo = 0;
     private int currentIndexCarrier = 0;
     private int currentIndexTransportation = 0;
@@ -24,6 +26,7 @@ public class Storage {
     public void addCargo(Cargo cargo) {
         if (cargo != null) {
             if (currentIndexCargo < arrCargo.length) {
+                cargo.setId(IdGenerator.generateId());
                 arrCargo[currentIndexCargo] = cargo;
                 currentIndexCargo++;
             } else {
@@ -36,6 +39,7 @@ public class Storage {
     public void addCarrier(Carrier carrier) {
         if (carrier != null) {
             if (currentIndexCarrier < arrCarrier.length) {
+                carrier.setId(IdGenerator.generateId());
                 arrCarrier[currentIndexCarrier] = carrier;
                 currentIndexCarrier++;
             } else {
@@ -48,6 +52,7 @@ public class Storage {
     public void addTransportation(Transportation transportation) {
         if (transportation != null) {
             if (currentIndexTransportation < arrTransportation.length) {
+                transportation.setId(IdGenerator.generateId());
                 arrTransportation[currentIndexTransportation] = transportation;
                 currentIndexTransportation++;
             } else {
