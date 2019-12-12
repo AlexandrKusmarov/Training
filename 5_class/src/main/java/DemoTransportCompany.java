@@ -13,13 +13,13 @@ public class DemoTransportCompany {
     public static void main(String[] args) {
         Storage storage = new Storage();
 
-        Cargo apple = new LimitedShelfLife(new Date(1,12,13), new Date(1,1,14));
+        Cargo apple = new LimitedShelfLife(new Date(1, 12, 13), new Date(1, 1, 14));
         apple.setName("Apple");
 
-        Cargo orange = new LimitedShelfLife(new Date(11,12,13), new Date(11,11,14));
+        Cargo orange = new LimitedShelfLife(new Date(11, 12, 13), new Date(11, 11, 14));
         orange.setName("Orange");
 
-        Cargo banana = new LimitedShelfLife(new Date(21,12,13), new Date(21,1,14));
+        Cargo banana = new LimitedShelfLife(new Date(21, 12, 13), new Date(21, 1, 14));
         banana.setName("banana");
         banana.setCargoType(CargoType.FOOD);
 

@@ -86,10 +86,10 @@ public class Storage {
         }
     }
 
-    public Cargo getCargoById(Long id){
-        if(id != null && arrCargo.length != 0){
+    public Cargo getCargoById(Long id) {
+        if (id != null && arrCargo.length != 0) {
             for (Cargo cargo : arrCargo) {
-                if(id.equals(cargo.getId())){
+                if (id.equals(cargo.getId())) {
                     return cargo;
                 }
             }
@@ -97,10 +97,10 @@ public class Storage {
         return null;
     }
 
-    public Cargo getCargoByName(String name){
-        if(name != null && arrCargo.length != 0){
+    public Cargo getCargoByName(String name) {
+        if (name != null && arrCargo.length != 0) {
             for (Cargo cargo : arrCargo) {
-                if(name.equals(cargo.getName())){
+                if (name.equals(cargo.getName())) {
                     return cargo;
                 }
             }
@@ -108,17 +108,17 @@ public class Storage {
         return null;
     }
 
-    public Cargo[] getAllCargos(){
-        if(arrCargo.length != 0){
+    public Cargo[] getAllCargos() {
+        if (arrCargo.length != 0) {
             return arrCargo;
         }
         return null;
     }
 
-    public Carrier getCarrierById(Long id){
-        if(id != null && arrCarrier.length != 0){
+    public Carrier getCarrierById(Long id) {
+        if (id != null && arrCarrier.length != 0) {
             for (Carrier carrier : arrCarrier) {
-                if(id.equals(carrier.getId())){
+                if (id.equals(carrier.getId())) {
                     return carrier;
                 }
             }
@@ -126,10 +126,10 @@ public class Storage {
         return null;
     }
 
-    public Carrier getCarrierByName(String name){
-        if(name != null && arrCarrier.length != 0){
+    public Carrier getCarrierByName(String name) {
+        if (name != null && arrCarrier.length != 0) {
             for (Carrier carrier : arrCarrier) {
-                if(name.equals(carrier.getName())){
+                if (name.equals(carrier.getName())) {
                     return carrier;
                 }
             }
@@ -137,17 +137,17 @@ public class Storage {
         return null;
     }
 
-    public Carrier[] getAllCarriers(){
-        if(arrCargo.length != 0){
+    public Carrier[] getAllCarriers() {
+        if (arrCargo.length != 0) {
             return arrCarrier;
         }
         return null;
     }
 
-    public Transportation getTransportationById(Long id){
-        if(id != null && arrTransportation.length != 0){
+    public Transportation getTransportationById(Long id) {
+        if (id != null && arrTransportation.length != 0) {
             for (Transportation transportation : arrTransportation) {
-                if(id.equals(transportation.getId())){
+                if (id.equals(transportation.getId())) {
                     return transportation;
                 }
             }
@@ -155,12 +155,10 @@ public class Storage {
         return null;
     }
 
-
-    public Transportation[] getAllTransportations(){
-        if(arrTransportation.length != 0){
+    public Transportation[] getAllTransportations() {
+        if (arrTransportation.length != 0) {
             return arrTransportation;
         }
         return null;
     }
-
 }
