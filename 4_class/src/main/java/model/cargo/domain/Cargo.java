@@ -1,6 +1,6 @@
-package main.java.model.cargo;
+package main.java.model.cargo.domain;
 
-import main.java.model.transportation.Transportation;
+import main.java.model.transportation.domain.Transportation;
 
 import java.util.Arrays;
 

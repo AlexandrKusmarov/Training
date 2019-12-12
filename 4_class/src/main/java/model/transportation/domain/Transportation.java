@@ -1,7 +1,7 @@
-package main.java.model.transportation;
+package main.java.model.transportation.domain;
 
-import main.java.model.cargo.Cargo;
-import main.java.model.carrier.Carrier;
+import main.java.model.cargo.domain.Cargo;
+import main.java.model.carrier.domain.Carrier;
 
 import java.util.Date;
 

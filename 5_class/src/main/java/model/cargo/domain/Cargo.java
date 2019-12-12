@@ -1,14 +1,14 @@
-package main.java.model.carrier;
+package main.java.model.cargo.domain;
 
-import main.java.model.transportation.Transportation;
+import main.java.model.transportation.domain.Transportation;
 
 import java.util.Arrays;
 
-public class Carrier {
+public class Cargo {
     private Long id;
     private String name;
-    private String address;
-    private CarrierType carrierType;
+    private int weight;
+    private CargoType cargoType;
     private Transportation[] transportations;
 
     public Long getId() {
@@ -27,20 +27,20 @@ public class Carrier {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    public CarrierType getCarrierType() {
-        return carrierType;
+    public CargoType getCargoType() {
+        return cargoType;
     }
 
-    public void setCarrierType(CarrierType carrierType) {
-        this.carrierType = carrierType;
+    public void setCargoType(CargoType cargoType) {
+        this.cargoType = cargoType;
     }
 
     public Transportation[] getTransportations() {
@@ -53,11 +53,11 @@ public class Carrier {
 
     @Override
     public String toString() {
-        return "Carrier{" +
+        return "Cargo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", carrierType=" + carrierType +
+                ", weight=" + weight +
+                ", cargoType=" + cargoType +
                 ", transportations=" + Arrays.toString(transportations) +
                 '}';
     }

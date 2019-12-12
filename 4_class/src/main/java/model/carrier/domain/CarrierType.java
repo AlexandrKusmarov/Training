@@ -1,4 +1,4 @@
-package main.java.model.carrier;
+package main.java.model.carrier.domain;
 
 public enum CarrierType {
     SHIP,

@@ -1,4 +1,4 @@
-package main.java.model.cargo;
+package main.java.model.cargo.domain;
 
 public enum CargoType {
     FOOD,
