@@ -2,7 +2,6 @@ package main.java;
 
 import main.java.model.cargo.domain.Cargo;
 import main.java.model.carrier.domain.Carrier;
-import main.java.model.common.domain.Basic;
 import main.java.model.transportation.domain.Transportation;
 
 import java.util.Arrays;
@@ -16,7 +15,6 @@ public class Storage {
     private int currentIndexCargo = 0;
     private int currentIndexCarrier = 0;
     private int currentIndexTransportation = 0;
-    private Basic basic;
 
     private Object[] expandArrCapacity(Object[] array) {
         Object[] tempArr;
@@ -87,4 +85,36 @@ public class Storage {
             }
         }
     }
+
+    public Cargo getCargoById(Long id){
+        if(id != null && arrCargo.length != 0){
+            for (Cargo cargo : arrCargo) {
+                if(id.equals(cargo.getId())){
+                    return cargo;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Cargo getCargoByName(String name){
+        if(name != null && arrCargo.length != 0){
+            for (Cargo cargo : arrCargo) {
+                if(name.equals(cargo.getName())){
+                    return cargo;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Cargo[] getAllCargos(){
+        if(arrCargo.length != 0){
+            return arrCargo;
+        }
+        return null;
+    }
+
+    
+
 }
