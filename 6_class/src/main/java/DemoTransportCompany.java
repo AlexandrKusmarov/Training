@@ -1,11 +1,11 @@
 package main.java;
 
-import main.java.model.cargo.domain.Cargo;
-import main.java.model.cargo.domain.CargoType;
-import main.java.model.cargo.domain.LimitedShelfLife;
-import main.java.model.cargo.domain.UnlimitedShelfLife;
-import main.java.model.carrier.domain.Carrier;
-import main.java.model.transportation.domain.Transportation;
+import main.java.cargo.domain.Cargo;
+import main.java.cargo.domain.CargoType;
+import main.java.cargo.domain.LimitedShelfLife;
+import main.java.cargo.domain.UnlimitedShelfLife;
+import main.java.carrier.domain.Carrier;
+import main.java.transportation.domain.Transportation;
 
 import java.util.Date;
 
@@ -73,8 +73,9 @@ public class DemoTransportCompany {
 //----------------------- Все товары -----------------------
         System.out.println();
         System.out.println("Obtain Cargo by id: " + storage.getCargoById(3L));
-        System.out.println("Obtain Cargo by name: " + storage.getCargoByName("banana"));
-        System.out.println("Obtain Cargo by name: " + storage.getCargoByName("ban"));
+        for (Cargo cargo : storage.getCargoByName("banana")) {
+            System.out.println("Obtain Cargo by name: " + cargo);
+        }
         System.out.println();
 //----------------------- Все перевозчики -----------------------
         for (Carrier allCarrier : storage.getAllCarriers()) {

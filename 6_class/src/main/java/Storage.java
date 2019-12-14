@@ -1,8 +1,8 @@
 package main.java;
 
-import main.java.model.cargo.domain.Cargo;
-import main.java.model.carrier.domain.Carrier;
-import main.java.model.transportation.domain.Transportation;
+import main.java.cargo.domain.Cargo;
+import main.java.carrier.domain.Carrier;
+import main.java.transportation.domain.Transportation;
 
 import java.util.Arrays;
 
@@ -19,6 +19,13 @@ public class Storage {
     private Object[] expandArrCapacity(Object[] array) {
         Object[] tempArr;
         tempArr = new Object[array.length * 2];
+        tempArr = Arrays.copyOf(array, tempArr.length);
+        return tempArr;
+    }
+
+    private Object[] expandArrCapacityByOne(Object[] array) {
+        Object[] tempArr;
+        tempArr = new Object[array.length + 1];
         tempArr = Arrays.copyOf(array, tempArr.length);
         return tempArr;
     }
@@ -98,12 +105,12 @@ public class Storage {
     }
 
     public Cargo[] getCargoByName(String name) {
-        Cargo [] foundCargos = new Cargo[ARR_CAPACITY];
+        Cargo[] foundCargos = new Cargo[ARR_CAPACITY];
         int index = 0;
         if (name != null && arrCargo.length != 0) {
             for (Cargo cargo : arrCargo) {
                 if (name.equals(cargo.getName())) {
-                    if(index < foundCargos.length) {
+                    if (index < foundCargos.length) {
                         foundCargos[index] = cargo;
                         index++;
                     } else {
@@ -113,8 +120,8 @@ public class Storage {
                     }
                 }
             }
-            if(foundCargos[0]!= null && foundCargos.length - index >=2){
-
+            if (foundCargos[0] != null) {
+                return foundCargos;
             }
         }
         return null;
@@ -138,12 +145,24 @@ public class Storage {
         return null;
     }
 
-    public Carrier getCarrierByName(String name) {
+    public Carrier[] getCarrierByName(String name) {
+        Carrier[] foundCarrier = new Carrier[ARR_CAPACITY];
+        int index = 0;
         if (name != null && arrCarrier.length != 0) {
             for (Carrier carrier : arrCarrier) {
                 if (name.equals(carrier.getName())) {
-                    return carrier;
+                    if (index < foundCarrier.length) {
+                        foundCarrier[index] = carrier;
+                        index++;
+                    } else {
+                        foundCarrier = (Carrier[]) expandArrCapacity(foundCarrier);
+                        foundCarrier[index] = carrier;
+                        index++;
+                    }
                 }
+            }
+            if (foundCarrier[0] != null) {
+                return foundCarrier;
             }
         }
         return null;

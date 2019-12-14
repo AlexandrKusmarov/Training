@@ -1,12 +1,12 @@
-package main.java.model.transportation.domain;
+package main.java.transportation.domain;
 
-import main.java.model.cargo.domain.Cargo;
-import main.java.model.carrier.domain.Carrier;
+import main.java.cargo.domain.Cargo;
+import main.java.carrier.domain.Carrier;
+import main.java.common.domain.BaseEntity;
 
 import java.util.Date;
 
-public class Transportation {
-    private Long id;
+public class Transportation extends BaseEntity {
     private Cargo cargo;
     private Carrier carrier;
     private String description;
@@ -21,13 +21,6 @@ public class Transportation {
         this.date = date;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDescription() {
         return description;

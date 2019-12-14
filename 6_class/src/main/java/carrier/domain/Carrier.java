@@ -1,23 +1,15 @@
-package main.java.model.carrier.domain;
+package main.java.carrier.domain;
 
-import main.java.model.transportation.domain.Transportation;
+import main.java.common.domain.BaseEntity;
+import main.java.transportation.domain.Transportation;
 
 import java.util.Arrays;
 
-public class Carrier {
-    private Long id;
+public class Carrier extends BaseEntity {
     private String name;
     private String address;
     private CarrierType carrierType;
     private Transportation[] transportations;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

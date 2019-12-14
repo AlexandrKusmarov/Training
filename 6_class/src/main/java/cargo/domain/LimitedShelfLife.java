@@ -1,4 +1,4 @@
-package main.java.model.cargo.domain;
+package main.java.cargo.domain;
 
 import java.util.Arrays;
 import java.util.Date;

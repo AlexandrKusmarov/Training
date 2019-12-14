@@ -1,23 +1,15 @@
-package main.java.model.cargo.domain;
+package main.java.cargo.domain;
 
-import main.java.model.transportation.domain.Transportation;
+import main.java.common.domain.BaseEntity;
+import main.java.transportation.domain.Transportation;
 
 import java.util.Arrays;
 
-public abstract class Cargo {
-    private Long id;
+public abstract class Cargo extends BaseEntity {
     private String name;
     private int weight;
     private CargoType cargoType;
     private Transportation[] transportations;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

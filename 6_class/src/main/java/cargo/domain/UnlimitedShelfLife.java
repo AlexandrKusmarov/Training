@@ -1,4 +1,4 @@
-package main.java.model.cargo.domain;
+package main.java.cargo.domain;
 
 import java.util.Arrays;
 
@@ -30,7 +30,7 @@ public class UnlimitedShelfLife extends Cargo {
     @Override
     public String toString() {
         return "Cargo =>> UnlimitedShelfLife{" +
-                "id=" + super.getId() +
+                "id=" + getId() +
                 ", name='" + super.getName() +
                 ", weight=" + super.getWeight() +
                 ", cargoType=" + super.getCargoType() +
