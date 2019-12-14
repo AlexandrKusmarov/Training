@@ -67,7 +67,21 @@ public class CarrierRepoImpl implements CarrierRepo {
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        boolean isDeleted = false;
+
+        for (int i = 0; i < arrCarrier.length; i++) {
+            if (arrCarrier[i].getId().equals(id)) {
+                arrCarrier = (Carrier[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCarrier, i);
+                isDeleted = true;
+                break;
+            }
+        }
+        if (isDeleted && arrCarrier.length > 1) {
+            arrCarrier = (Carrier[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCarrier);
+        } else if (isDeleted && arrCarrier.length == 1) {
+            arrCarrier[0] = null;
+        }
+        return isDeleted;
     }
 
     @Override

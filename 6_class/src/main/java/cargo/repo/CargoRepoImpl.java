@@ -67,12 +67,21 @@ public class CargoRepoImpl implements CargoRepo {
 
     @Override
     public boolean deleteById(Long id) {
+        boolean isDeleted = false;
+
         for (int i = 0; i < arrCargo.length; i++) {
-            if(arrCargo[i].getId().equals(id)){
-//                arrCargo[i];
+            if (arrCargo[i].getId().equals(id)) {
+                arrCargo = (Cargo[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCargo, i);
+                isDeleted = true;
+                break;
             }
         }
-        return true;
+        if (isDeleted && arrCargo.length > 1) {
+            arrCargo = (Cargo[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCargo);
+        } else if (isDeleted && arrCargo.length == 1) {
+            arrCargo[0] = null;
+        }
+        return isDeleted;
     }
 
     @Override

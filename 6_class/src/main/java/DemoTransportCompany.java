@@ -4,15 +4,22 @@ import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.CargoType;
 import main.java.cargo.domain.LimitedShelfLife;
 import main.java.cargo.domain.UnlimitedShelfLife;
+import main.java.cargo.repo.CargoRepo;
+import main.java.cargo.repo.CargoRepoImpl;
 import main.java.carrier.domain.Carrier;
-import main.java.storage.Storage;
+import main.java.carrier.repo.CarrierRepo;
+import main.java.carrier.repo.CarrierRepoImpl;
 import main.java.transportation.domain.Transportation;
+import main.java.transportation.repo.TransportationRepo;
+import main.java.transportation.repo.TransportationRepoImpl;
 
 import java.util.Date;
 
 public class DemoTransportCompany {
     public static void main(String[] args) {
-        Storage storage = new Storage();
+        CargoRepo cargoRepo = new CargoRepoImpl();
+        CarrierRepo carrierRepo = new CarrierRepoImpl();
+        TransportationRepo transportationRepo = new TransportationRepoImpl();
 
         Cargo apple = new LimitedShelfLife(new Date(1, 12, 13), new Date(1, 1, 14));
         apple.setName("Apple");
@@ -52,50 +59,69 @@ public class DemoTransportCompany {
                 new Transportation[]{transportation}
         );
 
-        storage.addCargo(apple);
-        storage.addCargo(orange);
-        storage.addCargo(banana);
-        storage.addCargo(computer);
-        storage.printAllCargo();
+        cargoRepo.add(apple);
+        cargoRepo.add(orange);
+        cargoRepo.add(banana);
+        cargoRepo.add(computer);
+        cargoRepo.printAll();
 
-        storage.addCarrier(company_1);
-        storage.addCarrier(company_2);
-        storage.printAllCarrier();
+        carrierRepo.add(company_1);
+        carrierRepo.add(company_2);
+        carrierRepo.printAll();
 
-        storage.addTransportation(transportation);
-        storage.addTransportation(transportation2);
-        storage.printAllTransportation();
+        transportationRepo.add(transportation);
+        transportationRepo.add(transportation2);
+        transportationRepo.printAll();
 
         System.out.println();
 //----------------------- Все товары -----------------------
-        for (Cargo allCargo : storage.getAllCargos()) {
+        for (Cargo allCargo : cargoRepo.getAll()) {
             System.out.println(allCargo);
         }
 //----------------------- Все товары -----------------------
         System.out.println();
-        System.out.println("Obtain Cargo by id: " + storage.getCargoById(3L));
-        for (Cargo cargo : storage.getCargoByName("banana")) {
+        System.out.println("Obtain Cargo by id: " + cargoRepo.getById(3L));
+        for (Cargo cargo : cargoRepo.getByName("banana")) {
             System.out.println("Obtain Cargo by name: " + cargo);
         }
         System.out.println();
 //----------------------- Все перевозчики -----------------------
-        for (Carrier allCarrier : storage.getAllCarriers()) {
+        for (Carrier allCarrier : carrierRepo.getAll()) {
             System.out.println(allCarrier);
         }
 //----------------------- Все перевозчики -----------------------
         System.out.println();
-        System.out.println("Obtain Carrier by id: " + storage.getCarrierById(5L));
-        System.out.println("Obtain Carrier by name: " + storage.getCarrierByName("Company 2"));
-        System.out.println("Obtain Carrier by name: " + storage.getCarrierByName("Com"));
+        System.out.println("Obtain Carrier by id: " + carrierRepo.getById(5L));
+        for (Carrier allCarrier : carrierRepo.getByName("Company 2")) {
+            System.out.println("Obtain Carrier by name: " + allCarrier);
+        }
         System.out.println();
 //----------------------- Все перевозки -----------------------
-        for (Transportation allTransportation : storage.getAllTransportations()) {
+        for (Transportation allTransportation : transportationRepo.getAll()) {
             System.out.println(allTransportation);
         }
 //----------------------- Все перевозки -----------------------
         System.out.println();
-        System.out.println("Obtain Transportation by id: " + storage.getTransportationById(7L));
-        System.out.println("Obtain Transportation by id: " + storage.getTransportationById(8L));
-        System.out.println("Obtain Transportation by id: " + storage.getTransportationById(1L));
+        System.out.println("Obtain Transportation by id: " + transportationRepo.getById(7L));
+        System.out.println("Obtain Transportation by id: " + transportationRepo.getById(8L));
+        System.out.println("Obtain Transportation by id: " + transportationRepo.getById(1L));
+//----------------------- Удаление по ID -----------------------
+        cargoRepo.deleteById(3L);
+        cargoRepo.printAll();
+        System.out.println();
+        cargoRepo.deleteById(1L);
+        cargoRepo.printAll();
+        System.out.println();
+        cargoRepo.deleteById(2L);
+        System.out.println("----------------------------------");
+        cargoRepo.printAll();
+        System.out.println(cargoRepo.deleteById(2L));
+        cargoRepo.printAll();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(cargoRepo.deleteById(4L));
+        cargoRepo.printAll();
+
+
+
     }
 }

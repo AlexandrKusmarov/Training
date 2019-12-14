@@ -44,7 +44,21 @@ public class TransportationRepoImpl implements TransportationRepo {
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        boolean isDeleted = false;
+
+        for (int i = 0; i < arrTransportation.length; i++) {
+            if (arrTransportation[i].getId().equals(id)) {
+                arrTransportation = (Transportation[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrTransportation, i);
+                isDeleted = true;
+                break;
+            }
+        }
+        if (isDeleted && arrTransportation.length > 1) {
+            arrTransportation = (Transportation[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrTransportation);
+        } else if (isDeleted && arrTransportation.length == 1) {
+            arrTransportation[0] = null;
+        }
+        return isDeleted;
     }
 
     @Override
