@@ -5,6 +5,7 @@ import main.java.cargo.domain.CargoType;
 import main.java.cargo.domain.LimitedShelfLife;
 import main.java.cargo.domain.UnlimitedShelfLife;
 import main.java.carrier.domain.Carrier;
+import main.java.storage.Storage;
 import main.java.transportation.domain.Transportation;
 
 import java.util.Date;
