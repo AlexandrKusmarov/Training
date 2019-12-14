@@ -12,7 +12,7 @@ public interface TransportationRepo {
 
     boolean deleteById(Long id);
 
-    void print();
+    void print(Transportation transportation);
 
     void printAll();
 }

@@ -2,10 +2,10 @@ package main.java.transportation.repo;
 
 import main.java.storage.IdGenerator;
 import main.java.transportation.domain.Transportation;
+import main.java.util.ArrayCapacityChanger;
 
 import static main.java.storage.Storage.arrTransportation;
 import static main.java.storage.Storage.currentIndexTransportation;
-import static main.java.storage.Storage.expandArrCapacity;
 
 public class TransportationRepoImpl implements TransportationRepo {
     @Override
@@ -16,7 +16,7 @@ public class TransportationRepoImpl implements TransportationRepo {
                 arrTransportation[currentIndexTransportation] = transportation;
                 currentIndexTransportation++;
             } else {
-                arrTransportation = (Transportation[]) expandArrCapacity(arrTransportation);
+                arrTransportation = (Transportation[]) ArrayCapacityChanger.expandArrCapacity(arrTransportation);
                 add(transportation);
             }
         }
@@ -48,8 +48,8 @@ public class TransportationRepoImpl implements TransportationRepo {
     }
 
     @Override
-    public void print() {
-
+    public void print(Transportation transportation) {
+        System.out.println(transportation);
     }
 
     @Override

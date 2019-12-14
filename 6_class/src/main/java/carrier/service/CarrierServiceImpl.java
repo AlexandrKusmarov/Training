@@ -29,7 +29,7 @@ public class CarrierServiceImpl implements CarrierService {
     }
 
     @Override
-    public void print(Carrier cargo) {
+    public void print(Carrier carrier) {
 
     }
 

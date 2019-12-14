@@ -13,7 +13,7 @@ public interface CarrierRepo {
 
     boolean deleteById(Long id);
 
-    void print();
+    void print(Carrier carrier);
 
     void printAll();
 }

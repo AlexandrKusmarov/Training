@@ -11,7 +11,7 @@ public interface TransportationService {
 
     boolean deleteById(Long id);
 
-    void print(Transportation cargo);
+    void print(Transportation transportation);
 
-    void printAll(Transportation[] carriers);
+    void printAll(Transportation[] transportations);
 }

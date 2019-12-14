@@ -13,7 +13,7 @@ public interface CarrierService {
 
     boolean deleteById(Long id);
 
-    void print(Carrier cargo);
+    void print(Carrier carrier);
 
     void printAll(Carrier[] carriers);
 }

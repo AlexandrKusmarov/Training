@@ -18,18 +18,4 @@ public class Storage {
     public static Transportation[] arrTransportation = new Transportation[ARR_CAPACITY];
     public static int currentIndexTransportation = 0;
 
-    public static Object[] expandArrCapacity(Object[] array) {
-        Object[] tempArr;
-        tempArr = new Object[array.length * 2];
-        tempArr = Arrays.copyOf(array, tempArr.length);
-        return tempArr;
-    }
-
-    public static Object[] expandArrCapacityByOne(Object[] array) {
-        Object[] tempArr;
-        tempArr = new Object[array.length + 1];
-        tempArr = Arrays.copyOf(array, tempArr.length);
-        return tempArr;
-    }
-
 }

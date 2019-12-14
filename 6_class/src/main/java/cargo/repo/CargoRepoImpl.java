@@ -2,7 +2,7 @@ package main.java.cargo.repo;
 
 import main.java.cargo.domain.Cargo;
 import main.java.storage.IdGenerator;
-import main.java.storage.Storage;
+import main.java.util.ArrayCapacityChanger;
 
 import static main.java.storage.Storage.*;
 
@@ -15,7 +15,7 @@ public class CargoRepoImpl implements CargoRepo {
                 arrCargo[currentIndexCargo] = cargo;
                 currentIndexCargo++;
             } else {
-                arrCargo = (Cargo[]) Storage.expandArrCapacity(arrCargo);
+                arrCargo = (Cargo[]) ArrayCapacityChanger.expandArrCapacity(arrCargo);
                 add(cargo);
             }
         }
@@ -44,7 +44,7 @@ public class CargoRepoImpl implements CargoRepo {
                         foundCargos[index] = cargo;
                         index++;
                     } else {
-                        foundCargos = (Cargo[]) expandArrCapacityByOne(foundCargos);
+                        foundCargos = (Cargo[]) ArrayCapacityChanger.expandArrCapacityByOne(foundCargos);
                         foundCargos[index] = cargo;
                         index++;
                     }
@@ -67,12 +67,17 @@ public class CargoRepoImpl implements CargoRepo {
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        for (int i = 0; i < arrCargo.length; i++) {
+            if(arrCargo[i].getId().equals(id)){
+//                arrCargo[i];
+            }
+        }
+        return true;
     }
 
     @Override
-    public void print() {
-
+    public void print(Cargo cargo) {
+        System.out.println(cargo);
     }
 
     @Override

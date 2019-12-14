@@ -13,7 +13,7 @@ public interface CargoRepo {
 
     boolean deleteById(Long id);
 
-    void print();
+    void print(Cargo cargo);
 
     void printAll();
 }

@@ -24,12 +24,12 @@ public class TransportationServiceImpl implements TransportationService {
     }
 
     @Override
-    public void print(Transportation cargo) {
+    public void print(Transportation transportation) {
 
     }
 
     @Override
-    public void printAll(Transportation[] carriers) {
+    public void printAll(Transportation[] transportations) {
 
     }
 }

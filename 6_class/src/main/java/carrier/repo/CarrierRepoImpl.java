@@ -2,6 +2,7 @@ package main.java.carrier.repo;
 
 import main.java.carrier.domain.Carrier;
 import main.java.storage.IdGenerator;
+import main.java.util.ArrayCapacityChanger;
 
 import static main.java.storage.Storage.*;
 
@@ -14,7 +15,7 @@ public class CarrierRepoImpl implements CarrierRepo {
                 arrCarrier[currentIndexCarrier] = carrier;
                 currentIndexCarrier++;
             } else {
-                arrCarrier = (Carrier[]) expandArrCapacity(arrCarrier);
+                arrCarrier = (Carrier[]) ArrayCapacityChanger.expandArrCapacity(arrCarrier);
                 add(carrier);
             }
         }
@@ -43,7 +44,7 @@ public class CarrierRepoImpl implements CarrierRepo {
                         foundCarrier[index] = carrier;
                         index++;
                     } else {
-                        foundCarrier = (Carrier[]) expandArrCapacityByOne(foundCarrier);
+                        foundCarrier = (Carrier[]) ArrayCapacityChanger.expandArrCapacityByOne(foundCarrier);
                         foundCarrier[index] = carrier;
                         index++;
                     }
@@ -70,8 +71,8 @@ public class CarrierRepoImpl implements CarrierRepo {
     }
 
     @Override
-    public void print() {
-
+    public void print(Carrier carrier) {
+        System.out.println(carrier);
     }
 
     @Override
