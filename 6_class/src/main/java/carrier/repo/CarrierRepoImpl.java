@@ -23,12 +23,10 @@ public class CarrierRepoImpl implements CarrierRepo {
 
     @Override
     public Carrier getById(Long id) {
-        if (id != null && arrCarrier.length != 0) {
             for (Carrier carrier : arrCarrier) {
-                if (id.equals(carrier.getId())) {
+                if (carrier!= null && Long.valueOf(id).equals(carrier.getId())) {
                     return carrier;
                 }
-            }
         }
         return null;
     }
@@ -67,21 +65,18 @@ public class CarrierRepoImpl implements CarrierRepo {
 
     @Override
     public boolean deleteById(Long id) {
-        boolean isDeleted = false;
-
-        for (int i = 0; i < arrCarrier.length; i++) {
+        int len = arrCarrier.length;
+        for (int i = 0; i < len; i++) {
             if (arrCarrier[i].getId().equals(id)) {
+                arrCarrier[i] = null;
                 arrCarrier = (Carrier[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCarrier, i);
-                isDeleted = true;
-                break;
+                if (len > 1) {
+                    arrCarrier = (Carrier[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCarrier);
+                }
+                return true;
             }
         }
-        if (isDeleted && arrCarrier.length > 1) {
-            arrCarrier = (Carrier[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCarrier);
-        } else if (isDeleted && arrCarrier.length == 1) {
-            arrCarrier[0] = null;
-        }
-        return isDeleted;
+        return false;
     }
 
     @Override

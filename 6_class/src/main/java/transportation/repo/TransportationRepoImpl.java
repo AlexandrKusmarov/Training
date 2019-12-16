@@ -8,6 +8,7 @@ import static main.java.storage.Storage.arrTransportation;
 import static main.java.storage.Storage.currentIndexTransportation;
 
 public class TransportationRepoImpl implements TransportationRepo {
+
     @Override
     public void add(Transportation transportation) {
         if (transportation != null) {
@@ -24,12 +25,10 @@ public class TransportationRepoImpl implements TransportationRepo {
 
     @Override
     public Transportation getById(Long id) {
-        if (id != null && arrTransportation.length != 0) {
             for (Transportation transportation : arrTransportation) {
-                if (id.equals(transportation.getId())) {
+                if (transportation!= null && Long.valueOf(id).equals(transportation.getId())) {
                     return transportation;
                 }
-            }
         }
         return null;
     }
@@ -44,21 +43,18 @@ public class TransportationRepoImpl implements TransportationRepo {
 
     @Override
     public boolean deleteById(Long id) {
-        boolean isDeleted = false;
-
-        for (int i = 0; i < arrTransportation.length; i++) {
+        int len = arrTransportation.length;
+        for (int i = 0; i < len; i++) {
             if (arrTransportation[i].getId().equals(id)) {
+                arrTransportation[i] = null;
                 arrTransportation = (Transportation[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrTransportation, i);
-                isDeleted = true;
-                break;
+                if (len > 1) {
+                    arrTransportation = (Transportation[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrTransportation);
+                }
+                return true;
             }
         }
-        if (isDeleted && arrTransportation.length > 1) {
-            arrTransportation = (Transportation[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrTransportation);
-        } else if (isDeleted && arrTransportation.length == 1) {
-            arrTransportation[0] = null;
-        }
-        return isDeleted;
+        return false;
     }
 
     @Override

@@ -23,11 +23,9 @@ public class CargoRepoImpl implements CargoRepo {
 
     @Override
     public Cargo getById(Long id) {
-        if (id != null && arrCargo.length != 0) {
-            for (Cargo cargo : arrCargo) {
-                if (id.equals(cargo.getId())) {
-                    return cargo;
-                }
+        for (Cargo cargo : arrCargo) {
+            if (cargo != null && Long.valueOf(id).equals(cargo.getId())) {
+                return cargo;
             }
         }
         return null;
@@ -67,21 +65,19 @@ public class CargoRepoImpl implements CargoRepo {
 
     @Override
     public boolean deleteById(Long id) {
-        boolean isDeleted = false;
-
-        for (int i = 0; i < arrCargo.length; i++) {
+        int len = arrCargo.length;
+        for (int i = 0; i < len; i++) {
             if (arrCargo[i].getId().equals(id)) {
+                arrCargo[i] = null;
                 arrCargo = (Cargo[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCargo, i);
-                isDeleted = true;
-                break;
+                if (len > 1) {
+                    arrCargo = (Cargo[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCargo);
+                }
+                return true;
             }
+
         }
-        if (isDeleted && arrCargo.length > 1) {
-            arrCargo = (Cargo[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCargo);
-        } else if (isDeleted && arrCargo.length == 1) {
-            arrCargo[0] = null;
-        }
-        return isDeleted;
+        return false;
     }
 
     @Override
