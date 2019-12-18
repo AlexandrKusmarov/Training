@@ -2,18 +2,16 @@ package main.java.carrier.service;
 
 import main.java.carrier.domain.Carrier;
 
-public interface CarrierService {
+import java.util.List;
+
+public interface CarrierCollectionService {
     void add(Carrier carrier);
 
     Carrier getById(Long id);
 
-    Carrier[] getByName(String name);
+    List<Carrier> getByName(String name);
 
-    Carrier[] getAll();
+    List<Carrier> getAll();
 
     boolean deleteById(Long id);
-
-    void print(Carrier carrier);
-
-    void printAll(Carrier[] carriers);
 }

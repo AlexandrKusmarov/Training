@@ -7,8 +7,8 @@ import main.java.cargo.domain.UnlimitedShelfLife;
 import main.java.cargo.repo.CargoArrRepo;
 import main.java.cargo.repo.impl.CargoArrRepoImpl;
 import main.java.carrier.domain.Carrier;
-import main.java.carrier.repo.CarrierRepo;
-import main.java.carrier.repo.CarrierRepoImpl;
+import main.java.carrier.repo.CarrierArrRepo;
+import main.java.carrier.repo.impl.CarrierArrRepoImpl;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.repo.TransportationRepo;
 import main.java.transportation.repo.TransportationRepoImpl;
@@ -18,7 +18,7 @@ import java.util.Date;
 public class DemoTransportCompany {
     public static void main(String[] args) {
         CargoArrRepo cargoRepo = new CargoArrRepoImpl();
-        CarrierRepo carrierRepo = new CarrierRepoImpl();
+        CarrierArrRepo carrierRepo = new CarrierArrRepoImpl();
         TransportationRepo transportationRepo = new TransportationRepoImpl();
 
         Cargo apple = new LimitedShelfLife(new Date(1, 12, 13), new Date(1, 1, 14));

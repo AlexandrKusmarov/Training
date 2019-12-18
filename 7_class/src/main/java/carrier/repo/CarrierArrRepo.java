@@ -2,7 +2,7 @@ package main.java.carrier.repo;
 
 import main.java.carrier.domain.Carrier;
 
-public interface CarrierRepo {
+public interface CarrierArrRepo {
     void add(Carrier carrier);
 
     Carrier getById(Long id);
@@ -12,8 +12,4 @@ public interface CarrierRepo {
     Carrier[] getAll();
 
     boolean deleteById(Long id);
-
-    void print(Carrier carrier);
-
-    void printAll();
 }
