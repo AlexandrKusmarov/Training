@@ -4,8 +4,8 @@ import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.CargoType;
 import main.java.cargo.domain.LimitedShelfLife;
 import main.java.cargo.domain.UnlimitedShelfLife;
-import main.java.cargo.repo.CargoRepo;
-import main.java.cargo.repo.CargoRepoImpl;
+import main.java.cargo.repo.CargoArrRepo;
+import main.java.cargo.repo.impl.CargoArrRepoImpl;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.repo.CarrierRepo;
 import main.java.carrier.repo.CarrierRepoImpl;
@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class DemoTransportCompany {
     public static void main(String[] args) {
-        CargoRepo cargoRepo = new CargoRepoImpl();
+        CargoArrRepo cargoRepo = new CargoArrRepoImpl();
         CarrierRepo carrierRepo = new CarrierRepoImpl();
         TransportationRepo transportationRepo = new TransportationRepoImpl();
 
