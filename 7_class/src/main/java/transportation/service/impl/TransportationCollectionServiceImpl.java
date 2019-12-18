@@ -29,4 +29,16 @@ public class TransportationCollectionServiceImpl implements TransportationCollec
     public boolean deleteById(Long id) {
         return transportCollectionRepo.deleteById(id);
     }
+
+    @Override
+    public void print(Transportation transportation) {
+        System.out.println(transportation);
+    }
+
+    @Override
+    public void printAll() {
+        for (Transportation transportation : transportCollectionRepo.getAll()) {
+            System.out.println(transportation);
+        }
+    }
 }

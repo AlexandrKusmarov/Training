@@ -34,8 +34,8 @@ public class TransportationArrServiceImpl implements TransportationArrService {
     }
 
     @Override
-    public void printAll(Transportation[] transportations) {
-        for (Transportation transportation : transportations) {
+    public void printAll() {
+        for (Transportation transportation : transportationArrRepo.getAll()) {
             System.out.println(transportation);
         }
     }

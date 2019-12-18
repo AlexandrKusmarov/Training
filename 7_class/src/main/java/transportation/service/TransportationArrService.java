@@ -13,5 +13,5 @@ public interface TransportationArrService {
 
     void print(Transportation transportation);
 
-    void printAll(Transportation[] transportations);
+    void printAll();
 }

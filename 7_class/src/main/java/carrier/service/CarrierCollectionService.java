@@ -14,4 +14,8 @@ public interface CarrierCollectionService {
     List<Carrier> getAll();
 
     boolean deleteById(Long id);
+
+    void print(Carrier carrier);
+
+    void printAll();
 }

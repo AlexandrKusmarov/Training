@@ -14,4 +14,8 @@ public interface CargoCollectionService {
     List<Cargo> getAll();
 
     boolean deleteById(Long id);
+
+    void print(Cargo cargo);
+
+    void printAll();
 }

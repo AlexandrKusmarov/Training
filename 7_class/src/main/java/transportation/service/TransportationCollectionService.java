@@ -12,4 +12,8 @@ public interface TransportationCollectionService {
     List<Transportation> getAll();
 
     boolean deleteById(Long id);
+
+    void print(Transportation transportation);
+
+    void printAll();
 }

@@ -40,7 +40,7 @@ public class CarrierArrServiceImpl implements CarrierArrService {
     }
 
     @Override
-    public void printAll(Carrier[] carriers) {
+    public void printAll() {
         for (Carrier carrier : Storage.arrCarrier) {
             if (carrier != null) {
                 System.out.println(carrier);

@@ -41,7 +41,7 @@ public class CargoArrServiceImpl implements CargoArrService {
     }
 
     @Override
-    public void printAll(Cargo[] cargos) {
+    public void printAll() {
         for (Cargo cargo : arrCargo) {
             if (cargo != null) {
                 System.out.println(cargo);

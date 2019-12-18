@@ -15,5 +15,5 @@ public interface CargoArrService {
 
     void print(Cargo cargo);
 
-    void printAll(Cargo[] cargos);
+    void printAll();
 }

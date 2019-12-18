@@ -34,4 +34,16 @@ public class CarrierCollectionServiceImpl implements CarrierCollectionService {
     public boolean deleteById(Long id) {
         return collectionRepo.deleteById(id);
     }
+
+    @Override
+    public void print(Carrier carrier) {
+        System.out.println(carrier);
+    }
+
+    @Override
+    public void printAll() {
+        for (Carrier carrier : collectionRepo.getAll()) {
+            System.out.println(carrier);
+        }
+    }
 }

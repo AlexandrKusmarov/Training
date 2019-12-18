@@ -15,5 +15,5 @@ public interface CarrierArrService {
 
     void print(Carrier carrier);
 
-    void printAll(Carrier[] carriers);
+    void printAll();
 }
