@@ -10,8 +10,8 @@ import main.java.carrier.domain.Carrier;
 import main.java.carrier.repo.CarrierArrRepo;
 import main.java.carrier.repo.impl.CarrierArrRepoImpl;
 import main.java.transportation.domain.Transportation;
-import main.java.transportation.repo.TransportationRepo;
-import main.java.transportation.repo.TransportationRepoImpl;
+import main.java.transportation.repo.TransportationArrRepo;
+import main.java.transportation.repo.impl.TransportationArrRepoImpl;
 
 import java.util.Date;
 
@@ -19,7 +19,7 @@ public class DemoTransportCompany {
     public static void main(String[] args) {
         CargoArrRepo cargoRepo = new CargoArrRepoImpl();
         CarrierArrRepo carrierRepo = new CarrierArrRepoImpl();
-        TransportationRepo transportationRepo = new TransportationRepoImpl();
+        TransportationArrRepo transportationRepo = new TransportationArrRepoImpl();
 
         Cargo apple = new LimitedShelfLife(new Date(1, 12, 13), new Date(1, 1, 14));
         apple.setName("Apple");

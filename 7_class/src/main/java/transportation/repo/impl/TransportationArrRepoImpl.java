@@ -1,13 +1,14 @@
-package main.java.transportation.repo;
+package main.java.transportation.repo.impl;
 
 import main.java.storage.IdGenerator;
 import main.java.transportation.domain.Transportation;
+import main.java.transportation.repo.TransportationArrRepo;
 import main.java.util.ArrayCapacityChanger;
 
 import static main.java.storage.Storage.arrTransportation;
 import static main.java.storage.Storage.currentIndexTransportation;
 
-public class TransportationRepoImpl implements TransportationRepo {
+public class TransportationArrRepoImpl implements TransportationArrRepo {
 
     @Override
     public void add(Transportation transportation) {
@@ -55,19 +56,5 @@ public class TransportationRepoImpl implements TransportationRepo {
             }
         }
         return false;
-    }
-
-    @Override
-    public void print(Transportation transportation) {
-        System.out.println(transportation);
-    }
-
-    @Override
-    public void printAll() {
-        for (Transportation transportation : arrTransportation) {
-            if (transportation != null) {
-                System.out.println(transportation);
-            }
-        }
     }
 }

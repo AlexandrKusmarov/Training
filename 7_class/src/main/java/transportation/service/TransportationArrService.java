@@ -2,7 +2,7 @@ package main.java.transportation.service;
 
 import main.java.transportation.domain.Transportation;
 
-public interface TransportationService {
+public interface TransportationArrService {
     void add(Transportation transportation);
 
     Transportation getById(Long id);
