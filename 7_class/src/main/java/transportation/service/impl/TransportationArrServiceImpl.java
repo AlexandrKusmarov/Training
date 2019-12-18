@@ -1,29 +1,31 @@
 package main.java.transportation.service.impl;
 
 import main.java.transportation.domain.Transportation;
+import main.java.transportation.repo.TransportationArrRepo;
+import main.java.transportation.repo.impl.TransportationArrRepoImpl;
 import main.java.transportation.service.TransportationArrService;
 
 public class TransportationArrServiceImpl implements TransportationArrService {
-    private TransportationArrService transportService = new TransportationArrServiceImpl();
+    private TransportationArrRepo transportationArrRepo = new TransportationArrRepoImpl();
 
     @Override
     public void add(Transportation transportation) {
-        transportService.add(transportation);
+        transportationArrRepo.add(transportation);
     }
 
     @Override
     public Transportation getById(Long id) {
-        return transportService.getById(id);
+        return transportationArrRepo.getById(id);
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return transportService.deleteById(id);
+        return transportationArrRepo.deleteById(id);
     }
 
     @Override
     public Transportation[] getAll() {
-        return transportService.getAll();
+        return transportationArrRepo.getAll();
     }
 
     @Override

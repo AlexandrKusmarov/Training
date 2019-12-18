@@ -1,35 +1,37 @@
 package main.java.carrier.service.impl;
 
 import main.java.carrier.domain.Carrier;
+import main.java.carrier.repo.CarrierArrRepo;
+import main.java.carrier.repo.impl.CarrierArrRepoImpl;
 import main.java.carrier.service.CarrierArrService;
 import main.java.storage.Storage;
 
 public class CarrierArrServiceImpl implements CarrierArrService {
-    private CarrierArrService arrService = new CarrierArrServiceImpl();
+    private CarrierArrRepo carrierArrRepo = new CarrierArrRepoImpl();
 
     @Override
     public void add(Carrier carrier) {
-        arrService.add(carrier);
+        carrierArrRepo.add(carrier);
     }
 
     @Override
     public Carrier getById(Long id) {
-        return arrService.getById(id);
+        return carrierArrRepo.getById(id);
     }
 
     @Override
     public Carrier[] getByName(String name) {
-        return arrService.getByName(name);
+        return carrierArrRepo.getByName(name);
     }
 
     @Override
     public Carrier[] getAll() {
-        return arrService.getAll();
+        return carrierArrRepo.getAll();
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return arrService.deleteById(id);
+        return carrierArrRepo.deleteById(id);
     }
 
     @Override
