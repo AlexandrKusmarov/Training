@@ -1,16 +1,17 @@
 package main.java.transportation.repo.impl;
 
+import main.java.storage.IdGenerator;
 import main.java.storage.Storage;
 import main.java.transportation.domain.Transportation;
-import main.java.transportation.repo.TransportationCollectionRepo;
+import main.java.transportation.repo.TransportationRepo;
 
 import java.util.Iterator;
-import java.util.List;
 
-public class TransportationCollectionsRepoImpl implements TransportationCollectionRepo {
+public class TransportationCollectionsRepoImpl implements TransportationRepo {
     @Override
     public void add(Transportation transportation) {
         if (transportation != null) {
+            transportation.setId(IdGenerator.generateId());
             Storage.transportationList.add(transportation);
         }
     }
@@ -26,8 +27,8 @@ public class TransportationCollectionsRepoImpl implements TransportationCollecti
     }
 
     @Override
-    public List<Transportation> getAll() {
-        return Storage.cargoList.size() > 0 ? Storage.transportationList : null;
+    public Transportation[] getAll() {
+        return Storage.cargoList.size() > 0 ? (Transportation[]) Storage.transportationList.toArray() : null;
     }
 
     @Override
@@ -44,5 +45,12 @@ public class TransportationCollectionsRepoImpl implements TransportationCollecti
             }
         }
         return isDeleted;
+    }
+
+    @Override
+    public void printAll() {
+        for (Transportation transportation : Storage.transportationList) {
+            System.out.println(transportation);
+        }
     }
 }

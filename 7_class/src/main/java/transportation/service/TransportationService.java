@@ -2,12 +2,14 @@ package main.java.transportation.service;
 
 import main.java.transportation.domain.Transportation;
 
-public interface TransportationArrService {
+import java.util.List;
+
+public interface TransportationService {
     void add(Transportation transportation);
 
     Transportation getById(Long id);
 
-    Transportation[] getAll();
+    List<Transportation> getAll();
 
     boolean deleteById(Long id);
 

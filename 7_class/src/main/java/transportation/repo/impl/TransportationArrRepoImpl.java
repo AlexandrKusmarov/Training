@@ -2,13 +2,13 @@ package main.java.transportation.repo.impl;
 
 import main.java.storage.IdGenerator;
 import main.java.transportation.domain.Transportation;
-import main.java.transportation.repo.TransportationArrRepo;
+import main.java.transportation.repo.TransportationRepo;
 import main.java.util.ArrayCapacityChanger;
 
 import static main.java.storage.Storage.arrTransportation;
 import static main.java.storage.Storage.currentIndexTransportation;
 
-public class TransportationArrRepoImpl implements TransportationArrRepo {
+public class TransportationArrRepoImpl implements TransportationRepo {
 
     @Override
     public void add(Transportation transportation) {
@@ -26,10 +26,10 @@ public class TransportationArrRepoImpl implements TransportationArrRepo {
 
     @Override
     public Transportation getById(Long id) {
-            for (Transportation transportation : arrTransportation) {
-                if (transportation!= null && Long.valueOf(id).equals(transportation.getId())) {
-                    return transportation;
-                }
+        for (Transportation transportation : arrTransportation) {
+            if (transportation != null && Long.valueOf(id).equals(transportation.getId())) {
+                return transportation;
+            }
         }
         return null;
     }
@@ -56,5 +56,12 @@ public class TransportationArrRepoImpl implements TransportationArrRepo {
             }
         }
         return false;
+    }
+
+    @Override
+    public void printAll() {
+        for (Transportation transportation : arrTransportation) {
+            System.out.println(transportation);
+        }
     }
 }

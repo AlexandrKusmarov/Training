@@ -1,8 +1,9 @@
-package main.java.carrier.service;
+package main.java.carrier.repo;
 
 import main.java.carrier.domain.Carrier;
+import main.java.common.repo.CommonRepo;
 
-public interface CarrierArrService {
+public interface CarrierRepo extends CommonRepo {
     void add(Carrier carrier);
 
     Carrier getById(Long id);
@@ -11,9 +12,4 @@ public interface CarrierArrService {
 
     Carrier[] getAll();
 
-    boolean deleteById(Long id);
-
-    void print(Carrier carrier);
-
-    void printAll();
 }

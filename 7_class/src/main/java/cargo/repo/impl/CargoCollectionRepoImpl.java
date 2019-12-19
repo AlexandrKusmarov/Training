@@ -1,17 +1,19 @@
 package main.java.cargo.repo.impl;
 
 import main.java.cargo.domain.Cargo;
-import main.java.cargo.repo.CargoCollectionRepo;
+import main.java.cargo.repo.CargoRepo;
+import main.java.storage.IdGenerator;
 import main.java.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CargoCollectionRepoImpl implements CargoCollectionRepo {
+public class CargoCollectionRepoImpl implements CargoRepo {
     @Override
     public void add(Cargo cargo) {
         if (cargo != null) {
+            cargo.setId(IdGenerator.generateId());
             Storage.cargoList.add(cargo);
         }
     }
@@ -27,7 +29,7 @@ public class CargoCollectionRepoImpl implements CargoCollectionRepo {
     }
 
     @Override
-    public List<Cargo> getByName(String name) {
+    public Cargo [] getByName(String name) {
         List<Cargo> cargos = new ArrayList<>();
         if (Storage.cargoList.size() > 0 && name != null) {
             for (Cargo cargo : Storage.cargoList) {
@@ -36,12 +38,12 @@ public class CargoCollectionRepoImpl implements CargoCollectionRepo {
                 }
             }
         }
-        return cargos.size() > 0 ? cargos : null;
+        return cargos.size() > 0 ? (Cargo[]) cargos.toArray() : null;
     }
 
     @Override
-    public List<Cargo> getAll() {
-        return Storage.cargoList.size() > 0 ? Storage.cargoList : null;
+    public Cargo [] getAll() {
+        return Storage.cargoList.size() > 0 ? (Cargo[]) Storage.cargoList.toArray() : null;
     }
 
     @Override
@@ -57,11 +59,6 @@ public class CargoCollectionRepoImpl implements CargoCollectionRepo {
                 }
             }
         }
-//        if (Storage.cargoList.size() > 0) {
-//            Storage.cargoList.removeIf(cargo -> cargo.getId().equals(id));
-//        isDeleted = true;
-//        break;
-//        }
         return isDeleted;
     }
 }

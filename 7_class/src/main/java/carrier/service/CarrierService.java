@@ -4,7 +4,7 @@ import main.java.carrier.domain.Carrier;
 
 import java.util.List;
 
-public interface CarrierCollectionService {
+public interface CarrierService {
     void add(Carrier carrier);
 
     Carrier getById(Long id);

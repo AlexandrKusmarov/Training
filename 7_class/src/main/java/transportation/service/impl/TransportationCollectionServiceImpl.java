@@ -1,14 +1,18 @@
 package main.java.transportation.service.impl;
 
 import main.java.transportation.domain.Transportation;
-import main.java.transportation.repo.TransportationCollectionRepo;
-import main.java.transportation.repo.impl.TransportationCollectionsRepoImpl;
-import main.java.transportation.service.TransportationCollectionService;
+import main.java.transportation.repo.TransportationRepo;
+import main.java.transportation.service.TransportationService;
 
+import java.util.Arrays;
 import java.util.List;
 
-public class TransportationCollectionServiceImpl implements TransportationCollectionService {
-    private TransportationCollectionRepo transportCollectionRepo = new TransportationCollectionsRepoImpl();
+public class TransportationCollectionServiceImpl implements TransportationService {
+    private TransportationRepo transportCollectionRepo;
+
+    public TransportationCollectionServiceImpl(TransportationRepo transportCollectionRepo) {
+        this.transportCollectionRepo = transportCollectionRepo;
+    }
 
     @Override
     public void add(Transportation transportation) {
@@ -22,7 +26,7 @@ public class TransportationCollectionServiceImpl implements TransportationCollec
 
     @Override
     public List<Transportation> getAll() {
-        return transportCollectionRepo.getAll();
+        return Arrays.asList(transportCollectionRepo.getAll());
     }
 
     @Override

@@ -1,17 +1,19 @@
 package main.java.carrier.repo.impl;
 
 import main.java.carrier.domain.Carrier;
-import main.java.carrier.repo.CarrierCollectionRepo;
+import main.java.carrier.repo.CarrierRepo;
+import main.java.storage.IdGenerator;
 import main.java.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CarrierCollectionRepoImpl implements CarrierCollectionRepo {
+public class CarrierCollectionRepoImpl implements CarrierRepo {
     @Override
     public void add(Carrier carrier) {
         if (carrier != null) {
+            carrier.setId(IdGenerator.generateId());
             Storage.carrierList.add(carrier);
         }
     }
@@ -27,7 +29,7 @@ public class CarrierCollectionRepoImpl implements CarrierCollectionRepo {
     }
 
     @Override
-    public List<Carrier> getByName(String name) {
+    public Carrier[] getByName(String name) {
         List<Carrier> carriers = new ArrayList<>();
         if (Storage.carrierList.size() > 0 && name != null) {
             for (Carrier carrier : Storage.carrierList) {
@@ -36,12 +38,12 @@ public class CarrierCollectionRepoImpl implements CarrierCollectionRepo {
                 }
             }
         }
-        return carriers.size() > 0 ? carriers : null;
+        return carriers.size() > 0 ? (Carrier[]) carriers.toArray() : null;
     }
 
     @Override
-    public List<Carrier> getAll() {
-        return Storage.carrierList.size() > 0 ? Storage.carrierList : null;
+    public Carrier[] getAll() {
+        return Storage.carrierList.size() > 0 ? (Carrier[]) Storage.carrierList.toArray() : null;
     }
 
     @Override

@@ -1,14 +1,20 @@
 package main.java.cargo.service.impl;
 
 import main.java.cargo.domain.Cargo;
-import main.java.cargo.repo.CargoArrRepo;
-import main.java.cargo.repo.impl.CargoArrRepoImpl;
-import main.java.cargo.service.CargoArrService;
+import main.java.cargo.repo.CargoRepo;
+import main.java.cargo.service.CargoService;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static main.java.storage.Storage.arrCargo;
 
-public class CargoArrServiceImpl implements CargoArrService {
-    private CargoArrRepo arrRepo = new CargoArrRepoImpl();
+public class CargoServiceImpl implements CargoService {
+    private CargoRepo arrRepo;
+
+    public CargoServiceImpl(CargoRepo arrRepo) {
+        this.arrRepo = arrRepo;
+    }
 
     @Override
     public void add(Cargo cargo) {
@@ -21,13 +27,13 @@ public class CargoArrServiceImpl implements CargoArrService {
     }
 
     @Override
-    public Cargo[] getByName(String name) {
-        return arrRepo.getByName(name);
+    public List<Cargo> getByName(String name) {
+        return Arrays.asList(arrRepo.getByName(name));
     }
 
     @Override
-    public Cargo[] getAll() {
-        return arrRepo.getAll();
+    public List<Cargo> getAll() {
+        return Arrays.asList(arrRepo.getAll());
     }
 
     @Override

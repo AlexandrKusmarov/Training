@@ -1,8 +1,9 @@
-package main.java.cargo.service;
+package main.java.cargo.repo;
 
 import main.java.cargo.domain.Cargo;
+import main.java.common.repo.CommonRepo;
 
-public interface CargoArrService {
+public interface CargoRepo extends CommonRepo {
     void add(Cargo cargo);
 
     Cargo getById(Long id);
@@ -11,9 +12,4 @@ public interface CargoArrService {
 
     Cargo[] getAll();
 
-    boolean deleteById(Long id);
-
-    void print(Cargo cargo);
-
-    void printAll();
 }

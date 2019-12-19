@@ -1,13 +1,13 @@
 package main.java.carrier.repo.impl;
 
 import main.java.carrier.domain.Carrier;
-import main.java.carrier.repo.CarrierArrRepo;
+import main.java.carrier.repo.CarrierRepo;
 import main.java.storage.IdGenerator;
 import main.java.util.ArrayCapacityChanger;
 
 import static main.java.storage.Storage.*;
 
-public class CarrierArrRepoImpl implements CarrierArrRepo {
+public class CarrierArrRepoImpl implements CarrierRepo {
     @Override
     public void add(Carrier carrier) {
         if (carrier != null) {

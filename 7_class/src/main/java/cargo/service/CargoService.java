@@ -4,7 +4,7 @@ import main.java.cargo.domain.Cargo;
 
 import java.util.List;
 
-public interface CargoCollectionService {
+public interface CargoService {
     void add(Cargo cargo);
 
     Cargo getById(Long id);

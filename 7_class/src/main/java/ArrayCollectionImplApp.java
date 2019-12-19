@@ -4,27 +4,22 @@ import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.CargoType;
 import main.java.cargo.domain.LimitedShelfLife;
 import main.java.cargo.domain.UnlimitedShelfLife;
-import main.java.cargo.service.CargoArrService;
-import main.java.cargo.service.CargoCollectionService;
-import main.java.cargo.service.impl.CargoArrServiceImpl;
-import main.java.cargo.service.impl.CargoCollectionServiceImpl;
+import main.java.cargo.service.CargoService;
+import main.java.cargo.service.impl.CargoServiceImpl;
 import main.java.carrier.domain.Carrier;
-import main.java.carrier.service.CarrierArrService;
-import main.java.carrier.service.CarrierCollectionService;
-import main.java.carrier.service.impl.CarrierArrServiceImpl;
-import main.java.carrier.service.impl.CarrierCollectionServiceImpl;
+import main.java.carrier.service.CarrierService;
+import main.java.carrier.service.impl.CarrierServiceImpl;
 import main.java.transportation.domain.Transportation;
-import main.java.transportation.service.TransportationArrService;
-import main.java.transportation.service.TransportationCollectionService;
+import main.java.transportation.service.TransportationService;
 import main.java.transportation.service.impl.TransportationArrServiceImpl;
 import main.java.transportation.service.impl.TransportationCollectionServiceImpl;
 
 import java.util.Date;
 
 public class ArrayCollectionImplApp {
-    private CargoArrService cargoArrService = new CargoArrServiceImpl();
-    private CarrierArrService carrierArrService = new CarrierArrServiceImpl();
-    private TransportationArrService transportationArrService = new TransportationArrServiceImpl();
+    private CargoService cargoArrService = new CargoServiceImpl();
+    private CarrierService carrierArrService = new CarrierServiceImpl();
+    private TransportationService transportationArrService = new TransportationArrServiceImpl();
     private CargoCollectionService cargoCollectionService = new CargoCollectionServiceImpl();
     private CarrierCollectionService carrierCollectionService = new CarrierCollectionServiceImpl();
     private TransportationCollectionService transportationCollectionService = new TransportationCollectionServiceImpl();

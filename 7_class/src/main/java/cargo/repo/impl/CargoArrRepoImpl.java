@@ -1,13 +1,13 @@
 package main.java.cargo.repo.impl;
 
 import main.java.cargo.domain.Cargo;
-import main.java.cargo.repo.CargoArrRepo;
+import main.java.cargo.repo.CargoRepo;
 import main.java.storage.IdGenerator;
 import main.java.util.ArrayCapacityChanger;
 
 import static main.java.storage.Storage.*;
 
-public class CargoArrRepoImpl implements CargoArrRepo {
+public class CargoArrRepoImpl implements CargoRepo {
     @Override
     public void add(Cargo cargo) {
         if (cargo != null) {

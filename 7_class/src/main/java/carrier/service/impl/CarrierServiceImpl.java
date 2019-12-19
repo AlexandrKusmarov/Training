@@ -1,13 +1,19 @@
 package main.java.carrier.service.impl;
 
 import main.java.carrier.domain.Carrier;
-import main.java.carrier.repo.CarrierArrRepo;
-import main.java.carrier.repo.impl.CarrierArrRepoImpl;
-import main.java.carrier.service.CarrierArrService;
+import main.java.carrier.repo.CarrierRepo;
+import main.java.carrier.service.CarrierService;
 import main.java.storage.Storage;
 
-public class CarrierArrServiceImpl implements CarrierArrService {
-    private CarrierArrRepo carrierArrRepo = new CarrierArrRepoImpl();
+import java.util.Arrays;
+import java.util.List;
+
+public class CarrierServiceImpl implements CarrierService {
+    private CarrierRepo carrierArrRepo;
+
+    public CarrierServiceImpl(CarrierRepo carrierArrRepo) {
+        this.carrierArrRepo = carrierArrRepo;
+    }
 
     @Override
     public void add(Carrier carrier) {
@@ -20,13 +26,13 @@ public class CarrierArrServiceImpl implements CarrierArrService {
     }
 
     @Override
-    public Carrier[] getByName(String name) {
-        return carrierArrRepo.getByName(name);
+    public List<Carrier> getByName(String name) {
+        return Arrays.asList(carrierArrRepo.getByName(name));
     }
 
     @Override
-    public Carrier[] getAll() {
-        return carrierArrRepo.getAll();
+    public List<Carrier> getAll() {
+        return Arrays.asList(carrierArrRepo.getAll());
     }
 
     @Override

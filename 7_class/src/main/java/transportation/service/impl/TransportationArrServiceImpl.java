@@ -1,12 +1,18 @@
 package main.java.transportation.service.impl;
 
 import main.java.transportation.domain.Transportation;
-import main.java.transportation.repo.TransportationArrRepo;
-import main.java.transportation.repo.impl.TransportationArrRepoImpl;
-import main.java.transportation.service.TransportationArrService;
+import main.java.transportation.repo.TransportationRepo;
+import main.java.transportation.service.TransportationService;
 
-public class TransportationArrServiceImpl implements TransportationArrService {
-    private TransportationArrRepo transportationArrRepo = new TransportationArrRepoImpl();
+import java.util.Arrays;
+import java.util.List;
+
+public class TransportationArrServiceImpl implements TransportationService {
+    private TransportationRepo transportationArrRepo;
+
+    public TransportationArrServiceImpl(TransportationRepo transportationArrRepo) {
+        this.transportationArrRepo = transportationArrRepo;
+    }
 
     @Override
     public void add(Transportation transportation) {
@@ -24,8 +30,8 @@ public class TransportationArrServiceImpl implements TransportationArrService {
     }
 
     @Override
-    public Transportation[] getAll() {
-        return transportationArrRepo.getAll();
+    public List<Transportation> getAll() {
+        return Arrays.asList(transportationArrRepo.getAll());
     }
 
     @Override
