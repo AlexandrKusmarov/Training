@@ -1,6 +1,7 @@
 package main.java.cargo.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 
 public class LimitedShelfLife extends Cargo {
@@ -40,4 +41,10 @@ public class LimitedShelfLife extends Cargo {
                 ", expires=" + expires +
                 '}';
     }
+
+    @Override
+    public int compare(Cargo o1, Cargo o2) {
+        return -1 * o1.getName().compareTo(o2.getName());
+    }
+
 }

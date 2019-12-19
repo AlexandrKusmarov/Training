@@ -102,5 +102,4 @@ public class CargoArrayRepoImpl implements CargoRepo {
             cargo.setTransportations(transportation);
         }
     }
-
 }

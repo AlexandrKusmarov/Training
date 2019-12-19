@@ -8,11 +8,12 @@ import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.domain.CarrierType;
 import main.java.carrier.service.CarrierService;
+import main.java.storage.Storage;
 import main.java.storage.initor.InMemoryStorageInitor;
 import main.java.storage.initor.StorageInitor;
 import main.java.transportation.service.TransportationService;
 
-import java.util.Date;
+import java.util.*;
 
 public class Application {
 
@@ -36,6 +37,8 @@ public class Application {
         doSearchOperations();
         doUpdateOperations();
         printStorageData();
+
+        compareCargo(false, false);
     }
 
     private static void printStorageData() {
@@ -73,10 +76,14 @@ public class Application {
         }
     }
 
-    private static void doUpdateOperations(){
-        cargoService.update(1L, "Limited-CHANGED_NAME", 100000, CargoType.COMPUTERS, null);
-        carrierService.update(10L,"Carrier_CHANGED_NAME", "CHANGED_ADDRESS", CarrierType.PLANE, null);
-        transportationService.update(13L,cargoService.getById(1L), carrierService.getById(10L),
+    private static void doUpdateOperations() {
+        cargoService.update(1L, "Limited-CHANGED_NAME1111111111", 100000, CargoType.COMPUTERS, null);
+        cargoService.update(2L, "Limited-CHANGED_NAME3", 55000, CargoType.COMPUTERS, null);
+        cargoService.update(3L, "Limited-CHANGED_NAME3", 50, CargoType.COMPUTERS, null);
+        cargoService.update(4L, "Limited-CHANGED_NAME3", 777, CargoType.COMPUTERS, null);
+
+        carrierService.update(10L, "Carrier_CHANGED_NAME", "CHANGED_ADDRESS", CarrierType.PLANE, null);
+        transportationService.update(13L, cargoService.getById(1L), carrierService.getById(10L),
                 "ADDED CARGO_C?HANGED_AND_CARRIER_CHANGED", "NNN", new Date());
     }
 
@@ -84,9 +91,23 @@ public class Application {
         System.out.println(SEPARATOR);
     }
 
-//    private static void compareCargo(Cargo cargo1, Cargo cargo2){
-//        Comparator<Cargo> cargocomp = new CargoNameComparator().thenComparing(new CargoWeightComparator());
-//        List<Cargo> comparedCargoList = new ArrayList<Cargo>(cargocomp);
-//    }
+    private static void compareCargo(boolean sortByname, boolean sortByWeight) {
+        Comparator<Cargo> compareByWeightAndName;
 
+        if (sortByname && !sortByWeight) {
+            compareByWeightAndName = Comparator.comparing(Cargo::getName);
+            Storage.cargoList.sort(compareByWeightAndName);
+        } else if (!sortByname && sortByWeight) {
+            compareByWeightAndName = Comparator.comparing(Cargo::getWeight);
+            Storage.cargoList.sort(compareByWeightAndName);
+        } else if (sortByname && sortByWeight) {
+            compareByWeightAndName = Comparator.comparing(Cargo::getName)
+                    .thenComparing(Cargo::getWeight);
+            Storage.cargoList.sort(compareByWeightAndName);
+        }
+
+            for (Cargo cargo : Storage.cargoList) {
+                System.out.println(cargo);
+            }
+    }
 }

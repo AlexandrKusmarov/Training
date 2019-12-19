@@ -39,4 +39,9 @@ public class UnlimitedShelfLife extends Cargo {
                 ", fragility=" + fragility +
                 '}';
     }
+
+    @Override
+    public int compare(Cargo o1, Cargo o2) {
+        return -1 * o1.getName().compareTo(o2.getName());
+    }
 }

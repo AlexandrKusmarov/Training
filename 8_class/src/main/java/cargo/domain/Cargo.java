@@ -4,8 +4,9 @@ import main.java.common.domain.BaseEntity;
 import main.java.transportation.domain.Transportation;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
-public abstract class Cargo extends BaseEntity {
+public abstract class Cargo extends BaseEntity implements Comparator<Cargo> {
     private String name;
     private int weight;
     private CargoType cargoType;
