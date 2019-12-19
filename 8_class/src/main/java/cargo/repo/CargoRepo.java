@@ -14,7 +14,7 @@ public interface CargoRepo extends CommonRepo {
 
     List<Cargo> getByName(String name);
 
-    Cargo[] getAll();
+    List<Cargo> getAll();
 
     void update(Long id, String name, int weight, CargoType cargoType, Transportation[] transportation);
 

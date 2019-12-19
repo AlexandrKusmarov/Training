@@ -34,7 +34,7 @@ public class CarrierServiceImpl implements CarrierService {
 
     @Override
     public List<Carrier> getAll() {
-        return Arrays.asList(carrierArrRepo.getAll());
+        return carrierArrRepo.getAll();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class CarrierServiceImpl implements CarrierService {
 
     @Override
     public void printAll() {
-        for (Carrier carrier : Storage.arrCarrier) {
+        for (Carrier carrier : carrierArrRepo.getAll()) {
             if (carrier != null) {
                 System.out.println(carrier);
             }

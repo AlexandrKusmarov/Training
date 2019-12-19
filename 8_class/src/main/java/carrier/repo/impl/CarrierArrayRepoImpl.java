@@ -62,9 +62,9 @@ public class CarrierArrayRepoImpl implements CarrierRepo {
     }
 
     @Override
-    public Carrier[] getAll() {
+    public List<Carrier> getAll() {
         if (arrCarrier.length != 0) {
-            return arrCarrier;
+            return Arrays.asList(arrCarrier);
         }
         return null;
     }

@@ -62,9 +62,9 @@ public class CargoArrayRepoImpl implements CargoRepo {
     }
 
     @Override
-    public Cargo[] getAll() {
+    public List<Cargo> getAll() {
         if (arrCargo.length != 0) {
-            return arrCargo;
+            return Arrays.asList(arrCargo);
         }
         return null;
     }

@@ -44,8 +44,8 @@ public class CargoCollectionRepoImpl implements CargoRepo {
     }
 
     @Override
-    public Cargo[] getAll() {
-        return Storage.cargoList.size() > 0 ? (Cargo[]) Storage.cargoList.toArray() : null;
+    public List<Cargo> getAll() {
+        return Storage.cargoList.size() > 0 ? Storage.cargoList : null;
     }
 
     @Override

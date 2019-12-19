@@ -44,8 +44,8 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
     }
 
     @Override
-    public Carrier[] getAll() {
-        return Storage.carrierList.size() > 0 ? (Carrier[]) Storage.carrierList.toArray() : null;
+    public List<Carrier> getAll() {
+        return Storage.carrierList.size() > 0 ? Storage.carrierList : null;
     }
 
     @Override

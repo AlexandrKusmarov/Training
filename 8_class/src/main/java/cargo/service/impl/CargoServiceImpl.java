@@ -35,7 +35,7 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public List<Cargo> getAll() {
-        return Arrays.asList(arrRepo.getAll());
+        return arrRepo.getAll();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public void printAll() {
-        for (Cargo cargo : arrCargo) {
+        for (Cargo cargo : arrRepo.getAll()) {
             if (cargo != null) {
                 System.out.println(cargo);
             }

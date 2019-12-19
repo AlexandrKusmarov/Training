@@ -14,7 +14,7 @@ public interface CarrierRepo extends CommonRepo {
 
     List<Carrier> getByName(String name);
 
-    Carrier[] getAll();
+    List<Carrier> getAll();
 
     void update(Long id, String name, String address, CarrierType carrierType, Transportation[] transportation);
 

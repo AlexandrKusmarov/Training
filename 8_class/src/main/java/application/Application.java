@@ -3,12 +3,16 @@ package main.java.application;
 import main.java.application.serviceholder.ServiceHolder;
 import main.java.application.serviceholder.StorageType;
 import main.java.cargo.domain.Cargo;
+import main.java.cargo.domain.CargoType;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
+import main.java.carrier.domain.CarrierType;
 import main.java.carrier.service.CarrierService;
 import main.java.storage.initor.InMemoryStorageInitor;
 import main.java.storage.initor.StorageInitor;
 import main.java.transportation.service.TransportationService;
+
+import java.util.Date;
 
 public class Application {
 
@@ -30,6 +34,8 @@ public class Application {
 
         printStorageData();
         doSearchOperations();
+        doUpdateOperations();
+        printStorageData();
     }
 
     private static void printStorageData() {
@@ -65,6 +71,13 @@ public class Application {
         for (Carrier carrierName : carrierService.getByName("Carrier_Name")) {
             System.out.println(carrierName);
         }
+    }
+
+    private static void doUpdateOperations(){
+        cargoService.update(1L, "Limited-CHANGED_NAME", 100000, CargoType.COMPUTERS, null);
+        carrierService.update(10L,"Carrier_CHANGED_NAME", "CHANGED_ADDRESS", CarrierType.PLANE, null);
+        transportationService.update(13L,cargoService.getById(1L), carrierService.getById(10L),
+                "ADDED CARGO_C?HANGED_AND_CARRIER_CHANGED", "NNN", new Date());
     }
 
     private static void printSeparator() {
