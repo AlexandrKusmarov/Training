@@ -106,8 +106,8 @@ public class Application {
             Storage.cargoList.sort(compareByWeightAndName);
         }
 
-            for (Cargo cargo : Storage.cargoList) {
-                System.out.println(cargo);
-            }
+        for (Cargo cargo : Storage.cargoList) {
+            System.out.println(cargo);
+        }
     }
 }
