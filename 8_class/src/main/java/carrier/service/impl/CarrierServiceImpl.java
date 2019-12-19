@@ -1,9 +1,11 @@
 package main.java.carrier.service.impl;
 
 import main.java.carrier.domain.Carrier;
+import main.java.carrier.domain.CarrierType;
 import main.java.carrier.repo.CarrierRepo;
 import main.java.carrier.service.CarrierService;
 import main.java.storage.Storage;
+import main.java.transportation.domain.Transportation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +29,7 @@ public class CarrierServiceImpl implements CarrierService {
 
     @Override
     public List<Carrier> getByName(String name) {
-        return Arrays.asList(carrierArrRepo.getByName(name));
+        return carrierArrRepo.getByName(name);
     }
 
     @Override
@@ -52,5 +54,10 @@ public class CarrierServiceImpl implements CarrierService {
                 System.out.println(carrier);
             }
         }
+    }
+
+    @Override
+    public void update(Long id, String name, String address, CarrierType carrierType, Transportation[] transportation) {
+        carrierArrRepo.update(id, name, address, carrierType, transportation);
     }
 }

@@ -1,6 +1,8 @@
 package main.java.cargo.service;
 
 import main.java.cargo.domain.Cargo;
+import main.java.cargo.domain.CargoType;
+import main.java.transportation.domain.Transportation;
 
 import java.util.List;
 
@@ -18,4 +20,6 @@ public interface CargoService {
     void print(Cargo cargo);
 
     void printAll();
+
+    void update(Long id, String name, int weight, CargoType cargoType, Transportation[] transportation);
 }

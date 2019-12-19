@@ -1,8 +1,10 @@
 package main.java.cargo.service.impl;
 
 import main.java.cargo.domain.Cargo;
+import main.java.cargo.domain.CargoType;
 import main.java.cargo.repo.CargoRepo;
 import main.java.cargo.service.CargoService;
+import main.java.transportation.domain.Transportation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +30,7 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public List<Cargo> getByName(String name) {
-        return Arrays.asList(arrRepo.getByName(name));
+        return arrRepo.getByName(name);
     }
 
     @Override
@@ -53,5 +55,10 @@ public class CargoServiceImpl implements CargoService {
                 System.out.println(cargo);
             }
         }
+    }
+
+    @Override
+    public void update(Long id, String name, int weight, CargoType cargoType, Transportation[] transportation) {
+        arrRepo.update(id, name, weight, cargoType, transportation);
     }
 }

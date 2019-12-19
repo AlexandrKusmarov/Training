@@ -1,14 +1,20 @@
 package main.java.transportation.repo.impl;
 
+import main.java.cargo.domain.Cargo;
+import main.java.carrier.domain.Carrier;
 import main.java.storage.IdGenerator;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.repo.TransportationRepo;
 import main.java.util.ArrayCapacityChanger;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 import static main.java.storage.Storage.arrTransportation;
 import static main.java.storage.Storage.currentIndexTransportation;
 
-public class TransportationArrRepoImpl implements TransportationRepo {
+public class TransportationArrayRepoImpl implements TransportationRepo {
 
     @Override
     public void add(Transportation transportation) {
@@ -35,9 +41,9 @@ public class TransportationArrRepoImpl implements TransportationRepo {
     }
 
     @Override
-    public Transportation[] getAll() {
+    public List<Transportation> getAll() {
         if (arrTransportation.length != 0) {
-            return arrTransportation;
+            return Arrays.asList(arrTransportation);
         }
         return null;
     }
@@ -62,6 +68,18 @@ public class TransportationArrRepoImpl implements TransportationRepo {
     public void printAll() {
         for (Transportation transportation : arrTransportation) {
             System.out.println(transportation);
+        }
+    }
+
+    @Override
+    public void update(Long id, Cargo cargo, Carrier carrier, String description, String billTo, Date date) {
+        Transportation transportation = getById(id);
+        if (transportation != null) {
+            transportation.setCargo(cargo);
+            transportation.setCarrier(carrier);
+            transportation.setDescription(description);
+            transportation.setBillTo(billTo);
+            transportation.setDate(date);
         }
     }
 }

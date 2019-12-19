@@ -1,16 +1,19 @@
 package main.java.transportation.service.impl;
 
+import main.java.cargo.domain.Cargo;
+import main.java.carrier.domain.Carrier;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.repo.TransportationRepo;
 import main.java.transportation.service.TransportationService;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
-public class TransportationArrServiceImpl implements TransportationService {
+public class TransportationArrayServiceImpl implements TransportationService {
     private TransportationRepo transportationArrRepo;
 
-    public TransportationArrServiceImpl(TransportationRepo transportationArrRepo) {
+    public TransportationArrayServiceImpl(TransportationRepo transportationArrRepo) {
         this.transportationArrRepo = transportationArrRepo;
     }
 
@@ -31,7 +34,7 @@ public class TransportationArrServiceImpl implements TransportationService {
 
     @Override
     public List<Transportation> getAll() {
-        return Arrays.asList(transportationArrRepo.getAll());
+        return transportationArrRepo.getAll();
     }
 
     @Override
@@ -44,5 +47,10 @@ public class TransportationArrServiceImpl implements TransportationService {
         for (Transportation transportation : transportationArrRepo.getAll()) {
             System.out.println(transportation);
         }
+    }
+
+    @Override
+    public void update(Long id, Cargo cargo, Carrier carrier, String description, String billTo, Date date) {
+        transportationArrRepo.update(id, cargo, carrier, description, billTo, date);
     }
 }

@@ -1,13 +1,18 @@
 package main.java.carrier.repo.impl;
 
 import main.java.carrier.domain.Carrier;
+import main.java.carrier.domain.CarrierType;
 import main.java.carrier.repo.CarrierRepo;
 import main.java.storage.IdGenerator;
+import main.java.transportation.domain.Transportation;
 import main.java.util.ArrayCapacityChanger;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static main.java.storage.Storage.*;
 
-public class CarrierArrRepoImpl implements CarrierRepo {
+public class CarrierArrayRepoImpl implements CarrierRepo {
     @Override
     public void add(Carrier carrier) {
         if (carrier != null) {
@@ -24,16 +29,16 @@ public class CarrierArrRepoImpl implements CarrierRepo {
 
     @Override
     public Carrier getById(Long id) {
-            for (Carrier carrier : arrCarrier) {
-                if (carrier!= null && Long.valueOf(id).equals(carrier.getId())) {
-                    return carrier;
-                }
+        for (Carrier carrier : arrCarrier) {
+            if (carrier != null && Long.valueOf(id).equals(carrier.getId())) {
+                return carrier;
+            }
         }
         return null;
     }
 
     @Override
-    public Carrier[] getByName(String name) {
+    public List<Carrier> getByName(String name) {
         Carrier[] foundCarrier = new Carrier[ARR_CAPACITY];
         int index = 0;
         if (name != null && arrCarrier.length != 0) {
@@ -50,7 +55,7 @@ public class CarrierArrRepoImpl implements CarrierRepo {
                 }
             }
             if (foundCarrier[0] != null) {
-                return foundCarrier;
+                return Arrays.asList(foundCarrier);
             }
         }
         return null;
@@ -78,5 +83,23 @@ public class CarrierArrRepoImpl implements CarrierRepo {
             }
         }
         return false;
+    }
+
+    @Override
+    public void printAll() {
+        for (Carrier carrier : arrCarrier) {
+            System.out.println(carrier);
+        }
+    }
+
+    @Override
+    public void update(Long id, String name, String address, CarrierType carrierType, Transportation[] transportation) {
+        Carrier carrier = getById(id);
+        if (carrier != null) {
+            carrier.setName(name);
+            carrier.setAddress(address);
+            carrier.setCarrierType(carrierType);
+            carrier.setTransportations(transportation);
+        }
     }
 }

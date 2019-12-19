@@ -1,13 +1,18 @@
 package main.java.cargo.repo.impl;
 
 import main.java.cargo.domain.Cargo;
+import main.java.cargo.domain.CargoType;
 import main.java.cargo.repo.CargoRepo;
 import main.java.storage.IdGenerator;
+import main.java.transportation.domain.Transportation;
 import main.java.util.ArrayCapacityChanger;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static main.java.storage.Storage.*;
 
-public class CargoArrRepoImpl implements CargoRepo {
+public class CargoArrayRepoImpl implements CargoRepo {
     @Override
     public void add(Cargo cargo) {
         if (cargo != null) {
@@ -33,7 +38,7 @@ public class CargoArrRepoImpl implements CargoRepo {
     }
 
     @Override
-    public Cargo[] getByName(String name) {
+    public List<Cargo> getByName(String name) {
         Cargo[] foundCargos = new Cargo[ARR_CAPACITY];
         int index = 0;
         if (name != null && arrCargo.length != 0) {
@@ -50,7 +55,7 @@ public class CargoArrRepoImpl implements CargoRepo {
                 }
             }
             if (foundCargos[0] != null) {
-                return foundCargos;
+                return Arrays.asList(foundCargos);
             }
         }
         return null;
@@ -79,4 +84,23 @@ public class CargoArrRepoImpl implements CargoRepo {
         }
         return false;
     }
+
+    @Override
+    public void printAll() {
+        for (Cargo cargo : arrCargo) {
+            System.out.println(cargo);
+        }
+    }
+
+    @Override
+    public void update(Long id, String name, int weight, CargoType cargoType, Transportation[] transportation) {
+        Cargo cargo = getById(id);
+        if (cargo != null) {
+            cargo.setCargoType(cargoType);
+            cargo.setName(name);
+            cargo.setWeight(weight);
+            cargo.setTransportations(transportation);
+        }
+    }
+
 }
