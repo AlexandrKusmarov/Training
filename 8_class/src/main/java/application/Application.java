@@ -39,7 +39,8 @@ public class Application {
         doUpdateOperations();
         printStorageData();
 
-        compareCargo(false, false);
+        compareCargo(true, false);
+        printStorageData();
     }
 
     private static void printStorageData() {
@@ -79,15 +80,15 @@ public class Application {
 
     private static void doUpdateOperations() {
         LimitedShelfLife limCargo = new LimitedShelfLife(new Date(), new Date());
-        limCargo.setName("Limited-CHANGED_NAME3");
+        limCargo.setName("bb");
         limCargo.setWeight(100000);
         limCargo.setCargoType(CargoType.COMPUTERS);
         cargoService.update(limCargo);
         limCargo = (LimitedShelfLife) cargoService.getById(2L);
-        limCargo.setName("Limited-CHANGED_NAME4");
+        limCargo.setName("Aaa");
         cargoService.update(limCargo);
-        limCargo = (LimitedShelfLife) cargoService.getById(2L);
-        limCargo.setName("Limited-CHANGED_NAME4");
+        limCargo = (LimitedShelfLife) cargoService.getById(3L);
+        limCargo.setName("Bb");
         limCargo.setWeight(7777);
         cargoService.update(limCargo);
 
@@ -107,14 +108,14 @@ public class Application {
 
         if (sortByname && !sortByWeight) {
             compareByWeightAndName = Comparator.comparing(Cargo::getName);
-            Storage.cargoList.sort(compareByWeightAndName);
+            cargoService.sort(Storage.cargoList, compareByWeightAndName);
         } else if (!sortByname && sortByWeight) {
             compareByWeightAndName = Comparator.comparing(Cargo::getWeight);
-            Storage.cargoList.sort(compareByWeightAndName);
+            cargoService.sort(Storage.cargoList, compareByWeightAndName);
         } else if (sortByname && sortByWeight) {
             compareByWeightAndName = Comparator.comparing(Cargo::getName)
                     .thenComparing(Cargo::getWeight);
-            Storage.cargoList.sort(compareByWeightAndName);
+            cargoService.sort(Storage.cargoList, compareByWeightAndName);
         }
 
         for (Cargo cargo : Storage.cargoList) {

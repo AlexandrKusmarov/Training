@@ -44,7 +44,7 @@ public class LimitedShelfLife extends Cargo {
 
     @Override
     public int compare(Cargo o1, Cargo o2) {
-        return -1 * o1.getName().compareTo(o2.getName());
+        return o1.getName().compareTo(o2.getName());
     }
 
 }

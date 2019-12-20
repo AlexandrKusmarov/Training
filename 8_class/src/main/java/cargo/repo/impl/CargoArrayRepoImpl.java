@@ -6,6 +6,8 @@ import main.java.storage.IdGenerator;
 import main.java.util.ArrayCapacityChanger;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static main.java.storage.Storage.*;
@@ -92,14 +94,14 @@ public class CargoArrayRepoImpl implements CargoRepo {
 
     @Override
     public Integer getIndexById(Long id) {
-        if(id != null) {
+        if (id != null) {
             for (int i = 0; i < arrCargo.length; i++) {
                 if (Long.valueOf(id).equals(arrCargo[i].getId())) {
                     return i;
                 }
             }
         }
-            return null;
+        return null;
     }
 
     @Override
@@ -110,5 +112,10 @@ public class CargoArrayRepoImpl implements CargoRepo {
                 arrCargo[index] = cargo;
             }
         }
+    }
+
+    @Override
+    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
+        cargoList.sort(comp);
     }
 }

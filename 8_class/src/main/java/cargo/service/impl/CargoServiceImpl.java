@@ -4,6 +4,7 @@ import main.java.cargo.domain.Cargo;
 import main.java.cargo.repo.CargoRepo;
 import main.java.cargo.service.CargoService;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class CargoServiceImpl implements CargoService {
@@ -57,4 +58,9 @@ public class CargoServiceImpl implements CargoService {
         arrRepo.update(cargo);
     }
 
+
+    @Override
+    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
+        arrRepo.sort(cargoList, comp);
+    }
 }

@@ -7,9 +7,7 @@ import main.java.storage.IdGenerator;
 import main.java.storage.Storage;
 import main.java.transportation.domain.Transportation;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class CargoCollectionRepoImpl implements CargoRepo {
     @Override
@@ -22,7 +20,7 @@ public class CargoCollectionRepoImpl implements CargoRepo {
 
     @Override
     public Cargo getById(Long id) {
-        if(id != null) {
+        if (id != null) {
             for (Cargo cargo : Storage.cargoList) {
                 if (cargo != null && Long.valueOf(id).equals(cargo.getId())) {
                     return cargo;
@@ -92,5 +90,10 @@ public class CargoCollectionRepoImpl implements CargoRepo {
                 Storage.cargoList.set(index, cargo);
             }
         }
+    }
+
+    @Override
+    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
+        cargoList.sort(comp);
     }
 }

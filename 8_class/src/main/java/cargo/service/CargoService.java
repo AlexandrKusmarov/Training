@@ -2,6 +2,7 @@ package main.java.cargo.service;
 
 import main.java.cargo.domain.Cargo;
 
+import java.util.Comparator;
 import java.util.List;
 
 public interface CargoService {
@@ -20,4 +21,6 @@ public interface CargoService {
     void printAll();
 
     void update(Cargo cargo);
+
+    void sort(List<Cargo> cargoList, Comparator<Cargo> comp);
 }

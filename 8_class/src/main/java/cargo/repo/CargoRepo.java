@@ -3,6 +3,7 @@ package main.java.cargo.repo;
 import main.java.cargo.domain.Cargo;
 import main.java.common.repo.CommonRepo;
 
+import java.util.Comparator;
 import java.util.List;
 
 public interface CargoRepo extends CommonRepo {
@@ -15,5 +16,7 @@ public interface CargoRepo extends CommonRepo {
     List<Cargo> getAll();
 
     void update(Cargo cargo);
+
+    void sort(List<Cargo> cargoList, Comparator<Cargo> comp);
 
 }
