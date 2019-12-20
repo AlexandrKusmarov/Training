@@ -22,9 +22,11 @@ public class CargoCollectionRepoImpl implements CargoRepo {
 
     @Override
     public Cargo getById(Long id) {
-        for (Cargo cargo : Storage.cargoList) {
-            if (cargo != null && Long.valueOf(id).equals(cargo.getId())) {
-                return cargo;
+        if(id != null) {
+            for (Cargo cargo : Storage.cargoList) {
+                if (cargo != null && Long.valueOf(id).equals(cargo.getId())) {
+                    return cargo;
+                }
             }
         }
         return null;
@@ -72,13 +74,23 @@ public class CargoCollectionRepoImpl implements CargoRepo {
     }
 
     @Override
-    public void update(Long id, String name, int weight, CargoType cargoType, Transportation[] transportation) {
+    public Integer getIndexById(Long id) {
         Cargo cargo = getById(id);
         if (cargo != null) {
-            cargo.setCargoType(cargoType);
-            cargo.setName(name);
-            cargo.setWeight(weight);
-            cargo.setTransportations(transportation);
+            if (Storage.cargoList.contains(cargo)) {
+                return Integer.valueOf(Storage.cargoList.indexOf(cargo));
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void update(Cargo cargo) {
+        if (cargo != null) {
+            Integer index = getIndexById(cargo.getId());
+            if (index != null) {
+                Storage.cargoList.set(index, cargo);
+            }
         }
     }
 }

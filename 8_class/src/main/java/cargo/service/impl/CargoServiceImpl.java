@@ -1,15 +1,10 @@
 package main.java.cargo.service.impl;
 
 import main.java.cargo.domain.Cargo;
-import main.java.cargo.domain.CargoType;
 import main.java.cargo.repo.CargoRepo;
 import main.java.cargo.service.CargoService;
-import main.java.transportation.domain.Transportation;
 
-import java.util.Arrays;
 import java.util.List;
-
-import static main.java.storage.Storage.arrCargo;
 
 public class CargoServiceImpl implements CargoService {
     private CargoRepo arrRepo;
@@ -58,7 +53,8 @@ public class CargoServiceImpl implements CargoService {
     }
 
     @Override
-    public void update(Long id, String name, int weight, CargoType cargoType, Transportation[] transportation) {
-        arrRepo.update(id, name, weight, cargoType, transportation);
+    public void update(Cargo cargo) {
+        arrRepo.update(cargo);
     }
+
 }

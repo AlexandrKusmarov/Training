@@ -57,7 +57,7 @@ public class CarrierServiceImpl implements CarrierService {
     }
 
     @Override
-    public void update(Long id, String name, String address, CarrierType carrierType, Transportation[] transportation) {
-        carrierArrRepo.update(id, name, address, carrierType, transportation);
+    public void update(Carrier carrier) {
+        carrierArrRepo.update(carrier);
     }
 }

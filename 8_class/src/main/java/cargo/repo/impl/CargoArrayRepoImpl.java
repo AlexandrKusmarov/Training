@@ -1,10 +1,8 @@
 package main.java.cargo.repo.impl;
 
 import main.java.cargo.domain.Cargo;
-import main.java.cargo.domain.CargoType;
 import main.java.cargo.repo.CargoRepo;
 import main.java.storage.IdGenerator;
-import main.java.transportation.domain.Transportation;
 import main.java.util.ArrayCapacityChanger;
 
 import java.util.Arrays;
@@ -93,13 +91,24 @@ public class CargoArrayRepoImpl implements CargoRepo {
     }
 
     @Override
-    public void update(Long id, String name, int weight, CargoType cargoType, Transportation[] transportation) {
-        Cargo cargo = getById(id);
+    public Integer getIndexById(Long id) {
+        if(id != null) {
+            for (int i = 0; i < arrCargo.length; i++) {
+                if (Long.valueOf(id).equals(arrCargo[i].getId())) {
+                    return i;
+                }
+            }
+        }
+            return null;
+    }
+
+    @Override
+    public void update(Cargo cargo) {
         if (cargo != null) {
-            cargo.setCargoType(cargoType);
-            cargo.setName(name);
-            cargo.setWeight(weight);
-            cargo.setTransportations(transportation);
+            Integer index = getIndexById(cargo.getId());
+            if (index != null) {
+                arrCargo[index] = cargo;
+            }
         }
     }
 }

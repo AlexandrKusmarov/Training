@@ -4,6 +4,7 @@ import main.java.application.serviceholder.ServiceHolder;
 import main.java.application.serviceholder.StorageType;
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.CargoType;
+import main.java.cargo.domain.LimitedShelfLife;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.domain.CarrierType;
@@ -77,14 +78,24 @@ public class Application {
     }
 
     private static void doUpdateOperations() {
-        cargoService.update(1L, "Limited-CHANGED_NAME1111111111", 100000, CargoType.COMPUTERS, null);
-        cargoService.update(2L, "Limited-CHANGED_NAME3", 55000, CargoType.COMPUTERS, null);
-        cargoService.update(3L, "Limited-CHANGED_NAME3", 50, CargoType.COMPUTERS, null);
-        cargoService.update(4L, "Limited-CHANGED_NAME3", 777, CargoType.COMPUTERS, null);
+        LimitedShelfLife limCargo = new LimitedShelfLife(new Date(), new Date());
+        limCargo.setName("Limited-CHANGED_NAME3");
+        limCargo.setWeight(100000);
+        limCargo.setCargoType(CargoType.COMPUTERS);
+        cargoService.update(limCargo);
+        limCargo = (LimitedShelfLife) cargoService.getById(2L);
+        limCargo.setName("Limited-CHANGED_NAME4");
+        cargoService.update(limCargo);
+        limCargo = (LimitedShelfLife) cargoService.getById(2L);
+        limCargo.setName("Limited-CHANGED_NAME4");
+        limCargo.setWeight(7777);
+        cargoService.update(limCargo);
 
-        carrierService.update(10L, "Carrier_CHANGED_NAME", "CHANGED_ADDRESS", CarrierType.PLANE, null);
-        transportationService.update(13L, cargoService.getById(1L), carrierService.getById(10L),
-                "ADDED CARGO_C?HANGED_AND_CARRIER_CHANGED", "NNN", new Date());
+
+//        carrierService.update(10L, "Carrier_CHANGED_NAME", "CHANGED_ADDRESS", CarrierType.PLANE, null);
+//        transportationService.update(13L, cargoService.getById(1L), carrierService.getById(10L),
+//                "ADDED CARGO_C?HANGED_AND_CARRIER_CHANGED", "NNN", new Date());
+//    }
     }
 
     private static void printSeparator() {

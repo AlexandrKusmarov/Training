@@ -50,7 +50,7 @@ public class TransportationArrayServiceImpl implements TransportationService {
     }
 
     @Override
-    public void update(Long id, Cargo cargo, Carrier carrier, String description, String billTo, Date date) {
-        transportationArrRepo.update(id, cargo, carrier, description, billTo, date);
+    public void update(Transportation transportation) {
+        transportationArrRepo.update(transportation);
     }
 }

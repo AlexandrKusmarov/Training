@@ -5,4 +5,5 @@ public interface CommonRepo {
 
     void printAll();
 
+    Integer getIndexById(Long id);
 }

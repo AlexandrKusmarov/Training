@@ -59,14 +59,23 @@ public class TransportationCollectionRepoImpl implements TransportationRepo {
     }
 
     @Override
-    public void update(Long id, Cargo cargo, Carrier carrier, String description, String billTo, Date date) {
-        Transportation transportation = getById(id);
+    public Integer getIndexById(Long id) {
+        if (id != null) {
+            Transportation transportation = getById(id);
+            if (Storage.transportationList.contains(transportation)) {
+                return Integer.valueOf(Storage.transportationList.indexOf(transportation));
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void update(Transportation transportation) {
         if (transportation != null) {
-            transportation.setCargo(cargo);
-            transportation.setCarrier(carrier);
-            transportation.setDescription(description);
-            transportation.setBillTo(billTo);
-            transportation.setDate(date);
+            Integer index = getIndexById(transportation.getId());
+            if (index != null) {
+                Storage.transportationList.set(index, transportation);
+            }
         }
     }
 }

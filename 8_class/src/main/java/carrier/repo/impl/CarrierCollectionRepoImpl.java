@@ -72,13 +72,23 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
     }
 
     @Override
-    public void update(Long id, String name, String address, CarrierType carrierType, Transportation[] transportation) {
-        Carrier carrier = getById(id);
+    public Integer getIndexById(Long id) {
+        if (id != null) {
+            Carrier carrier = getById(id);
+            if (Storage.carrierList.contains(carrier)) {
+                return Integer.valueOf(Storage.carrierList.indexOf(carrier));
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void update(Carrier carrier) {
         if (carrier != null) {
-            carrier.setName(name);
-            carrier.setAddress(address);
-            carrier.setCarrierType(carrierType);
-            carrier.setTransportations(transportation);
+            Integer index = getIndexById(carrier.getId());
+            if (index != null) {
+                Storage.carrierList.set(index, carrier);
+            }
         }
     }
 }
