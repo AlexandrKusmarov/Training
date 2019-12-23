@@ -3,6 +3,7 @@ package main.java.carrier.repo.impl;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.domain.CarrierType;
 import main.java.carrier.repo.CarrierRepo;
+import main.java.exception.EmptyArrayException;
 import main.java.storage.IdGenerator;
 import main.java.transportation.domain.Transportation;
 import main.java.util.ArrayCapacityChanger;
@@ -72,14 +73,22 @@ public class CarrierArrayRepoImpl implements CarrierRepo {
     @Override
     public boolean deleteById(Long id) {
         int len = arrCarrier.length;
-        for (int i = 0; i < len; i++) {
-            if (arrCarrier[i].getId().equals(id)) {
-                arrCarrier[i] = null;
-                arrCarrier = (Carrier[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCarrier, i);
-                if (len > 1) {
-                    arrCarrier = (Carrier[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCarrier);
+        if(len != 0) {
+            for (int i = 0; i < len; i++) {
+                if (arrCarrier[i].getId().equals(id)) {
+                    arrCarrier[i] = null;
+                    arrCarrier = (Carrier[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCarrier, i);
+                    if (len > 1) {
+                        arrCarrier = (Carrier[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCarrier);
+                    }
+                    return true;
                 }
-                return true;
+            }
+        } else {
+            try {
+                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
+            } catch (EmptyArrayException e) {
+                e.printStackTrace();
             }
         }
         return false;

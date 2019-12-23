@@ -2,6 +2,7 @@ package main.java.cargo.repo.impl;
 
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.repo.CargoRepo;
+import main.java.exception.EmptyArrayException;
 import main.java.storage.IdGenerator;
 import main.java.util.ArrayCapacityChanger;
 
@@ -72,14 +73,24 @@ public class CargoArrayRepoImpl implements CargoRepo {
     @Override
     public boolean deleteById(Long id) {
         int len = arrCargo.length;
-        for (int i = 0; i < len; i++) {
-            if (arrCargo[i].getId().equals(id)) {
-                arrCargo[i] = null;
-                arrCargo = (Cargo[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCargo, i);
-                if (len > 1) {
-                    arrCargo = (Cargo[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCargo);
+        if (len != 0) {
+            for (int i = 0; i < len; i++) {
+                if (arrCargo[i] != null) {
+                    if (arrCargo[i].getId().equals(id)) {
+                        arrCargo[i] = null;
+                        arrCargo = (Cargo[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCargo, i);
+                        if (len > 1) {
+                            arrCargo = (Cargo[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCargo);
+                        }
+                        return true;
+                    }
                 }
-                return true;
+            }
+        } else {
+            try {
+                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
+            } catch (EmptyArrayException e) {
+                e.printStackTrace();
             }
         }
         return false;

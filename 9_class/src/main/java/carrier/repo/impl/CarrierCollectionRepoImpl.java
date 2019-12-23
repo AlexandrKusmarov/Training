@@ -3,6 +3,7 @@ package main.java.carrier.repo.impl;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.domain.CarrierType;
 import main.java.carrier.repo.CarrierRepo;
+import main.java.exception.EmptyArrayException;
 import main.java.storage.IdGenerator;
 import main.java.storage.Storage;
 import main.java.transportation.domain.Transportation;
@@ -59,6 +60,12 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
                     isDeleted = true;
                     break;
                 }
+            }
+        } else {
+            try {
+                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
+            } catch (EmptyArrayException e) {
+                e.printStackTrace();
             }
         }
         return isDeleted;

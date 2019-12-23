@@ -1,13 +1,15 @@
 package main.java.cargo.repo.impl;
 
 import main.java.cargo.domain.Cargo;
-import main.java.cargo.domain.CargoType;
 import main.java.cargo.repo.CargoRepo;
+import main.java.exception.EmptyArrayException;
 import main.java.storage.IdGenerator;
 import main.java.storage.Storage;
-import main.java.transportation.domain.Transportation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 public class CargoCollectionRepoImpl implements CargoRepo {
     @Override
@@ -59,6 +61,12 @@ public class CargoCollectionRepoImpl implements CargoRepo {
                     isDeleted = true;
                     break;
                 }
+            }
+        } else {
+            try {
+                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
+            } catch (EmptyArrayException e) {
+                e.printStackTrace();
             }
         }
         return isDeleted;

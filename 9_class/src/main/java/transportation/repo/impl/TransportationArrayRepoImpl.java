@@ -2,6 +2,7 @@ package main.java.transportation.repo.impl;
 
 import main.java.cargo.domain.Cargo;
 import main.java.carrier.domain.Carrier;
+import main.java.exception.EmptyArrayException;
 import main.java.storage.IdGenerator;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.repo.TransportationRepo;
@@ -51,14 +52,22 @@ public class TransportationArrayRepoImpl implements TransportationRepo {
     @Override
     public boolean deleteById(Long id) {
         int len = arrTransportation.length;
-        for (int i = 0; i < len; i++) {
-            if (arrTransportation[i].getId().equals(id)) {
-                arrTransportation[i] = null;
-                arrTransportation = (Transportation[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrTransportation, i);
-                if (len > 1) {
-                    arrTransportation = (Transportation[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrTransportation);
+        if(len != 0) {
+            for (int i = 0; i < len; i++) {
+                if (arrTransportation[i].getId().equals(id)) {
+                    arrTransportation[i] = null;
+                    arrTransportation = (Transportation[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrTransportation, i);
+                    if (len > 1) {
+                        arrTransportation = (Transportation[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrTransportation);
+                    }
+                    return true;
                 }
-                return true;
+            }
+        } else {
+            try {
+                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
+            } catch (EmptyArrayException e) {
+                e.printStackTrace();
             }
         }
         return false;
