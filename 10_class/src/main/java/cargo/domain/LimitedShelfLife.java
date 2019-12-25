@@ -2,13 +2,22 @@ package main.java.cargo.domain;
 
 import java.util.Date;
 
-public class LimitedShelfLife extends Cargo {
+public class LimitedShelfLife<T extends Cargo> extends Cargo {
     private Date produced;
     private Date expires;
+    private T type;
+
+    public LimitedShelfLife(T type) {
+        this.type = type;
+    }
 
     public LimitedShelfLife(Date produced, Date expires) {
         this.produced = produced;
         this.expires = expires;
+    }
+
+    public T getType() {
+        return type;
     }
 
     public Date getProduced() {
@@ -39,10 +48,4 @@ public class LimitedShelfLife extends Cargo {
                 ", expires=" + expires +
                 '}';
     }
-
-    @Override
-    public int compare(Cargo o1, Cargo o2) {
-        return o1.getName().compareTo(o2.getName());
-    }
-
 }

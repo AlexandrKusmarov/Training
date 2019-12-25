@@ -3,10 +3,9 @@ package main.java.cargo.domain;
 import main.java.common.business.domain.BaseEntity;
 import main.java.transportation.domain.Transportation;
 
-import java.util.Comparator;
 import java.util.List;
 
-public abstract class Cargo extends BaseEntity implements Comparator<Cargo> {
+public abstract class Cargo extends BaseEntity {
     private String name;
     private int weight;
     private CargoType cargoType;

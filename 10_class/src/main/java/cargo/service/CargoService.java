@@ -5,26 +5,26 @@ import main.java.cargo.search.CargoSearchCondition;
 
 import java.util.List;
 
-public interface CargoService {
-    void add(Cargo cargo);
+public interface CargoService<T extends Cargo> {
+    void add(T cargo);
 
-    <Cargo> Cargo getById(Long id);
+    T getById(Long id);
 
-    <Cargo> List<Cargo> getByName(String name);
+    List<Cargo> getByName(String name);
 
     List<Cargo> getAll();
 
     boolean deleteById(Long id);
 
-    void print(Cargo cargo);
+    void print(T cargo);
 
     void printAll();
 
-    void update(Cargo cargo);
+    void update(T cargo);
 
 //    void sort(List<Cargo> cargoList, Comparator<Cargo> comp);
 
-    <Cargo> Cargo getByIdFetchingTransportations(Long id);
+    T getByIdFetchingTransportations(Long id);
 
-    <Cargo> List<Cargo> search(CargoSearchCondition cargoSearchCondition);
+    List<Cargo> search(CargoSearchCondition cargoSearchCondition);
 }

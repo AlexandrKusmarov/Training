@@ -7,9 +7,9 @@ import main.java.transportation.service.TransportationService;
 import java.util.List;
 
 public class TransportationArrayServiceImpl implements TransportationService {
-    private TransportationRepo transportationArrRepo;
+    private TransportationRepo<Transportation> transportationArrRepo;
 
-    public TransportationArrayServiceImpl(TransportationRepo transportationArrRepo) {
+    public TransportationArrayServiceImpl(TransportationRepo<Transportation> transportationArrRepo) {
         this.transportationArrRepo = transportationArrRepo;
     }
 

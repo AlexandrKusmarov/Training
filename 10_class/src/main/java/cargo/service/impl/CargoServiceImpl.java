@@ -8,7 +8,7 @@ import main.java.cargo.service.CargoService;
 import java.util.List;
 
 public class CargoServiceImpl implements CargoService {
-    private CargoRepo arrRepo;
+    private CargoRepo<Cargo> arrRepo;
 
     public CargoServiceImpl(CargoRepo arrRepo) {
         this.arrRepo = arrRepo;

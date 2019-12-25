@@ -7,9 +7,9 @@ import main.java.carrier.service.CarrierService;
 import java.util.List;
 
 public class CarrierServiceImpl implements CarrierService {
-    private CarrierRepo carrierArrRepo;
+    private CarrierRepo<Carrier> carrierArrRepo;
 
-    public CarrierServiceImpl(CarrierRepo carrierArrRepo) {
+    public CarrierServiceImpl(CarrierRepo<Carrier> carrierArrRepo) {
         this.carrierArrRepo = carrierArrRepo;
     }
 

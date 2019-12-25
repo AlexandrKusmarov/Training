@@ -167,9 +167,10 @@ public class Application {
 
     private static void demoExceptions() {
         System.out.println("------Demo  exceptions------------");
-        Long firstCargo = cargoService.getAll().get(0).getId();
+        Cargo firstCargo = (Cargo)cargoService.getAll().get(0);
+        Long idFirstCargo = firstCargo.getId();
 
-        Cargo cargo = cargoService.getByIdFetchingTransportations(firstCargo);
+        Cargo cargo = cargoService.getByIdFetchingTransportations(idFirstCargo);
         System.out.println("Try to delete cargo");
         System.out.println("Cargo details:");
         System.out.println("id: " + cargo.getId());

@@ -4,18 +4,18 @@ import main.java.transportation.domain.Transportation;
 
 import java.util.List;
 
-public interface TransportationService {
-    void add(Transportation transportation);
+public interface TransportationService<T extends Transportation> {
+    void add(T transportation);
 
-    <Transportattion> Transportation getById(Long id);
+    T getById(Long id);
 
-    <Transportattion> List<Transportation> getAll();
+    List<Transportation> getAll();
 
     boolean deleteById(Long id);
 
-    void print(Transportation transportation);
+    void print(T transportation);
 
     void printAll();
 
-    void update(Transportation transportation);
+    void update(T transportation);
 }

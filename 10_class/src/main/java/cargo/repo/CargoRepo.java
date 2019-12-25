@@ -6,21 +6,21 @@ import main.java.common.business.repo.CommonRepo;
 
 import java.util.List;
 
-public interface CargoRepo extends CommonRepo {
-    void add(Cargo cargo);
+public interface CargoRepo<T extends Cargo> extends CommonRepo {
+    void add(T cargo);
 
-    <Cargo> Cargo getById(Long id);
+    T getById(Long id);
 
-    <Cargo> List<Cargo> getByName(String name);
+    List<Cargo> getByName(String name);
 
     List<Cargo> getAll();
 
-    void update(Cargo cargo);
+    void update(T cargo);
 
 //    void sort(List<Cargo> cargoList, Comparator<Cargo> comp);
 
-    <Cargo> Cargo getByIdFetchingTransportations(long id);
+    T getByIdFetchingTransportations(long id);
 
-    <Cargo> List<Cargo> search(CargoSearchCondition cargoSearchCondition);
+    List<Cargo> search(CargoSearchCondition cargoSearchCondition);
 
 }
