@@ -1,19 +1,18 @@
 package main.java.cargo.repo.impl;
 
 import main.java.cargo.domain.Cargo;
-import main.java.cargo.repo.CargoRepo;
-import main.java.exception.EmptyArrayException;
+import main.java.cargo.search.CargoSearchCondition;
+import main.java.common.solutions.util.ArrayCapacityChanger;
+import main.java.common.solutions.util.CollectionUtils;
 import main.java.storage.IdGenerator;
-import main.java.util.ArrayCapacityChanger;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import static main.java.storage.Storage.*;
 
-public class CargoArrayRepoImpl implements CargoRepo {
+public class CargoArrayRepoImpl extends CommonCargoRepo {
     @Override
     public void add(Cargo cargo) {
         if (cargo != null) {
@@ -73,7 +72,6 @@ public class CargoArrayRepoImpl implements CargoRepo {
     @Override
     public boolean deleteById(Long id) {
         int len = arrCargo.length;
-        if (len != 0) {
             for (int i = 0; i < len; i++) {
                 if (arrCargo[i] != null) {
                     if (arrCargo[i].getId().equals(id)) {
@@ -86,13 +84,6 @@ public class CargoArrayRepoImpl implements CargoRepo {
                     }
                 }
             }
-        } else {
-            try {
-                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
-            } catch (EmptyArrayException e) {
-                e.printStackTrace();
-            }
-        }
         return false;
     }
 
@@ -126,7 +117,27 @@ public class CargoArrayRepoImpl implements CargoRepo {
     }
 
     @Override
-    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
-        cargoList.sort(comp);
+    public Cargo getByIdFetchingTransportations(long id) {
+        return getById(id);
     }
+
+    @Override
+    public List<Cargo> search(CargoSearchCondition searchCondition) {
+        List<Cargo> cargos = getAll();
+
+        if (CollectionUtils.isNotEmpty(cargos)) {
+            if (searchCondition.needSorting()) {
+                Comparator<Cargo> cargoComparator = createCargoComparator(searchCondition);
+                cargos.sort(searchCondition.isAscOrdering() ? cargoComparator : cargoComparator.reversed());
+            }
+        }
+
+        return cargos;
+    }
+
+    //    @Override
+//    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
+//        cargoList.sort(comp);
+//    }
+
 }

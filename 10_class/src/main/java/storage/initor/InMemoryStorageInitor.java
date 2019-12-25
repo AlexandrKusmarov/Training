@@ -1,6 +1,7 @@
 package main.java.storage.initor;
 
 import main.java.application.serviceholder.ServiceHolder;
+import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.LimitedShelfLife;
 import main.java.cargo.domain.UnlimitedShelfLife;
 import main.java.cargo.service.CargoService;
@@ -9,7 +10,11 @@ import main.java.carrier.service.CarrierService;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.service.TransportationService;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import static main.java.common.solutions.util.CollectionUtils.isNotEmpty;
 
 public class InMemoryStorageInitor implements StorageInitor {
 
@@ -83,6 +88,35 @@ public class InMemoryStorageInitor implements StorageInitor {
         transportation.setDescription("Transportation");
 
         return transportation;
+    }
+
+    private void appendTransportationsToCargos() {
+        List<Cargo> cargos = cargoService.getAll();
+        List<Transportation> transportations = transportationService.getAll();
+
+        if (isNotEmpty(cargos) && isNotEmpty(transportations)) {
+            for (Cargo cargo : cargos) {
+                appendTransportationsToCargo(cargo, transportations);
+            }
+        }
+    }
+
+    private void appendTransportationsToCargo(Cargo cargo,
+                                              List<Transportation> transportations) {
+
+        List<Transportation> cargoTransportations = cargo.getTransportations();
+        if (cargoTransportations == null) {
+            cargoTransportations = new ArrayList<>();
+        }
+
+        for (Transportation transportation : transportations) {
+            if (transportation.getCargo() != null && transportation.getCargo().getId()
+                    .equals(cargo.getId())) {
+                cargoTransportations.add(transportation);
+            }
+        }
+
+        cargo.setTransportations(transportations);
     }
 
 }

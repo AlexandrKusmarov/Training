@@ -2,7 +2,7 @@ package main.java.transportation.domain;
 
 import main.java.cargo.domain.Cargo;
 import main.java.carrier.domain.Carrier;
-import main.java.common.domain.BaseEntity;
+import main.java.common.business.domain.BaseEntity;
 
 import java.util.Date;
 

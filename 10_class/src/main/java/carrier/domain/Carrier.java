@@ -1,15 +1,15 @@
 package main.java.carrier.domain;
 
-import main.java.common.domain.BaseEntity;
+import main.java.common.business.domain.BaseEntity;
 import main.java.transportation.domain.Transportation;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Carrier extends BaseEntity {
     private String name;
     private String address;
     private CarrierType carrierType;
-    private Transportation[] transportations;
+    private List<Transportation> transportations;
 
     public String getName() {
         return name;
@@ -35,11 +35,11 @@ public class Carrier extends BaseEntity {
         this.carrierType = carrierType;
     }
 
-    public Transportation[] getTransportations() {
+    public List<Transportation> getTransportations() {
         return transportations;
     }
 
-    public void setTransportations(Transportation[] transportations) {
+    public void setTransportations(List<Transportation> transportations) {
         this.transportations = transportations;
     }
 
@@ -50,7 +50,7 @@ public class Carrier extends BaseEntity {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", carrierType=" + carrierType +
-                ", transportations=" + Arrays.toString(transportations) +
+                ", transportations=" + transportations +
                 '}';
     }
 }

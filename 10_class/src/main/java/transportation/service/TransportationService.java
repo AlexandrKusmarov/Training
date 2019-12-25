@@ -7,9 +7,9 @@ import java.util.List;
 public interface TransportationService {
     void add(Transportation transportation);
 
-    Transportation getById(Long id);
+    <Transportattion> Transportation getById(Long id);
 
-    List<Transportation> getAll();
+    <Transportattion> List<Transportation> getAll();
 
     boolean deleteById(Long id);
 

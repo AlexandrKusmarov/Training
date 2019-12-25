@@ -2,9 +2,9 @@ package main.java.cargo.service.impl;
 
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.repo.CargoRepo;
+import main.java.cargo.search.CargoSearchCondition;
 import main.java.cargo.service.CargoService;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class CargoServiceImpl implements CargoService {
@@ -46,7 +46,7 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public void printAll() {
-        for (Cargo cargo : arrRepo.getAll()) {
+        for (Object cargo : arrRepo.getAll()) {
             if (cargo != null) {
                 System.out.println(cargo);
             }
@@ -59,8 +59,19 @@ public class CargoServiceImpl implements CargoService {
     }
 
 
+//    @Override
+//    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
+//        arrRepo.sort(cargoList, comp);
+//    }
+
+
     @Override
-    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
-        arrRepo.sort(cargoList, comp);
+    public Cargo getByIdFetchingTransportations(Long id) {
+        return arrRepo.getByIdFetchingTransportations(id);
+    }
+
+    @Override
+    public List<Cargo> search(CargoSearchCondition cargoSearchCondition) {
+        return arrRepo.search(cargoSearchCondition);
     }
 }

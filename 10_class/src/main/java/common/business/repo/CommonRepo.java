@@ -1,4 +1,4 @@
-package main.java.common.repo;
+package main.java.common.business.repo;
 
 public interface CommonRepo {
     boolean deleteById(Long id);

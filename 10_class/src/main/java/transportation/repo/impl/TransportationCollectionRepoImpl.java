@@ -1,14 +1,10 @@
 package main.java.transportation.repo.impl;
 
-import main.java.cargo.domain.Cargo;
-import main.java.carrier.domain.Carrier;
-import main.java.exception.EmptyArrayException;
 import main.java.storage.IdGenerator;
 import main.java.storage.Storage;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.repo.TransportationRepo;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,12 +43,6 @@ public class TransportationCollectionRepoImpl implements TransportationRepo {
                     isDeleted = true;
                     break;
                 }
-            }
-        } else {
-            try {
-                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
-            } catch (EmptyArrayException e) {
-                e.printStackTrace();
             }
         }
         return isDeleted;

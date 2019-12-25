@@ -1,4 +1,4 @@
-package main.java.common.domain;
+package main.java.common.business.domain;
 
 public class BaseEntity {
     protected Long id;

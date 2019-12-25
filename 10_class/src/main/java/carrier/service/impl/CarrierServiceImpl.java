@@ -1,13 +1,9 @@
 package main.java.carrier.service.impl;
 
 import main.java.carrier.domain.Carrier;
-import main.java.carrier.domain.CarrierType;
 import main.java.carrier.repo.CarrierRepo;
 import main.java.carrier.service.CarrierService;
-import main.java.storage.Storage;
-import main.java.transportation.domain.Transportation;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CarrierServiceImpl implements CarrierService {
@@ -49,7 +45,7 @@ public class CarrierServiceImpl implements CarrierService {
 
     @Override
     public void printAll() {
-        for (Carrier carrier : carrierArrRepo.getAll()) {
+        for (Object carrier : carrierArrRepo.getAll()) {
             if (carrier != null) {
                 System.out.println(carrier);
             }

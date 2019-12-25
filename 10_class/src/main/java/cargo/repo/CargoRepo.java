@@ -1,22 +1,26 @@
 package main.java.cargo.repo;
 
 import main.java.cargo.domain.Cargo;
-import main.java.common.repo.CommonRepo;
+import main.java.cargo.search.CargoSearchCondition;
+import main.java.common.business.repo.CommonRepo;
 
-import java.util.Comparator;
 import java.util.List;
 
 public interface CargoRepo extends CommonRepo {
     void add(Cargo cargo);
 
-    Cargo getById(Long id);
+    <Cargo> Cargo getById(Long id);
 
-    List<Cargo> getByName(String name);
+    <Cargo> List<Cargo> getByName(String name);
 
     List<Cargo> getAll();
 
     void update(Cargo cargo);
 
-    void sort(List<Cargo> cargoList, Comparator<Cargo> comp);
+//    void sort(List<Cargo> cargoList, Comparator<Cargo> comp);
+
+    <Cargo> Cargo getByIdFetchingTransportations(long id);
+
+    <Cargo> List<Cargo> search(CargoSearchCondition cargoSearchCondition);
 
 }

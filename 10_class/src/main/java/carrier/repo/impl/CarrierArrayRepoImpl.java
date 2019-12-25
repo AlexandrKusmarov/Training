@@ -1,12 +1,9 @@
 package main.java.carrier.repo.impl;
 
 import main.java.carrier.domain.Carrier;
-import main.java.carrier.domain.CarrierType;
 import main.java.carrier.repo.CarrierRepo;
-import main.java.exception.EmptyArrayException;
+import main.java.common.solutions.util.ArrayCapacityChanger;
 import main.java.storage.IdGenerator;
-import main.java.transportation.domain.Transportation;
-import main.java.util.ArrayCapacityChanger;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,7 +70,6 @@ public class CarrierArrayRepoImpl implements CarrierRepo {
     @Override
     public boolean deleteById(Long id) {
         int len = arrCarrier.length;
-        if(len != 0) {
             for (int i = 0; i < len; i++) {
                 if (arrCarrier[i].getId().equals(id)) {
                     arrCarrier[i] = null;
@@ -84,13 +80,6 @@ public class CarrierArrayRepoImpl implements CarrierRepo {
                     return true;
                 }
             }
-        } else {
-            try {
-                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
-            } catch (EmptyArrayException e) {
-                e.printStackTrace();
-            }
-        }
         return false;
     }
 

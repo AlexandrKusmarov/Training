@@ -1,16 +1,16 @@
 package main.java.cargo.domain;
 
-import main.java.common.domain.BaseEntity;
+import main.java.common.business.domain.BaseEntity;
 import main.java.transportation.domain.Transportation;
 
-import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public abstract class Cargo extends BaseEntity implements Comparator<Cargo> {
     private String name;
     private int weight;
     private CargoType cargoType;
-    private Transportation[] transportations;
+    private List<Transportation> transportations;
 
     public String getName() {
         return name;
@@ -36,11 +36,11 @@ public abstract class Cargo extends BaseEntity implements Comparator<Cargo> {
         this.cargoType = cargoType;
     }
 
-    public Transportation[] getTransportations() {
+    public List<Transportation> getTransportations() {
         return transportations;
     }
 
-    public void setTransportations(Transportation[] transportations) {
+    public void setTransportations(List<Transportation> transportations) {
         this.transportations = transportations;
     }
 
@@ -51,7 +51,7 @@ public abstract class Cargo extends BaseEntity implements Comparator<Cargo> {
                 ", name='" + name + '\'' +
                 ", weight=" + weight +
                 ", cargoType=" + cargoType +
-                ", transportations=" + Arrays.toString(transportations) +
+                ", transportations=" + transportations +
                 '}';
     }
 }

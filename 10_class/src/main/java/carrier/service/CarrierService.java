@@ -7,9 +7,9 @@ import java.util.List;
 public interface CarrierService {
     void add(Carrier carrier);
 
-    Carrier getById(Long id);
+    <Carrier> Carrier getById(Long id);
 
-    List<Carrier> getByName(String name);
+    <Carrier> List<Carrier> getByName(String name);
 
     List<Carrier> getAll();
 

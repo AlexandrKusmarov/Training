@@ -1,16 +1,16 @@
 package main.java.cargo.service;
 
 import main.java.cargo.domain.Cargo;
+import main.java.cargo.search.CargoSearchCondition;
 
-import java.util.Comparator;
 import java.util.List;
 
 public interface CargoService {
     void add(Cargo cargo);
 
-    Cargo getById(Long id);
+    <Cargo> Cargo getById(Long id);
 
-    List<Cargo> getByName(String name);
+    <Cargo> List<Cargo> getByName(String name);
 
     List<Cargo> getAll();
 
@@ -22,5 +22,9 @@ public interface CargoService {
 
     void update(Cargo cargo);
 
-    void sort(List<Cargo> cargoList, Comparator<Cargo> comp);
+//    void sort(List<Cargo> cargoList, Comparator<Cargo> comp);
+
+    <Cargo> Cargo getByIdFetchingTransportations(Long id);
+
+    <Cargo> List<Cargo> search(CargoSearchCondition cargoSearchCondition);
 }

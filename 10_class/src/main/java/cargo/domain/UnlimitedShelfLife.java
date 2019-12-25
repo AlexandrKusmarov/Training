@@ -1,7 +1,5 @@
 package main.java.cargo.domain;
 
-import java.util.Arrays;
-
 public class UnlimitedShelfLife extends Cargo {
     private boolean isComposite;
     private boolean fragility;
@@ -34,7 +32,7 @@ public class UnlimitedShelfLife extends Cargo {
                 ", name='" + super.getName() +
                 ", weight=" + super.getWeight() +
                 ", cargoType=" + super.getCargoType() +
-                ", transportations=" + Arrays.toString(super.getTransportations()) +
+                ", transportations=" + super.getTransportations() +
                 "isComposite=" + isComposite +
                 ", fragility=" + fragility +
                 '}';

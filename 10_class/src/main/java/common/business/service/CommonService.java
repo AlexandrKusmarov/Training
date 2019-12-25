@@ -1,4 +1,4 @@
-package main.java.common.service;
+package main.java.common.business.service;
 
 public interface CommonService {
     boolean deleteById(Long id);

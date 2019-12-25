@@ -1,13 +1,9 @@
 package main.java.transportation.service.impl;
 
-import main.java.cargo.domain.Cargo;
-import main.java.carrier.domain.Carrier;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.repo.TransportationRepo;
 import main.java.transportation.service.TransportationService;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class TransportationArrayServiceImpl implements TransportationService {
@@ -44,7 +40,7 @@ public class TransportationArrayServiceImpl implements TransportationService {
 
     @Override
     public void printAll() {
-        for (Transportation transportation : transportationArrRepo.getAll()) {
+        for (Object transportation : transportationArrRepo.getAll()) {
             System.out.println(transportation);
         }
     }

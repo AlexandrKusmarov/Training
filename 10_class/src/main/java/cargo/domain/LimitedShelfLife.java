@@ -1,7 +1,5 @@
 package main.java.cargo.domain;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
 
 public class LimitedShelfLife extends Cargo {
@@ -36,7 +34,7 @@ public class LimitedShelfLife extends Cargo {
                 ", name='" + super.getName() +
                 ", weight=" + super.getWeight() +
                 ", cargoType=" + super.getCargoType() +
-                ", transportations=" + Arrays.toString(super.getTransportations()) +
+                ", transportations=" + super.getTransportations() +
                 "produced=" + produced +
                 ", expires=" + expires +
                 '}';

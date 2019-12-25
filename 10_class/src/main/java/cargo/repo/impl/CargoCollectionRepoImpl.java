@@ -1,8 +1,8 @@
 package main.java.cargo.repo.impl;
 
 import main.java.cargo.domain.Cargo;
-import main.java.cargo.repo.CargoRepo;
-import main.java.exception.EmptyArrayException;
+import main.java.cargo.search.CargoSearchCondition;
+import main.java.common.solutions.util.CollectionUtils;
 import main.java.storage.IdGenerator;
 import main.java.storage.Storage;
 
@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-public class CargoCollectionRepoImpl implements CargoRepo {
+public class CargoCollectionRepoImpl extends CommonCargoRepo {
     @Override
     public void add(Cargo cargo) {
         if (cargo != null) {
@@ -62,12 +62,6 @@ public class CargoCollectionRepoImpl implements CargoRepo {
                     break;
                 }
             }
-        } else {
-            try {
-                throw new EmptyArrayException("Instance can't be deleted. Array is empty.");
-            } catch (EmptyArrayException e) {
-                e.printStackTrace();
-            }
         }
         return isDeleted;
     }
@@ -100,8 +94,28 @@ public class CargoCollectionRepoImpl implements CargoRepo {
         }
     }
 
+//    @Override
+//    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
+//        cargoList.sort(comp);
+//    }
+
+
     @Override
-    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
-        cargoList.sort(comp);
+    public Cargo getByIdFetchingTransportations(long id) {
+        return getById(id);
+    }
+
+    @Override
+    public List<Cargo> search(CargoSearchCondition searchCondition) {
+        List<Cargo> cargos = getAll();
+
+        if (CollectionUtils.isNotEmpty(cargos)) {
+            if (searchCondition.needSorting()) {
+                Comparator<Cargo> cargoComparator = createCargoComparator(searchCondition);
+                cargos.sort(searchCondition.isAscOrdering() ? cargoComparator : cargoComparator.reversed());
+            }
+        }
+
+        return cargos;
     }
 }
