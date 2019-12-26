@@ -6,6 +6,9 @@ public class LimitedShelfLife extends Cargo {
     private Date produced;
     private Date expires;
 
+    public LimitedShelfLife() {
+    }
+
     public LimitedShelfLife(Date produced, Date expires) {
         this.produced = produced;
         this.expires = expires;

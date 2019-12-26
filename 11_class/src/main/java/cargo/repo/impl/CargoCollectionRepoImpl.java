@@ -69,7 +69,9 @@ public class CargoCollectionRepoImpl extends CommonCargoRepo {
     @Override
     public void printAll() {
         for (Cargo cargo : Storage.cargoList) {
-            System.out.println(cargo);
+            if(cargo!= null) {
+                System.out.println(cargo);
+            }
         }
     }
 
@@ -92,12 +94,6 @@ public class CargoCollectionRepoImpl extends CommonCargoRepo {
             }
         }
     }
-
-//    @Override
-//    public void sort(List<Cargo> cargoList, Comparator<Cargo> comp) {
-//        cargoList.sort(comp);
-//    }
-
 
     @Override
     public Cargo getByIdFetchingTransportations(long id) {

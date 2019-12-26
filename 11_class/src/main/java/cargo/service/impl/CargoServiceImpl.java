@@ -47,9 +47,7 @@ public class CargoServiceImpl implements CargoService {
     @Override
     public void printAll() {
         for (Object cargo : arrRepo.getAll()) {
-            if (cargo != null) {
                 System.out.println(cargo);
-            }
         }
     }
 

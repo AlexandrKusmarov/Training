@@ -13,12 +13,14 @@ import main.java.carrier.service.CarrierService;
 import main.java.common.solutions.parser.EntityReader;
 import main.java.common.solutions.search.OrderType;
 import main.java.common.solutions.util.MessagePrinter;
+import main.java.storage.Storage;
 import main.java.storage.initor.FileStorageInitor;
 import main.java.storage.initor.InMemoryStorageInitor;
 import main.java.storage.initor.StorageInitor;
 import main.java.transportation.service.TransportationService;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 import static java.util.Collections.singletonList;
@@ -32,8 +34,6 @@ public class Application {
 
     private static final String SEPARATOR = "--------------";
     private static final StorageType storageType = StorageType.COLLECTION;
-    private static final StorageInitor storageInitorInMemory = new InMemoryStorageInitor();
-    private static final StorageInitor storageInitorFromFile = new FileStorageInitor();
     private static CargoService cargoService;
     private static CarrierService carrierService;
     private static TransportationService transportationService;
@@ -45,8 +45,17 @@ public class Application {
         carrierService = ServiceHolder.getInstance().getCarrierService();
         transportationService = ServiceHolder.getInstance().getTransportationService();
 
-        StorageInitor storageInitor = storageInitorFromFile;
-        storageInitor.initStorage();
+        StorageInitor storageInitor = new FileStorageInitor();
+//        StorageInitor storageInitor = new InMemoryStorageInitor();
+        try {
+            storageInitor.initStorage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Cargo cargo : Storage.cargoList) {
+            System.out.println(cargo);
+        }
 
         printStorageData();
         doSearchOperations();

@@ -3,7 +3,7 @@ package main.java.common.solutions.parser;
 import java.io.*;
 
 public class EntityReader {
-    public static StringBuilder stringBuilderFile;
+    public static StringBuilder stringBuilderFile = new StringBuilder();
     private EntityReader() {
     }
 
@@ -12,7 +12,8 @@ public class EntityReader {
         {
             String line;
             while ((line = bf.readLine()) != null) {
-                stringBuilderFile.append(line).append("\n");
+                System.out.println(line);
+                stringBuilderFile.append(line).append(System.lineSeparator());
             }
         }
         return stringBuilderFile;

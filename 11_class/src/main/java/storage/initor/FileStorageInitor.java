@@ -4,6 +4,7 @@ import main.java.application.serviceholder.ServiceHolder;
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.service.CarrierService;
+import main.java.common.solutions.parser.EntityParser;
 import main.java.common.solutions.parser.EntityReader;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.service.TransportationService;
@@ -20,7 +21,7 @@ public class FileStorageInitor implements StorageInitor {
     private final CarrierService carrierService;
     private final CargoService cargoService;
     private final TransportationService transportationService;
-    private static final String FILE_PATH = "D:\\JAVA\\EPAM_SPB\\Training\\11_class\\src\\main\\java\\common\\solutions\\input\\TransportTable.txt";
+    private static final String FILE_PATH = "D:/JAVA/EPAM_SPB/Training/11_class/src/main/java/common/solutions/input/TransportTable.txt";
 
     public FileStorageInitor() {
         carrierService = ServiceHolder.getInstance().getCarrierService();
@@ -31,6 +32,7 @@ public class FileStorageInitor implements StorageInitor {
     @Override
     public void initStorage() throws IOException {
         EntityReader.readFromFile(new File(FILE_PATH));
+        EntityParser.parse();
         initCargos();
         initCarriers();
         initTransportations();

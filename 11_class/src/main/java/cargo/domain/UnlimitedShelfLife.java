@@ -4,6 +4,8 @@ public class UnlimitedShelfLife extends Cargo {
     private boolean isComposite;
     private boolean fragility;
 
+    public UnlimitedShelfLife() {
+    }
 
     public UnlimitedShelfLife(boolean isComposite, boolean fragility) {
         this.isComposite = isComposite;
