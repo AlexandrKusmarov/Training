@@ -13,12 +13,12 @@ import main.java.carrier.service.CarrierService;
 import main.java.common.solutions.parser.EntityReader;
 import main.java.common.solutions.search.OrderType;
 import main.java.common.solutions.util.MessagePrinter;
+import main.java.storage.initor.FileStorageInitor;
 import main.java.storage.initor.InMemoryStorageInitor;
 import main.java.storage.initor.StorageInitor;
 import main.java.transportation.service.TransportationService;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 import static java.util.Collections.singletonList;
@@ -29,9 +29,11 @@ import static main.java.common.solutions.search.OrderType.DESC;
 
 public class Application {
 
-    private static final String FILE_PATH = "D:\\JAVA\\EPAM_SPB\\Training\\11_class\\src\\main\\java\\common\\solutions\\input\\TransportTable.txt";
+
     private static final String SEPARATOR = "--------------";
     private static final StorageType storageType = StorageType.COLLECTION;
+    private static final StorageInitor storageInitorInMemory = new InMemoryStorageInitor();
+    private static final StorageInitor storageInitorFromFile = new FileStorageInitor();
     private static CargoService cargoService;
     private static CarrierService carrierService;
     private static TransportationService transportationService;
@@ -43,7 +45,7 @@ public class Application {
         carrierService = ServiceHolder.getInstance().getCarrierService();
         transportationService = ServiceHolder.getInstance().getTransportationService();
 
-        StorageInitor storageInitor = new InMemoryStorageInitor();
+        StorageInitor storageInitor = storageInitorFromFile;
         storageInitor.initStorage();
 
         printStorageData();
@@ -52,7 +54,7 @@ public class Application {
         demoSortOperations();
         printStorageData();
 
-        readAndShowFile(new File(FILE_PATH));
+        readAndShowFile();
 
 
     }
@@ -173,14 +175,8 @@ public class Application {
         }
     }
 
-    private static void readAndShowFile(File file){
-        try {
-            MessagePrinter.printMessage( EntityReader.readFromFile(file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+    private static void readAndShowFile(){
+        MessagePrinter.printMessage(EntityReader.stringBuilderFile);
     }
 
 
