@@ -13,6 +13,7 @@ import main.java.carrier.service.CarrierService;
 import main.java.common.solutions.search.OrderType;
 import main.java.storage.initor.InMemoryStorageInitor;
 import main.java.storage.initor.StorageInitor;
+import main.java.transportation.domain.Transportation;
 import main.java.transportation.service.TransportationService;
 
 import java.util.*;
@@ -103,26 +104,6 @@ public class Application {
     private static void printSeparator() {
         System.out.println(SEPARATOR);
     }
-
-//    private static void compareCargo(boolean sortByname, boolean sortByWeight) {
-//        Comparator<Cargo> compareByWeightAndName;
-//
-//        if (sortByname && !sortByWeight) {
-//            compareByWeightAndName = Comparator.comparing(Cargo::getName);
-//            cargoService.sort(Storage.cargoList, compareByWeightAndName);
-//        } else if (!sortByname && sortByWeight) {
-//            compareByWeightAndName = Comparator.comparing(Cargo::getWeight);
-//            cargoService.sort(Storage.cargoList, compareByWeightAndName);
-//        } else if (sortByname && sortByWeight) {
-//            compareByWeightAndName = Comparator.comparing(Cargo::getName)
-//                    .thenComparing(Cargo::getWeight);
-//            cargoService.sort(Storage.cargoList, compareByWeightAndName);
-//        }
-//
-//        for (Cargo cargo : Storage.cargoList) {
-//            System.out.println(cargo);
-//        }
-//    }
 
     private static void demoSortOperations() {
         demoCargoSorting(singletonList(NAME), ASC);

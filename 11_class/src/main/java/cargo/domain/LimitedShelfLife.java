@@ -2,22 +2,13 @@ package main.java.cargo.domain;
 
 import java.util.Date;
 
-public class LimitedShelfLife<T extends Cargo> extends Cargo {
+public class LimitedShelfLife extends Cargo {
     private Date produced;
     private Date expires;
-    private T type;
-
-    public LimitedShelfLife(T type) {
-        this.type = type;
-    }
 
     public LimitedShelfLife(Date produced, Date expires) {
         this.produced = produced;
         this.expires = expires;
-    }
-
-    public T getType() {
-        return type;
     }
 
     public Date getProduced() {

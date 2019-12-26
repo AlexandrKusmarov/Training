@@ -1,21 +1,13 @@
 package main.java.cargo.domain;
 
-public class UnlimitedShelfLife<T extends Cargo> extends Cargo {
+public class UnlimitedShelfLife extends Cargo {
     private boolean isComposite;
     private boolean fragility;
-    private T type;
 
-    public UnlimitedShelfLife(T type) {
-        this.type = type;
-    }
 
     public UnlimitedShelfLife(boolean isComposite, boolean fragility) {
         this.isComposite = isComposite;
         this.fragility = fragility;
-    }
-
-    public T getType() {
-        return type;
     }
 
     public boolean isComposite() {
