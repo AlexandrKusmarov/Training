@@ -10,12 +10,15 @@ import main.java.cargo.search.CargoSearchCondition;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.service.CarrierService;
+import main.java.common.solutions.parser.EntityReader;
 import main.java.common.solutions.search.OrderType;
+import main.java.common.solutions.util.MessagePrinter;
 import main.java.storage.initor.InMemoryStorageInitor;
 import main.java.storage.initor.StorageInitor;
-import main.java.transportation.domain.Transportation;
 import main.java.transportation.service.TransportationService;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 import static java.util.Collections.singletonList;
@@ -26,6 +29,7 @@ import static main.java.common.solutions.search.OrderType.DESC;
 
 public class Application {
 
+    private static final String FILE_PATH = "D:\\JAVA\\EPAM_SPB\\Training\\11_class\\src\\main\\java\\common\\solutions\\input\\TransportTable.txt";
     private static final String SEPARATOR = "--------------";
     private static final StorageType storageType = StorageType.COLLECTION;
     private static CargoService cargoService;
@@ -46,9 +50,11 @@ public class Application {
         doSearchOperations();
         demoExceptions();
         demoSortOperations();
-
-//        compareCargo(true, false);
         printStorageData();
+
+        readAndShowFile(new File(FILE_PATH));
+
+
     }
 
     private static void printStorageData() {
@@ -166,5 +172,16 @@ public class Application {
             System.out.println(e.getMessage());
         }
     }
+
+    private static void readAndShowFile(File file){
+        try {
+            MessagePrinter.printMessage( EntityReader.readFromFile(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
 }
