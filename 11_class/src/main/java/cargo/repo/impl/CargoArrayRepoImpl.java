@@ -72,18 +72,18 @@ public class CargoArrayRepoImpl extends CommonCargoRepo {
     @Override
     public boolean deleteById(Object id) {
         int len = arrCargo.length;
-            for (int i = 0; i < len; i++) {
-                if (arrCargo[i] != null) {
-                    if (arrCargo[i].getId().equals(id)) {
-                        arrCargo[i] = null;
-                        arrCargo = (Cargo[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCargo, i);
-                        if (len > 1) {
-                            arrCargo = (Cargo[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCargo);
-                        }
-                        return true;
+        for (int i = 0; i < len; i++) {
+            if (arrCargo[i] != null) {
+                if (arrCargo[i].getId().equals(id)) {
+                    arrCargo[i] = null;
+                    arrCargo = (Cargo[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrCargo, i);
+                    if (len > 1) {
+                        arrCargo = (Cargo[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrCargo);
                     }
+                    return true;
                 }
             }
+        }
         return false;
     }
 

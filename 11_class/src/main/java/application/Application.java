@@ -15,11 +15,9 @@ import main.java.common.solutions.search.OrderType;
 import main.java.common.solutions.util.MessagePrinter;
 import main.java.storage.Storage;
 import main.java.storage.initor.FileStorageInitor;
-import main.java.storage.initor.InMemoryStorageInitor;
 import main.java.storage.initor.StorageInitor;
 import main.java.transportation.service.TransportationService;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -53,9 +51,6 @@ public class Application {
             e.printStackTrace();
         }
 
-        for (Cargo cargo : Storage.cargoList) {
-            System.out.println(cargo);
-        }
 
         printStorageData();
         doSearchOperations();
@@ -84,7 +79,7 @@ public class Application {
 
     private static void doSearchOperations() {
         System.out.println("SEARCH CARGO BY ID = 1");
-        System.out.println((Cargo)cargoService.getById(1L));
+        System.out.println((Cargo) cargoService.getById(1L));
         printSeparator();
 
         System.out.println("SEARCH CARRIER BY ID = 8");
@@ -97,9 +92,13 @@ public class Application {
         }
         printSeparator();
 
-        System.out.println("SEARCH CARRIERS BY NAME = 'Carrier_Name'");
-        for (Object carrierName : carrierService.getByName("Carrier_Name")) {
-            System.out.println(carrierName);
+        System.out.println("SEARCH CARRIERS BY NAME = 'CarFirst'");
+        try {
+            for (Object carrierName : carrierService.getByName("CarFirst")) {
+                System.out.println(carrierName);
+            }
+        } catch (NullPointerException e){
+            e.printStackTrace();
         }
     }
 
@@ -165,7 +164,7 @@ public class Application {
 
     private static void demoExceptions() {
         System.out.println("------Demo  exceptions------------");
-        Cargo firstCargo = (Cargo)cargoService.getAll().get(0);
+        Cargo firstCargo = (Cargo) cargoService.getAll().get(0);
         Long idFirstCargo = firstCargo.getId();
 
         Cargo cargo = cargoService.getByIdFetchingTransportations(idFirstCargo);
@@ -184,7 +183,7 @@ public class Application {
         }
     }
 
-    private static void readAndShowFile(){
+    private static void readAndShowFile() {
         MessagePrinter.printMessage(EntityReader.stringBuilderFile);
     }
 

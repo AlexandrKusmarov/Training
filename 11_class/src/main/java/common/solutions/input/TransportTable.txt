@@ -23,7 +23,7 @@
 
 			~~Example of carrier~~
 
-~Transportation fields - description(Ultra.fast), billTo(Ivanov.I.I.), date(31.12.2019)
+~Transportation fields - description(Ultra.fast), billTo(Ivanov.I.I.), date(31.12.2019), transportation:null
 			
 				CARGOS
 1. name:banana weight:10 cargoType:FOOD transportation:null dateProduced:20.12.2019 dateExpires:20.02.2020 lim
@@ -36,6 +36,6 @@
 3. name:planeThird address:Savushkina.77 carrierType:PLANE transportation:null
 
 				TRANSPORTATIONS
-1. description:Need.Very.Fast billTo:Ivanov.I.I. date:31.12.2019
-2. description:Slow billTo:Moroz date:31.12.2019
-3. description:- billTo:Sidorov.K.V date:01.01.2020
+1. description:Need.Very.Fast billTo:Ivanov.I.I. date:31.12.2019 transportation:null
+2. description:Slow billTo:Moroz date:31.12.2019 transportation:null
+3. description:- billTo:Sidorov.K.V date:01.01.2020 transportation:null
