@@ -20,6 +20,9 @@ public class ExporterTxtFile {
     private static FileWriter writer;
     private static int index;
 
+    private ExporterTxtFile() {
+    }
+
     public static boolean exportIntoTxt(List<Cargo> list, List<Carrier> list2, List<Transportation> list3) {
         try {
             Path path = createFile();

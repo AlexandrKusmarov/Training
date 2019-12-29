@@ -1,0 +1,70 @@
+<company>
+    <cargos>
+        <cargo type="lim">
+            <ID>1001</ID>
+            <name>banana</name>
+            <weight>10</weight>
+            <cargoType>FOOD</cargoType>
+            <transportation>null</transportation>
+            <dateProduced>20.12.2019</dateProduced>
+            <dateExpires>20.02.2020</dateExpires>
+        </cargo>
+        <cargo type="lim">
+            <ID>1002</ID>
+            <name>berry</name>
+            <weight>5000</weight>
+            <cargoType>FOOD</cargoType>
+            <transportation>null</transportation>
+            <dateProduced>10.12.2019</dateProduced>
+            <dateExpires>20.01.2020</dateExpires>
+        </cargo>
+        <cargo type="unlim">
+            <ID>1003</ID>
+            <name>keyboard</name>
+            <weight>1</weight>
+            <cargoType>COMPUTERS</cargoType>
+            <isComposite>true</isComposite>
+            <fragility>false</fragility>
+        </cargo>
+    </cargos>
+    <carriers>
+        <carrier>
+            <ID>2001</ID>
+            <name>carFirst</name>
+            <address>Prospekt Slavu 24</address>
+            <carrierType>CAR</carrierType>
+        </carrier>
+        <carrier>
+            <ID>2002</ID>
+            <name>carSecond</name>
+            <address>Lenina 4</address>
+            <carrierType>SHIP</carrierType>
+        </carrier>
+        <carrier>
+            <ID>2003</ID>
+            <name>carThird</name>
+            <address>Savushkina 77</address>
+            <carrierType>PLANE</carrierType>
+        </carrier>
+    </carriers>
+    <transportations>
+        <transportation>
+            <description>Need very fast</description>
+            <billTo>Ivanov I. I.</billTo>
+            <date>31.12.2019</date>
+            <bound>1001 -> 2001</bound>
+        </transportation>
+        <transportation>
+            <description>Slow</description>
+            <billTo>Moroz</billTo>
+            <date>31.12.2019</date>
+            <bound>1002 -> 2001</bound>
+        </transportation>
+        <transportation>
+            <description></description>
+            <billTo>Sidorov K. V.</billTo>
+            <date>01.01.2020</date>
+            <bound>1003 -> 2003</bound>
+        </transportation>
+    </transportations>
+</company>
