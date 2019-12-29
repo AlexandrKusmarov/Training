@@ -16,13 +16,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ExporterTxtFile {
+    private static StringBuilder exportStringBuilder;
+    private static FileWriter writer;
+    private static int index;
 
     public static boolean exportIntoTxt(List<Cargo> list, List<Carrier> list2, List<Transportation> list3) {
         try {
             Path path = createFile();
             writeCargos(list, path);
-            writeCarriers(list2, path);
-            writeTransportation(list3, path);
+            writeCarriers(list2);
+            writeTransportation(list3);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,11 +33,12 @@ public class ExporterTxtFile {
     }
 
     private static void writeCargos(List<Cargo> list, Path path) throws IOException {
-        FileWriter writer = new FileWriter(path.toFile());
-        StringBuilder cargoString = new StringBuilder();
+        writer = new FileWriter(path.toFile());
+        exportStringBuilder = new StringBuilder();
         StringBuilder diffString = new StringBuilder();
-        int index = 1;
-        cargoString.append("\t\t\t\tCARGOS\n");
+        index = 1;
+        exportStringBuilder.append("\t\t\t\tCARGOS\n");
+
         for (Cargo cargo : list) {
             if (isLimitedTimeShelfCargo(cargo.getCargoType())) {
                 diffString.append(" dateProduced:")
@@ -47,7 +51,7 @@ public class ExporterTxtFile {
                         .append(" fragility:").append(((UnlimitedShelfLife) cargo).isFragility())
                         .append(" unlim");
             }
-            cargoString.append(index).append(". ")
+            exportStringBuilder.append(index).append(". ")
                     .append("name:").append(cargo.getName())
                     .append(" weight:").append(cargo.getWeight())
                     .append(" cargoType:").append(cargo.getCargoType())
@@ -57,20 +61,44 @@ public class ExporterTxtFile {
             diffString = new StringBuilder();
             index++;
         }
-        writer.write(cargoString.append("\n").toString());
-        writer.flush();
+        flushAndWriteLineSeparator();
+    }
+
+    private static void writeCarriers(List<Carrier> list2) throws IOException {
+        exportStringBuilder = new StringBuilder();
+        index = 1;
+        exportStringBuilder.append("\t\t\t\tCARRIERS\n");
+
+        for (Carrier carrier : list2) {
+            exportStringBuilder.append(index).append(". ")
+                    .append("name:").append(carrier.getName())
+                    .append(" address:").append(carrier.getAddress())
+                    .append(" carrierType:").append(carrier.getCarrierType())
+                    .append(" transportations:").append(carrier.getTransportations())
+                    .append(System.lineSeparator());
+            index++;
+        }
+        flushAndWriteLineSeparator();
+    }
+
+    private static void writeTransportation(List<Transportation> list3) throws IOException {
+        exportStringBuilder = new StringBuilder();
+        index = 1;
+        exportStringBuilder.append("\t\t\t\tTRANSPORTATIONS\n");
+
+        for (Transportation transportation : list3) {
+            exportStringBuilder.append(index).append(". ")
+                    .append("description:").append(transportation.getDescription())
+                    .append(" billTo:").append(transportation.getBillTo())
+                    .append(" date:").append(transportation.getDate()).append(" ")
+                    .append(transportation.getCargo().getId()).append("_")
+                    .append(transportation.getCarrier().getId())
+                    .append(" transportations:null")
+                    .append(System.lineSeparator());
+            index++;
+        }
+        flushAndWriteLineSeparator();
         writer.close();
-    }
-
-    private static boolean isLimitedTimeShelfCargo(CargoType cargoType) {
-        return cargoType.equals(CargoType.FOOD);
-    }
-
-    private static void writeCarriers(List<Carrier> list2, Path path) {
-    }
-
-    private static void writeTransportation(List<Transportation> list3, Path path) {
-
     }
 
     private static Path createFile() throws IOException {
@@ -85,5 +113,14 @@ public class ExporterTxtFile {
             Files.createFile(path);
         }
         return path;
+    }
+
+    private static boolean isLimitedTimeShelfCargo(CargoType cargoType) {
+        return cargoType.equals(CargoType.FOOD);
+    }
+
+    private static void flushAndWriteLineSeparator() throws IOException {
+        writer.write(exportStringBuilder.append("\n").toString());
+        writer.flush();
     }
 }
