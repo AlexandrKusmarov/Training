@@ -36,6 +36,6 @@
 3. name:planeThird address:Savushkina.77 carrierType:PLANE transportation:null
 
 				TRANSPORTATIONS
-1. description:Need.Very.Fast billTo:Ivanov.I.I. date:31.12.2019 transportation:null
-2. description:Slow billTo:Moroz date:31.12.2019 transportation:null
-3. description:- billTo:Sidorov.K.V date:01.01.2020 transportation:null
+1. description:Need.Very.Fast billTo:Ivanov.I.I. date:31.12.2019 1_1 transportation:null
+2. description:Slow billTo:Moroz date:31.12.2019 2_1 transportation:null
+3. description:- billTo:Sidorov.K.V date:01.01.2020 3_3 transportation:null
