@@ -15,7 +15,9 @@ public class CargoCollectionRepoImpl extends CommonCargoRepo {
     @Override
     public void add(Cargo cargo) {
         if (cargo != null) {
-            cargo.setId(IdGenerator.generateId());
+            if (cargo.getId() == null) {
+                cargo.setId(IdGenerator.generateId());
+            }
             Storage.cargoList.add(cargo);
         }
     }
@@ -69,7 +71,7 @@ public class CargoCollectionRepoImpl extends CommonCargoRepo {
     @Override
     public void printAll() {
         for (Cargo cargo : Storage.cargoList) {
-            if(cargo!= null) {
+            if (cargo != null) {
                 System.out.println(cargo);
             }
         }

@@ -21,7 +21,6 @@ public class Transportation extends BaseEntity {
         this.date = date;
     }
 
-
     public String getDescription() {
         return description;
     }

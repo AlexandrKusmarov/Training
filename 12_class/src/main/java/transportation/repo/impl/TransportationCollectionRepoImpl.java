@@ -12,7 +12,9 @@ public class TransportationCollectionRepoImpl implements TransportationRepo {
     @Override
     public void add(Transportation transportation) {
         if (transportation != null) {
-            transportation.setId(IdGenerator.generateId());
+            if (transportation.getId() == null) {
+                transportation.setId(IdGenerator.generateId());
+            }
             Storage.transportationList.add(transportation);
         }
     }

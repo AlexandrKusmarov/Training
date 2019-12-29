@@ -13,7 +13,9 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
     @Override
     public void add(Carrier carrier) {
         if (carrier != null) {
-            carrier.setId(IdGenerator.generateId());
+            if(carrier.getId() == null) {
+                carrier.setId(IdGenerator.generateId());
+            }
             Storage.carrierList.add(carrier);
         }
     }

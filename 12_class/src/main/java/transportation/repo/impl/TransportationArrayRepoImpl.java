@@ -48,16 +48,16 @@ public class TransportationArrayRepoImpl implements TransportationRepo {
     @Override
     public boolean deleteById(Object id) {
         int len = arrTransportation.length;
-            for (int i = 0; i < len; i++) {
-                if (arrTransportation[i].getId().equals(id)) {
-                    arrTransportation[i] = null;
-                    arrTransportation = (Transportation[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrTransportation, i);
-                    if (len > 1) {
-                        arrTransportation = (Transportation[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrTransportation);
-                    }
-                    return true;
+        for (int i = 0; i < len; i++) {
+            if (arrTransportation[i].getId().equals(id)) {
+                arrTransportation[i] = null;
+                arrTransportation = (Transportation[]) ArrayCapacityChanger.shiftArrFromEndToIndexByOnePos(arrTransportation, i);
+                if (len > 1) {
+                    arrTransportation = (Transportation[]) ArrayCapacityChanger.constrictionArrCapacityByOne(arrTransportation);
                 }
+                return true;
             }
+        }
         return false;
     }
 

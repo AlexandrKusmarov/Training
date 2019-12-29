@@ -3,6 +3,7 @@ package main.java.storage.initor;
 import main.java.application.serviceholder.ServiceHolder;
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.service.CargoService;
+import main.java.carrier.domain.Carrier;
 import main.java.carrier.service.CarrierService;
 import main.java.common.solutions.parser.EntityParser;
 import main.java.common.solutions.parser.EntityReader;
@@ -11,6 +12,7 @@ import main.java.transportation.service.TransportationService;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class FileStorageInitor implements StorageInitor {
     private final CargoService cargoService;
     private final TransportationService transportationService;
     private static final String FILE_PATH = "D:\\JAVA\\EPAM_SPB\\Training\\11_class\\src\\main\\java\\resources\\TransportTable.txt";
+    private static String text;
 
     public FileStorageInitor() {
         carrierService = ServiceHolder.getInstance().getCarrierService();
@@ -32,27 +35,47 @@ public class FileStorageInitor implements StorageInitor {
     @Override
     public void initStorage() throws IOException {
         EntityReader.readFromFile(new File(FILE_PATH));
-        EntityParser.parse();
-        initCargos();
-        initCarriers();
-        initTransportations();
+        text = EntityReader.stringBuilderFile.toString();
+        try {
+            initCargos();
+            initCarriers();
+            initTransportations();
+            tieEntities();
+            addAllEntities();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initCargos() {
-
+    private void addAllEntities() {
+        for (Cargo cargo : EntityParser.getCargosTemp()) {
+            if (cargo != null) {
+                cargoService.add(cargo);
+            }
+        }
+        for (Carrier carrier : EntityParser.getCarriersTemp()) {
+            if (carrier != null) {
+                carrierService.add(carrier);
+            }
+        }
+        EntityParser.getTransportMapTemp().forEach((k, v) -> transportationService.add(v));
     }
 
-
-
-    private void initCarriers() {
-
+    private void tieEntities() {
+        EntityParser.tieCargosCarriersToTransportations();
     }
 
-
-    private void initTransportations() {
-
+    private void initCargos() throws ParseException {
+        EntityParser.parseCargos(text);
     }
 
+    private void initCarriers() throws ParseException {
+        EntityParser.parseCarriers(text);
+    }
+
+    private void initTransportations() throws ParseException {
+        EntityParser.parseTransportations(text);
+    }
 
     private void appendTransportationsToCargos() {
         List<Cargo> cargos = cargoService.getAll();

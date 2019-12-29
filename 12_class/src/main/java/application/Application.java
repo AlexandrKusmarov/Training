@@ -13,7 +13,6 @@ import main.java.carrier.service.CarrierService;
 import main.java.common.solutions.parser.EntityReader;
 import main.java.common.solutions.search.OrderType;
 import main.java.common.solutions.util.MessagePrinter;
-import main.java.storage.Storage;
 import main.java.storage.initor.FileStorageInitor;
 import main.java.storage.initor.StorageInitor;
 import main.java.transportation.service.TransportationService;
@@ -50,7 +49,6 @@ public class Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         printStorageData();
         doSearchOperations();
@@ -97,7 +95,7 @@ public class Application {
             for (Object carrierName : carrierService.getByName("CarFirst")) {
                 System.out.println(carrierName);
             }
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
