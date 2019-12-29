@@ -10,9 +10,12 @@ import main.java.cargo.search.CargoSearchCondition;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.service.CarrierService;
+import main.java.common.business.domain.BaseEntity;
 import main.java.common.solutions.parser.EntityReader;
 import main.java.common.solutions.search.OrderType;
+import main.java.common.solutions.serialization.ExporterTxtFile;
 import main.java.common.solutions.util.MessagePrinter;
+import main.java.storage.Storage;
 import main.java.storage.initor.FileStorageInitor;
 import main.java.storage.initor.StorageInitor;
 import main.java.transportation.service.TransportationService;
@@ -51,14 +54,22 @@ public class Application {
         }
 
         printStorageData();
-        doSearchOperations();
-        demoExceptions();
-        demoSortOperations();
+//        doSearchOperations();
+//        demoExceptions();
+//        demoSortOperations();
         printStorageData();
-
         readAndShowFile();
 
+        //HOMEWORK 12. EXPORT INTO TXT FILE.
+        sortEntitiesById();
+        ExporterTxtFile.exportIntoTxt(cargoService.getAll(), carrierService.getAll(), transportationService.getAll());
 
+    }
+
+    private static void sortEntitiesById() {
+        Storage.cargoList.sort(Comparator.comparing(BaseEntity::getId));
+        Storage.carrierList.sort(Comparator.comparing(BaseEntity::getId));
+        Storage.transportationList.sort(Comparator.comparing(BaseEntity::getId));
     }
 
     private static void printStorageData() {
