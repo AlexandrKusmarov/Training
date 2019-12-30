@@ -5,8 +5,8 @@ import main.java.cargo.domain.Cargo;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.service.CarrierService;
-import main.java.common.solutions.parser.EntityParser;
-import main.java.common.solutions.parser.EntityReader;
+import main.java.common.solutions.parser.txt.EntityParser;
+import main.java.common.solutions.parser.txt.EntityReader;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.service.TransportationService;
 

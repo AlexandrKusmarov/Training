@@ -11,13 +11,14 @@ import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.service.CarrierService;
 import main.java.common.business.domain.BaseEntity;
-import main.java.common.solutions.parser.EntityReader;
+import main.java.common.solutions.parser.txt.EntityReader;
 import main.java.common.solutions.search.OrderType;
 import main.java.common.solutions.serialization.ExporterTxtFile;
 import main.java.common.solutions.util.MessagePrinter;
 import main.java.storage.Storage;
 import main.java.storage.initor.FileStorageInitor;
 import main.java.storage.initor.StorageInitor;
+import main.java.storage.initor.XmlStorageInitor;
 import main.java.transportation.service.TransportationService;
 
 import java.io.IOException;
@@ -45,8 +46,9 @@ public class Application {
         carrierService = ServiceHolder.getInstance().getCarrierService();
         transportationService = ServiceHolder.getInstance().getTransportationService();
 
-        StorageInitor storageInitor = new FileStorageInitor();
+//        StorageInitor storageInitor = new FileStorageInitor();
 //        StorageInitor storageInitor = new InMemoryStorageInitor();
+        StorageInitor storageInitor = new XmlStorageInitor();
         try {
             storageInitor.initStorage();
         } catch (IOException e) {
@@ -63,6 +65,8 @@ public class Application {
         //HOMEWORK 12. EXPORT INTO TXT FILE.
         sortEntitiesById();
         ExporterTxtFile.exportIntoTxt(cargoService.getAll(), carrierService.getAll(), transportationService.getAll());
+        //Parse XML File.
+
 
     }
 

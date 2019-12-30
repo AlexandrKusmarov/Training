@@ -1,4 +1,4 @@
-package main.java.common.solutions.parser;
+package main.java.common.solutions.parser.txt;
 
 import java.io.*;
 

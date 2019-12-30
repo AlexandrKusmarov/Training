@@ -1,4 +1,4 @@
-package main.java.common.solutions.parser;
+package main.java.common.solutions.parser.txt;
 
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.CargoType;
