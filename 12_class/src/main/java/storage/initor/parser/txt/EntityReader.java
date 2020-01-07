@@ -1,4 +1,4 @@
-package main.java.common.solutions.parser.txt;
+package main.java.storage.initor.parser.txt;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package main.java.common.solutions.parser.xml;
+package main.java.storage.initor.parser.xml;
 
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.CargoType;
@@ -35,13 +35,7 @@ public class XmlParser {
         document = createDocument();
     }
 
-    private static Document createDocument() throws ParserConfigurationException, IOException, SAXException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        return builder.parse(new File(PATH_NAME));
-    }
-
-    public static List<Cargo> getCargoList() throws ParseException {
+    public List<Cargo> getCargoList() throws ParseException {
         List<Cargo> cargoList = new ArrayList<>();
         List<String> temp;
         Cargo cargoObject = null;
@@ -50,7 +44,7 @@ public class XmlParser {
             NamedNodeMap attributes;
             if (cargos.item(i).getNodeName().equals("cargo")) {
                 attributes = cargos.item(i).getAttributes();
-                temp = getEntity(cargos.item(i).getChildNodes());
+                temp = getListFieldsOfOneEntity(cargos.item(i).getChildNodes());
 
                 if (attributes.getNamedItem("type").getNodeValue().equals("lim")) {
                     cargoObject = new LimitedShelfLife();
@@ -64,7 +58,6 @@ public class XmlParser {
                     ((UnlimitedShelfLife) cargoObject).setFragility(Boolean.parseBoolean(temp.get(5)));
                 }
 
-                cargoObject.setId(IdGenerator.generateId());
                 cargoObject.setName(temp.get(1));
                 cargoObject.setWeight(Integer.parseInt(temp.get(2)));
                 cargoObject.setCargoType(CargoType.valueOf(temp.get(3)));
@@ -74,13 +67,13 @@ public class XmlParser {
         return cargoList;
     }
 
-    public static List<Carrier> getCarrierList() throws ParseException {
+    public List<Carrier> getCarrierList() throws ParseException {
         List<Carrier> carrierList = new ArrayList<>();
         NodeList carriers = document.getElementsByTagName("carriers").item(0).getChildNodes();
 
         for (int i = 0; i < carriers.getLength(); i++) {
             if (carriers.item(i).getNodeName().equals("carrier")) {
-                List<String> temp = getEntity(carriers.item(i).getChildNodes());
+                List<String> temp = getListFieldsOfOneEntity(carriers.item(i).getChildNodes());
 
                 Carrier carrierObject = new Carrier();
                 carrierObject.setId(IdGenerator.generateId());
@@ -93,13 +86,13 @@ public class XmlParser {
         return carrierList;
     }
 
-    public static Map<String, Transportation> getTransportationMap() throws ParseException {
+    public Map<String, Transportation> getTransportationMap() throws ParseException {
         Map<String, Transportation> transportationMap = new HashMap<>();
         NodeList transportations = document.getElementsByTagName("transportations").item(0).getChildNodes();
 
         for (int i = 0; i < transportations.getLength(); i++) {
             if (transportations.item(i).getNodeName().equals("transportation")) {
-                List<String> temp = getEntity(transportations.item(i).getChildNodes());
+                List<String> temp = getListFieldsOfOneEntity(transportations.item(i).getChildNodes());
 
                 Transportation transportationObject = new Transportation();
                 Date date = new SimpleDateFormat("dd.MM.yyyy").parse(temp.get(2));
@@ -113,74 +106,9 @@ public class XmlParser {
         return transportationMap;
     }
 
-    private static List<String> getEntity(NodeList nodeList) {
-        List<String> tempList = new ArrayList<>();
-        for (int j = 0; j < nodeList.getLength(); j++) {
-            switch (nodeList.item(j).getNodeName()) {
-                case "ID": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "name": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "weight": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "cargoType": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "dateProduced": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "dateExpires": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "isComposite": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "fragility": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "address": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "carrierType": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "description": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "billTo": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "date": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-                case "bound": {
-                    tempList.add(nodeList.item(j).getTextContent());
-                    break;
-                }
-            }
-        }
-        return tempList;
-    }
-
-    public static void tieCargosCarriersToTransportations(Map<String, Transportation> map,
-                                                          List<Cargo> cargoList,
+    public void tieCargosCarriersToTransportations(Map<String, Transportation> map, List<Cargo> cargoList,
                                                           List<Carrier> carrierList) {
+
         for (Map.Entry<String, Transportation> pair : map.entrySet()) {
             String[] arr = pair.getKey().split("->");
             pair.getValue()
@@ -189,7 +117,78 @@ public class XmlParser {
             pair.getValue()
                     .setCarrier(carrierList.get(
                             Integer.parseInt(arr[1].trim()) - CARRIER_INDEX_FROM_XML - 1));
-
         }
+    }
+
+    private static List<String> getListFieldsOfOneEntity(NodeList nodeList) {
+        List<String> tempList = new ArrayList<>();
+        for (int j = 0; j < nodeList.getLength(); j++) {
+           String tag = nodeList.item(j).getTextContent();
+            switch (nodeList.item(j).getNodeName()) {
+                case "ID": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "name": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "weight": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "cargoType": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "dateProduced": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "dateExpires": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "isComposite": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "fragility": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "address": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "carrierType": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "description": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "billTo": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "date": {
+                    tempList.add(tag);
+                    break;
+                }
+                case "bound": {
+                    tempList.add(tag);
+                    break;
+                }
+            }
+        }
+        return tempList;
+    }
+
+    private static Document createDocument() throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        return builder.parse(new File(PATH_NAME));
     }
 }

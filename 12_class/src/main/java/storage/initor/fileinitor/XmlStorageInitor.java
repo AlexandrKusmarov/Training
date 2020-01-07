@@ -1,11 +1,12 @@
-package main.java.storage.initor;
+package main.java.storage.initor.fileinitor;
 
 import main.java.application.serviceholder.ServiceHolder;
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.service.CarrierService;
-import main.java.common.solutions.parser.xml.XmlParser;
+import main.java.storage.initor.parser.xml.XmlParser;
+import main.java.storage.initor.StorageInitor;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.service.TransportationService;
 import org.xml.sax.SAXException;
@@ -13,8 +14,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +23,7 @@ public class XmlStorageInitor implements StorageInitor {
     private final TransportationService transportationService;
     private static List<Cargo> cargoList;
     private static List<Carrier> carrierList;
+    private XmlParser xmlParser;
 
     public XmlStorageInitor() {
         carrierService = ServiceHolder.getInstance().getCarrierService();
@@ -41,7 +41,7 @@ public class XmlStorageInitor implements StorageInitor {
     private void initCargos() {
         try {
             XmlParser.initDocument();
-            cargoList = XmlParser.getCargoList();
+            cargoList = xmlParser.getCargoList();
             for (Cargo cargo : cargoList) {
                 cargoService.add(cargo);
             }
@@ -52,7 +52,7 @@ public class XmlStorageInitor implements StorageInitor {
 
     private void initCarriers() {
         try {
-            carrierList = XmlParser.getCarrierList();
+            carrierList = xmlParser.getCarrierList();
             for (Carrier carrier : carrierList) {
                 carrierService.add(carrier);
             }
@@ -64,13 +64,11 @@ public class XmlStorageInitor implements StorageInitor {
     private void initTransportations() {
         try {
             Map<String, Transportation> map;
-            map = XmlParser.getTransportationMap();
-            XmlParser.tieCargosCarriersToTransportations(map, cargoList, carrierList);
+            map = xmlParser.getTransportationMap();
+            xmlParser.tieCargosCarriersToTransportations(map, cargoList, carrierList);
             map.forEach((k, v) -> transportationService.add(v));
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-
-
 }

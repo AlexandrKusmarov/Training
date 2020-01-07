@@ -1,12 +1,13 @@
-package main.java.storage.initor;
+package main.java.storage.initor.fileinitor;
 
 import main.java.application.serviceholder.ServiceHolder;
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.service.CarrierService;
-import main.java.common.solutions.parser.txt.EntityParser;
-import main.java.common.solutions.parser.txt.EntityReader;
+import main.java.storage.initor.parser.txt.EntityParser;
+import main.java.storage.initor.parser.txt.EntityReader;
+import main.java.storage.initor.StorageInitor;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.service.TransportationService;
 

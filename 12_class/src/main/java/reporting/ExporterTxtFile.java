@@ -1,4 +1,4 @@
-package main.java.common.solutions.serialization;
+package main.java.reporting;
 
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.CargoType;
@@ -23,26 +23,27 @@ public class ExporterTxtFile {
     private ExporterTxtFile() {
     }
 
-    public static boolean exportIntoTxt(List<Cargo> list, List<Carrier> list2, List<Transportation> list3) {
+    public static boolean exportIntoTxt(List<Cargo> cargoList, List<Carrier> carrierList, List<Transportation> transportationList) {
         try {
             Path path = createFile();
-            writeCargos(list, path);
-            writeCarriers(list2);
-            writeTransportation(list3);
+//            writer = new FileWriter(String.valueOf(path),false);
+            writeCargos(cargoList, path);
+            writeCarriers(carrierList);
+            writeTransportation(transportationList);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    private static void writeCargos(List<Cargo> list, Path path) throws IOException {
+    private static void writeCargos(List<Cargo> cargoList, Path path) throws IOException {
         writer = new FileWriter(path.toFile());
         exportStringBuilder = new StringBuilder();
         StringBuilder diffString = new StringBuilder();
         index = 1;
         exportStringBuilder.append("\t\t\t\tCARGOS\n");
 
-        for (Cargo cargo : list) {
+        for (Cargo cargo : cargoList) {
             if (isLimitedTimeShelfCargo(cargo.getCargoType())) {
                 diffString.append(" dateProduced:")
                         .append(((LimitedShelfLife) cargo).getProduced())
@@ -85,37 +86,36 @@ public class ExporterTxtFile {
     }
 
     private static void writeTransportation(List<Transportation> list3) throws IOException {
-        exportStringBuilder = new StringBuilder();
-        index = 1;
-        exportStringBuilder.append("\t\t\t\tTRANSPORTATIONS\n");
+        try {
+            exportStringBuilder = new StringBuilder();
+            index = 1;
+            exportStringBuilder.append("\t\t\t\tTRANSPORTATIONS\n");
 
-        for (Transportation transportation : list3) {
-            exportStringBuilder.append(index).append(". ")
-                    .append("description:").append(transportation.getDescription())
-                    .append(" billTo:").append(transportation.getBillTo())
-                    .append(" date:").append(transportation.getDate()).append(" ")
-                    .append(transportation.getCargo().getId()).append("_")
-                    .append(transportation.getCarrier().getId())
-                    .append(" transportations:null")
-                    .append(System.lineSeparator());
-            index++;
+            for (Transportation transportation : list3) {
+                exportStringBuilder.append(index).append(". ")
+                        .append("description:").append(transportation.getDescription())
+                        .append(" billTo:").append(transportation.getBillTo())
+                        .append(" date:").append(transportation.getDate()).append(" ")
+                        .append(transportation.getCargo().getId()).append("_")
+                        .append(transportation.getCarrier().getId())
+                        .append(" transportations:null")
+                        .append(System.lineSeparator());
+                index++;
+            }
+        } finally {
+            flushAndWriteLineSeparator();
+            writer.close();
         }
-        flushAndWriteLineSeparator();
-        writer.close();
     }
 
     private static Path createFile() throws IOException {
         LocalDateTime localDateTime = LocalDateTime.now();
         String dateNow = String.valueOf(localDateTime.toLocalDate());
-        StringBuilder filename = new StringBuilder(dateNow).append(".txt");
-        Path path = Paths.get("D:\\JAVA\\EPAM_SPB\\Training\\12_class\\src\\main\\java\\resources\\out\\" + String.valueOf(filename));
-        if (!Files.exists(path)) {
-            Files.createFile(path);
-        } else {
-            Files.delete(path);
-            Files.createFile(path);
-        }
-        return path;
+        StringBuilder filename = new StringBuilder(dateNow);
+        Path tempFile = Files.createTempFile(Paths.get("D:\\JAVA\\EPAM_SPB\\Training\\12_class\\src\\main\\java\\reporting\\out\\"),
+                String.valueOf(filename),
+                ".txt");
+        return tempFile;
     }
 
     private static boolean isLimitedTimeShelfCargo(CargoType cargoType) {
