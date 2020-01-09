@@ -5,6 +5,7 @@ import main.java.cargo.domain.CargoType;
 import main.java.cargo.domain.LimitedShelfLife;
 import main.java.cargo.domain.UnlimitedShelfLife;
 import main.java.carrier.domain.Carrier;
+import main.java.carrier.domain.CarrierType;
 import main.java.common.solutions.util.DateHandler;
 import main.java.transportation.domain.Transportation;
 import org.xml.sax.Attributes;
@@ -17,25 +18,30 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class SaxParser {
     private static final String FILE = "src/main/java/resources/TransportTable.xml";
-    private static Map<String, Cargo> cargoMap = new LinkedHashMap<>();
-    private static Map<String, Carrier> carrierMap = new LinkedHashMap<>();
-    private Map<String, Transportation> tiesMap = new LinkedHashMap<>();
-    private SAXParser parser;
+    private static List<Cargo> cargoList = new LinkedList<>();
+    private static List<Carrier> carrierList = new LinkedList<>();
+    private static Map<String, Transportation> tiesMap = new LinkedHashMap<>();
+    private static String lastElementName;
+    private static String type;
+    private static String id;
+    private static SAXParser parser;
 
-    public Map<String, Cargo> getCargoMap() throws ParserConfigurationException, SAXException, IOException {
+    public List<Cargo> getCargoList() throws ParserConfigurationException, SAXException, IOException {
         parser = getSAXParser();
         parser.parse(FILE, new XMLCargoHandler());
-        return cargoMap;
+        return cargoList;
     }
 
-    public Map<String, Carrier> getCarrierMap() throws ParserConfigurationException, SAXException, IOException {
+    public List<Carrier> getCarrierList() throws ParserConfigurationException, SAXException, IOException {
         parser = getSAXParser();
         parser.parse(FILE, new XMLCarrierHandler());
-        return carrierMap;
+        return carrierList;
     }
 
     public Map<String, Transportation> getTransportationMap() throws ParserConfigurationException, SAXException, IOException {
@@ -50,9 +56,6 @@ public class SaxParser {
     }
 
     private static class XMLCargoHandler extends DefaultHandler {
-        private String lastElementName;
-        private String type;
-        private String id;
         private String name;
         private String weight;
         private String cargoType;
@@ -61,19 +64,17 @@ public class SaxParser {
         private String isComposite;
         private String fragility;
 
-
         @Override
         public void startElement(String uri, String localName,
-                                 String qName, Attributes attributes) throws SAXException {
+                                 String qName, Attributes attributes) {
             lastElementName = qName;
             if (qName.equals("cargo")) {
                 type = attributes.getValue("type");
-                System.out.println("TYPE: " + type);
             }
         }
 
         @Override
-        public void characters(char[] ch, int start, int length) throws SAXException {
+        public void characters(char[] ch, int start, int length) {
             String content = new String(ch, start, length);
             content = content.replace("\n", "").trim();
 
@@ -106,7 +107,7 @@ public class SaxParser {
         }
 
         @Override
-        public void endElement(String uri, String localName, String qName) throws SAXException {
+        public void endElement(String uri, String localName, String qName) {
             if (isAllFieldsOfOneEntityChecked()) {
                 Cargo cargo;
 
@@ -126,21 +127,9 @@ public class SaxParser {
                 cargo.setName(name);
                 cargo.setWeight(Integer.parseInt(weight));
                 cargo.setCargoType(CargoType.valueOf(cargoType));
-                cargoMap.put(id, cargo);
+                cargoList.add(cargo);
                 cleanStringVarriables();
             }
-        }
-
-        private void cleanStringVarriables() {
-            type = "";
-            id = "";
-            name = "";
-            weight = "";
-            cargoType = "";
-            dateProduced = "";
-            dateExpires = "";
-            isComposite = "";
-            fragility = "";
         }
 
         private boolean isAllFieldsOfOneEntityChecked() {
@@ -154,13 +143,144 @@ public class SaxParser {
                             dateExpires != null && !dateExpires.isEmpty());
         }
 
+        private void cleanStringVarriables() {
+            type = "";
+            id = "";
+            name = "";
+            weight = "";
+            cargoType = "";
+            dateProduced = "";
+            dateExpires = "";
+            isComposite = "";
+            fragility = "";
+        }
     }
 
-    
+    private static class XMLCarrierHandler extends DefaultHandler {
+        private String name;
+        private String address;
+        private String carrierType;
 
+        @Override
+        public void startElement(String uri, String localName,
+                                 String qName, Attributes attributes) {
+            lastElementName = qName;
+        }
 
+        @Override
+        public void characters(char[] ch, int start, int length) {
+            String content = new String(ch, start, length);
+            content = content.replace("\n", "").trim();
 
+            if (!content.isEmpty()) {
+                if (lastElementName.equals("ID")) {
+                    id = content;
+                }
+                if (lastElementName.equals("name")) {
+                    name = content;
+                }
+                if (lastElementName.equals("address")) {
+                    address = content;
+                }
+                if (lastElementName.equals("carrierType")) {
+                    carrierType = content;
+                }
+            }
+        }
 
+        @Override
+        public void endElement(String uri, String localName, String qName) {
+            if (isAllFieldsOfOneEntityChecked()) {
+                Carrier carrier = new Carrier();
 
+                carrier.setName(name);
+                carrier.setAddress(address);
+                carrier.setCarrierType(CarrierType.valueOf(carrierType));
+                carrierList.add(carrier);
+                cleanStringVarriables();
+            }
+        }
 
+        private void cleanStringVarriables() {
+            id = "";
+            name = "";
+            address = "";
+            carrierType = "";
+        }
+
+        private boolean isAllFieldsOfOneEntityChecked() {
+            return (name != null && !name.isEmpty() &&
+                    id != null && !id.isEmpty() &&
+                    address != null && !address.isEmpty() &&
+                    carrierType != null && !carrierType.isEmpty());
+        }
+    }
+
+    private static class XMLTransportationHandler extends DefaultHandler {
+        private String description;
+        private String billTo;
+        private String date;
+        private String bound;
+
+        @Override
+        public void startElement(String uri, String localName,
+                                 String qName, Attributes attributes) {
+            lastElementName = qName;
+        }
+
+        @Override
+        public void characters(char[] ch, int start, int length) {
+            String content = new String(ch, start, length);
+            content = content.replace("\n", "").trim();
+
+            if (!content.isEmpty()) {
+                if (lastElementName.equals("ID")) {
+                    id = content;
+                }
+                if (lastElementName.equals("description")) {
+                    description = content;
+                }
+                if (lastElementName.equals("billTo")) {
+                    billTo = content;
+                }
+                if (lastElementName.equals("date")) {
+                    date = content;
+                }
+                if (lastElementName.equals("bound")) {
+                    bound = content;
+                }
+            }
+        }
+
+        @Override
+        public void endElement(String uri, String localName, String qName) {
+            if (isAllFieldsOfOneEntityChecked()) {
+                Transportation transportation = new Transportation();
+                try {
+                    transportation.setDate(DateHandler.parseDate(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                transportation.setDescription(description);
+                transportation.setBillTo(billTo);
+                tiesMap.put(bound, transportation);
+                cleanStringVarriables();
+            }
+        }
+
+        private void cleanStringVarriables() {
+            id = "";
+            description = "";
+            billTo = "";
+            date = "";
+            bound = "";
+        }
+
+        private boolean isAllFieldsOfOneEntityChecked() {
+            return (description != null && !description.isEmpty() &&
+                    id != null && !id.isEmpty() &&
+                    billTo != null && !billTo.isEmpty() &&
+                    bound != null && !bound.isEmpty());
+        }
+    }
 }
