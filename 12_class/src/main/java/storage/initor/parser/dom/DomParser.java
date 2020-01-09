@@ -1,4 +1,4 @@
-package main.java.storage.initor.parser.xml;
+package main.java.storage.initor.parser.dom;
 
 import main.java.cargo.domain.Cargo;
 import main.java.cargo.domain.CargoType;
@@ -22,13 +22,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class XmlParser {
+public class DomParser {
     private static final int CARGO_INDX_FROM_XML = 1000;
     private static final int CARRIER_INDEX_FROM_XML = 2000;
-    private static final String PATH_NAME = "src/main/java/resources/TransportTable.xml";
+    private static final String PATH_NAME = "src/main/java/resources/TransportTable.dom";
     private static Document document;
 
-    private XmlParser() {
+    private DomParser() {
     }
 
     public static void initDocument() throws ParserConfigurationException, IOException, SAXException {

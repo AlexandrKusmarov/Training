@@ -5,7 +5,7 @@ import main.java.cargo.domain.Cargo;
 import main.java.cargo.service.CargoService;
 import main.java.carrier.domain.Carrier;
 import main.java.carrier.service.CarrierService;
-import main.java.storage.initor.parser.xml.XmlParser;
+import main.java.storage.initor.parser.dom.DomParser;
 import main.java.storage.initor.StorageInitor;
 import main.java.transportation.domain.Transportation;
 import main.java.transportation.service.TransportationService;
@@ -17,15 +17,15 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
-public class XmlStorageInitor implements StorageInitor {
+public class DomXmlStorageInitor implements StorageInitor {
     private final CarrierService carrierService;
     private final CargoService cargoService;
     private final TransportationService transportationService;
     private static List<Cargo> cargoList;
     private static List<Carrier> carrierList;
-    private XmlParser xmlParser;
+    private DomParser xmlParser;
 
-    public XmlStorageInitor() {
+    public DomXmlStorageInitor() {
         carrierService = ServiceHolder.getInstance().getCarrierService();
         cargoService = ServiceHolder.getInstance().getCargoService();
         transportationService = ServiceHolder.getInstance().getTransportationService();
@@ -40,7 +40,7 @@ public class XmlStorageInitor implements StorageInitor {
 
     private void initCargos() {
         try {
-            XmlParser.initDocument();
+            DomParser.initDocument();
             cargoList = xmlParser.getCargoList();
             for (Cargo cargo : cargoList) {
                 cargoService.add(cargo);
