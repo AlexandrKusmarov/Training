@@ -23,13 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class DomParser {
-    private static final int CARGO_INDX_FROM_XML = 1000;
-    private static final int CARRIER_INDEX_FROM_XML = 2000;
+
     private static final String PATH_NAME = "src/main/java/resources/TransportTable.dom";
     private static Document document;
-
-    private DomParser() {
-    }
 
     public static void initDocument() throws ParserConfigurationException, IOException, SAXException {
         document = createDocument();
@@ -106,24 +102,11 @@ public class DomParser {
         return transportationMap;
     }
 
-    public void tieCargosCarriersToTransportations(Map<String, Transportation> map, List<Cargo> cargoList,
-                                                          List<Carrier> carrierList) {
-
-        for (Map.Entry<String, Transportation> pair : map.entrySet()) {
-            String[] arr = pair.getKey().split("->");
-            pair.getValue()
-                    .setCargo(cargoList.get(
-                            Integer.parseInt(arr[0].trim()) - CARGO_INDX_FROM_XML - 1));
-            pair.getValue()
-                    .setCarrier(carrierList.get(
-                            Integer.parseInt(arr[1].trim()) - CARRIER_INDEX_FROM_XML - 1));
-        }
-    }
 
     private static List<String> getListFieldsOfOneEntity(NodeList nodeList) {
         List<String> tempList = new ArrayList<>();
         for (int j = 0; j < nodeList.getLength(); j++) {
-           String tag = nodeList.item(j).getTextContent();
+            String tag = nodeList.item(j).getTextContent();
             switch (nodeList.item(j).getNodeName()) {
                 case "ID": {
                     tempList.add(tag);

@@ -17,6 +17,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import static main.java.common.solutions.util.xml.CommonParserUtil.tieCargosCarriersToTransportations;
+
 public class DomXmlStorageInitor implements StorageInitor {
     private final CarrierService carrierService;
     private final CargoService cargoService;
@@ -65,7 +67,7 @@ public class DomXmlStorageInitor implements StorageInitor {
         try {
             Map<String, Transportation> map;
             map = xmlParser.getTransportationMap();
-            xmlParser.tieCargosCarriersToTransportations(map, cargoList, carrierList);
+            tieCargosCarriersToTransportations(map, cargoList, carrierList);
             map.forEach((k, v) -> transportationService.add(v));
         } catch (ParseException e) {
             e.printStackTrace();

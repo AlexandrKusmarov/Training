@@ -3,6 +3,7 @@ package main.java.storage.initor;
 import main.java.storage.initor.fileinitor.FileStorageInitor;
 import main.java.storage.initor.fileinitor.InMemoryStorageInitor;
 import main.java.storage.initor.fileinitor.DomXmlStorageInitor;
+import main.java.storage.initor.fileinitor.SaxXmlStorageInitor;
 
 public final class StorageInitorFactory {
 
@@ -23,7 +24,7 @@ public final class StorageInitorFactory {
                 return new DomXmlStorageInitor();
             }
             case XML_SAX_FILE:{
-                return new DomXmlStorageInitor();
+                return new SaxXmlStorageInitor();
             }
             default: {
                 throw new RuntimeException("Unknown storage init type " + initStorageType);

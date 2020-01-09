@@ -32,7 +32,6 @@ import static main.java.storage.initor.StorageInitorFactory.getStorageInitor;
 
 public class Application {
 
-
     private static final String SEPARATOR = "--------------";
     private static final StorageType storageType = StorageType.COLLECTION;
     private static CargoService cargoService;
@@ -46,7 +45,7 @@ public class Application {
         carrierService = ServiceHolder.getInstance().getCarrierService();
         transportationService = ServiceHolder.getInstance().getTransportationService();
 
-        StorageInitor storageInitor = getStorageInitor(InitStorageType.XML_DOM_FILE);
+        StorageInitor storageInitor = getStorageInitor(InitStorageType.XML_SAX_FILE);
         try {
             storageInitor.initStorage();
         } catch (IOException e) {
