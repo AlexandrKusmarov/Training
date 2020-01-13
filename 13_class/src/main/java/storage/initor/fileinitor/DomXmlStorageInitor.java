@@ -14,7 +14,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
 
 import static main.java.common.solutions.util.xml.CommonParserUtil.tieCargosCarriersToTransportations;
@@ -23,9 +22,9 @@ public class DomXmlStorageInitor implements StorageInitor {
     private final CarrierService carrierService;
     private final CargoService cargoService;
     private final TransportationService transportationService;
-    private static List<Cargo> cargoList;
-    private static List<Carrier> carrierList;
-    private DomParser xmlParser;
+    private static Map<String, Cargo> cargoMap;
+    private static Map<String, Carrier> carrierMap;
+    private DomParser xmlParser = new DomParser();
 
     public DomXmlStorageInitor() {
         carrierService = ServiceHolder.getInstance().getCarrierService();
@@ -43,9 +42,9 @@ public class DomXmlStorageInitor implements StorageInitor {
     private void initCargos() {
         try {
             DomParser.initDocument();
-            cargoList = xmlParser.getCargoList();
-            for (Cargo cargo : cargoList) {
-                cargoService.add(cargo);
+            cargoMap = xmlParser.getCargoMap();
+            for(Map.Entry<String, Cargo> pair : cargoMap.entrySet()){
+                cargoService.add(pair.getValue());
             }
         } catch (ParserConfigurationException | SAXException | IOException | ParseException e) {
             e.printStackTrace();
@@ -54,9 +53,9 @@ public class DomXmlStorageInitor implements StorageInitor {
 
     private void initCarriers() {
         try {
-            carrierList = xmlParser.getCarrierList();
-            for (Carrier carrier : carrierList) {
-                carrierService.add(carrier);
+            carrierMap = xmlParser.getCarrierMap();
+            for(Map.Entry<String, Carrier> pair : carrierMap.entrySet()){
+                carrierService.add(pair.getValue());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -67,7 +66,7 @@ public class DomXmlStorageInitor implements StorageInitor {
         try {
             Map<String, Transportation> map;
             map = xmlParser.getTransportationMap();
-//            tieCargosCarriersToTransportations(map, cargoList, carrierList);
+            tieCargosCarriersToTransportations(map, cargoMap, carrierMap);
             map.forEach((k, v) -> transportationService.add(v));
         } catch (ParseException e) {
             e.printStackTrace();

@@ -24,15 +24,15 @@ import java.util.*;
 
 public class DomParser {
 
-    private static final String PATH_NAME = "src/main/java/resources/TransportTable.xml";
+    private static final String PATH_NAME = "D:\\JAVA\\EPAM_SPB\\Training\\13_class\\src\\main\\java\\resources\\TransportTable.xml";
     private static Document document;
 
     public static void initDocument() throws ParserConfigurationException, IOException, SAXException {
         document = createDocument();
     }
 
-    public List<Cargo> getCargoList() throws ParseException {
-        List<Cargo> cargoList = new ArrayList<>();
+    public Map<String, Cargo> getCargoMap() throws ParseException {
+        Map<String, Cargo> cargoMap = new HashMap<>();
         List<String> temp;
         Cargo cargoObject = null;
         NodeList cargos = document.getElementsByTagName("cargos").item(0).getChildNodes();
@@ -57,14 +57,14 @@ public class DomParser {
                 cargoObject.setName(temp.get(1));
                 cargoObject.setWeight(Integer.parseInt(temp.get(2)));
                 cargoObject.setCargoType(CargoType.valueOf(temp.get(3)));
-                cargoList.add(cargoObject);
+                cargoMap.put(temp.get(0), cargoObject);
             }
         }
-        return cargoList;
+        return cargoMap;
     }
 
-    public List<Carrier> getCarrierList() throws ParseException {
-        List<Carrier> carrierList = new ArrayList<>();
+    public Map<String, Carrier> getCarrierMap() throws ParseException {
+        Map<String, Carrier> carrierMap = new HashMap<>();
         NodeList carriers = document.getElementsByTagName("carriers").item(0).getChildNodes();
 
         for (int i = 0; i < carriers.getLength(); i++) {
@@ -76,10 +76,11 @@ public class DomParser {
                 carrierObject.setName(temp.get(1));
                 carrierObject.setAddress(temp.get(2));
                 carrierObject.setCarrierType(CarrierType.valueOf(temp.get(3)));
-                carrierList.add(carrierObject);
+
+                carrierMap.put(temp.get(0), carrierObject);
             }
         }
-        return carrierList;
+        return carrierMap;
     }
 
     public Map<String, Transportation> getTransportationMap() throws ParseException {

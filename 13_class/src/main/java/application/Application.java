@@ -45,7 +45,7 @@ public class Application {
         carrierService = ServiceHolder.getInstance().getCarrierService();
         transportationService = ServiceHolder.getInstance().getTransportationService();
 
-        StorageInitor storageInitor = getStorageInitor(InitStorageType.XML_SAX_FILE);
+        StorageInitor storageInitor = getStorageInitor(InitStorageType.XML_DOM_FILE);
         try {
             storageInitor.initStorage();
         } catch (IOException e) {
