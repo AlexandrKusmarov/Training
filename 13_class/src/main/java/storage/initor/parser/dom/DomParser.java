@@ -24,7 +24,7 @@ import java.util.*;
 
 public class DomParser {
 
-    private static final String PATH_NAME = "src/main/java/resources/TransportTable.dom";
+    private static final String PATH_NAME = "src/main/java/resources/TransportTable.xml";
     private static Document document;
 
     public static void initDocument() throws ParserConfigurationException, IOException, SAXException {
@@ -92,7 +92,6 @@ public class DomParser {
 
                 Transportation transportationObject = new Transportation();
                 Date date = new SimpleDateFormat("dd.MM.yyyy").parse(temp.get(2));
-                transportationObject.setId(IdGenerator.generateId());
                 transportationObject.setDescription(temp.get(0));
                 transportationObject.setBillTo(temp.get(1));
                 transportationObject.setDate(date);

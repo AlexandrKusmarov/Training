@@ -61,9 +61,9 @@ public class Application {
 
         //HOMEWORK 12. EXPORT INTO TXT FILE.
         sortEntitiesById();
-        ExporterTxtFile.exportIntoTxt(cargoService.getAll(),
-                carrierService.getAll(),
-                transportationService.getAll());
+//        ExporterTxtFile.exportIntoTxt(cargoService.getAll(),
+//                carrierService.getAll(),
+//                transportationService.getAll());
         //Parse XML File.
 
 

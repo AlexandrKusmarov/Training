@@ -67,7 +67,7 @@ public class DomXmlStorageInitor implements StorageInitor {
         try {
             Map<String, Transportation> map;
             map = xmlParser.getTransportationMap();
-            tieCargosCarriersToTransportations(map, cargoList, carrierList);
+//            tieCargosCarriersToTransportations(map, cargoList, carrierList);
             map.forEach((k, v) -> transportationService.add(v));
         } catch (ParseException e) {
             e.printStackTrace();

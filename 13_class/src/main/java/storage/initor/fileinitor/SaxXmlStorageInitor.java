@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.util.Map;
 
 import static main.java.common.solutions.util.xml.CommonParserUtil.tieCargosCarriersToTransportations;
-import static main.java.storage.Storage.cargoList;
-import static main.java.storage.Storage.carrierList;
 
 public class SaxXmlStorageInitor implements StorageInitor {
     private final CarrierService carrierService;
@@ -40,8 +38,11 @@ public class SaxXmlStorageInitor implements StorageInitor {
 
     private void initCargos() {
         try {
-            for (Cargo cargo : saxParser.getCargoList()) {
-                cargoService.add(cargo);
+            for(Map.Entry<String, Cargo> pair : saxParser.getCargoMap().entrySet()){
+                Cargo cargo = pair.getValue();
+                if(cargo != null) {
+                    cargoService.add(pair.getValue());
+                }
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
@@ -50,8 +51,11 @@ public class SaxXmlStorageInitor implements StorageInitor {
 
     private void initCarriers() {
         try {
-            for (Carrier carrier : saxParser.getCarrierList()) {
-                carrierService.add(carrier);
+            for(Map.Entry<String, Carrier> pair : saxParser.getCarrierMap().entrySet()){
+                Carrier carrier = pair.getValue();
+                if(carrier != null) {
+                    carrierService.add(pair.getValue());
+                }
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
@@ -62,7 +66,7 @@ public class SaxXmlStorageInitor implements StorageInitor {
         Map<String, Transportation> transportationMap;
         try {
             transportationMap = saxParser.getTransportationMap();
-            tieCargosCarriersToTransportations(transportationMap, cargoList, carrierList);
+            tieCargosCarriersToTransportations(transportationMap, saxParser.getCargoMap(), saxParser.getCarrierMap());
             transportationMap.forEach((k, v) -> transportationService.add(v));
         } catch (ParserConfigurationException | SAXException | IOException e1) {
             e1.printStackTrace();

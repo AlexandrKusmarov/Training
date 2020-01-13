@@ -17,31 +17,28 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SaxParser {
     private static final String FILE = "src/main/java/resources/TransportTable.xml";
-    private static List<Cargo> cargoList = new LinkedList<>();
-    private static List<Carrier> carrierList = new LinkedList<>();
+    private static Map<String, Cargo> cargoMap = new HashMap<>();
+    private static Map<String, Carrier> carrierMap = new HashMap<>();
     private static Map<String, Transportation> tiesMap = new LinkedHashMap<>();
     private static String lastElementName;
     private static String type;
     private static String id;
     private static SAXParser parser;
 
-    public List<Cargo> getCargoList() throws ParserConfigurationException, SAXException, IOException {
+    public Map<String, Cargo> getCargoMap() throws ParserConfigurationException, SAXException, IOException {
         parser = getSAXParser();
         parser.parse(FILE, new XMLCargoHandler());
-        return cargoList;
+        return cargoMap;
     }
 
-    public List<Carrier> getCarrierList() throws ParserConfigurationException, SAXException, IOException {
+    public  Map<String, Carrier> getCarrierMap() throws ParserConfigurationException, SAXException, IOException {
         parser = getSAXParser();
         parser.parse(FILE, new XMLCarrierHandler());
-        return carrierList;
+        return carrierMap;
     }
 
     public Map<String, Transportation> getTransportationMap() throws ParserConfigurationException, SAXException, IOException {
@@ -127,7 +124,7 @@ public class SaxParser {
                 cargo.setName(name);
                 cargo.setWeight(Integer.parseInt(weight));
                 cargo.setCargoType(CargoType.valueOf(cargoType));
-                cargoList.add(cargo);
+                cargoMap.put(id,cargo);
                 cleanStringVarriables();
             }
         }
@@ -196,7 +193,7 @@ public class SaxParser {
                 carrier.setName(name);
                 carrier.setAddress(address);
                 carrier.setCarrierType(CarrierType.valueOf(carrierType));
-                carrierList.add(carrier);
+                carrierMap.put(id, carrier);
                 cleanStringVarriables();
             }
         }
