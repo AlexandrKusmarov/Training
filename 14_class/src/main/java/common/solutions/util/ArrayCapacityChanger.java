@@ -1,0 +1,40 @@
+package main.java.common.solutions.util;
+
+import java.util.Arrays;
+
+public class ArrayCapacityChanger {
+
+    private ArrayCapacityChanger() {
+    }
+
+    public static Object[] expandArrCapacity(Object[] array) {
+        Object[] tempArr;
+        tempArr = new Object[array.length * 2];
+        tempArr = Arrays.copyOf(array, tempArr.length);
+        return tempArr;
+    }
+
+    public static Object[] expandArrCapacityByOne(Object[] array) {
+        Object[] tempArr;
+        tempArr = new Object[array.length + 1];
+        tempArr = Arrays.copyOf(array, tempArr.length);
+        return tempArr;
+    }
+
+    public static Object[] constrictionArrCapacityByOne(Object[] array) {
+
+        Object[] tempArr;
+        tempArr = new Object[array.length - 1];
+
+        tempArr = Arrays.copyOf(array, tempArr.length);
+        return tempArr;
+    }
+
+    public static Object[] shiftArrFromEndToIndexByOnePos(Object[] array, int position) {
+        while (position < array.length - 1) {
+            array[position] = array[position + 1];
+            position++;
+        }
+        return array;
+    }
+}
