@@ -1,6 +1,8 @@
 package main.homework.common.business.domain;
 
-public abstract class BaseEntity {
+import java.io.Serializable;
+
+public abstract class BaseEntity implements Serializable {
   protected Long id;
 
   public Long getId() {
