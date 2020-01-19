@@ -1,13 +1,17 @@
 package common.solutions.serialization;
 
+import cargo.domain.Cargo;
 import cargo.domain.ClothersCargo;
 import cargo.domain.FoodCargo;
+import carrier.domain.Carrier;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import sun.rmi.transport.Transport;
+import transportation.domain.Transportation;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -20,11 +24,13 @@ import static common.solutions.comparator.SimpleComparator.LONG_COMPARATOR;
 import static common.solutions.comparator.SimpleComparator.STRING_COMPARATOR;
 
 public class SerializationTest {
-
     private Path tempFile = null;
 
-    @BeforeEach
+    @Before
     public void createTempFile() throws IOException {
+//        tempFile = Files.createFile (Paths.get("D:\\JAVA\\EPAM_SPB\\Training\\outputdata\\" +
+//                RandomStringUtils.randomAlphabetic(8) + ".txt"));
+//        System.out.println(tempFile.getFileName());
         tempFile = Files.createTempFile("temp", "test");
     }
 
@@ -94,6 +100,47 @@ public class SerializationTest {
         Assertions.assertNull(deserialized);
     }
 
+    @Test
+    public void testSerializationCarrier() throws Exception {
+        Carrier carrier = prepareCarrier();
+        String pathToFile = tempFile.toAbsolutePath().toString();
+        serializeToFile(carrier, pathToFile);
+        Carrier deserialized = readSerializedObjectFromFile(pathToFile);
+
+        Assertions.assertTrue(areCarrierEntitiesEquals(carrier, deserialized));
+    }
+
+    @Test
+    public void testSerializationNullCarrier() throws Exception {
+        Carrier carrier = null;
+        String pathToFile = tempFile.toAbsolutePath().toString();
+        serializeToFile(carrier, pathToFile);
+        Carrier deserialized = readSerializedObjectFromFile(pathToFile);
+
+        Assertions.assertNull(deserialized);
+    }
+
+    @Test
+    public void testSerializationCarriers() throws Exception {
+        List <Carrier> carrierList = Arrays.asList(prepareCarrier(), prepareCarrier());
+        String pathToFile = tempFile.toAbsolutePath().toString();
+        serializeToFile(carrierList, pathToFile);
+        List<Carrier> deserialized = readSerializedObjectFromFile(pathToFile);
+
+        Assertions.assertTrue(areCarrierEntitiesEquals(carrierList, deserialized));
+    }
+
+    @Test
+    public void testSerializationTransportation() throws Exception {
+        Transportation transportation = prepareTransportation(prepareFood(),prepareCarrier());
+        String pathToFile = tempFile.toAbsolutePath().toString();
+        serializeToFile(transportation, pathToFile);
+        Transportation deserialized = readSerializedObjectFromFile(pathToFile);
+
+        Assertions.assertTrue(areTransportationEntitiesEquals(transportation, deserialized));
+    }
+
+
     private <T> void serializeToFile(T entity, String file) throws Exception {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
             outputStream.writeObject(entity);
@@ -128,16 +175,36 @@ public class SerializationTest {
         return clothers;
     }
 
+    private Carrier prepareCarrier() {
+        Carrier carrier = new Carrier();
+        carrier.setId(randLong());
+        carrier.setName(randString());
+        carrier.setAddress(randString());
+
+        return carrier;
+    }
+
+    private Transportation prepareTransportation(Cargo cargo, Carrier carrier){
+        Transportation transportation = new Transportation();
+        transportation.setId(randLong());
+        transportation.setDescription(randString());
+        transportation.setBillTo(randString());
+        transportation.setCargo(cargo);
+        transportation.setCarrier(carrier);
+
+        return transportation;
+    }
+
     private String randString() {
         return RandomStringUtils.randomAlphabetic(5);
     }
 
     private int randInt() {
-        return RandomUtils.nextInt(1,5);
+        return RandomUtils.nextInt();
     }
 
     private long randLong() {
-        return RandomUtils.nextLong(1,5);
+        return RandomUtils.nextLong();
     }
 
     private boolean areFoodEntitiesEquals(FoodCargo food1, FoodCargo food2) {
@@ -209,6 +276,57 @@ public class SerializationTest {
             }
 
             return true;
+        }
+    }
+
+    private boolean areCarrierEntitiesEquals(Carrier carrier1, Carrier carrier2) {
+        if (carrier1 == null && carrier2 == null) {
+            return true;
+        } else if (carrier1 != null && carrier2 == null) {
+            return false;
+        } else if (carrier1 == null) {
+            return false;
+        } else {
+            return STRING_COMPARATOR.compare(carrier1.getName(), carrier2.getName()) == 0
+                    && LONG_COMPARATOR.compare(carrier1.getId(), carrier2.getId()) == 0
+                    && STRING_COMPARATOR.compare(carrier1.getAddress(), carrier2.getAddress()) == 0;
+            //continue in this way
+        }
+    }
+
+    private boolean areCarrierEntitiesEquals(List<Carrier> carriers1,
+                                             List<Carrier> carriers2) {
+        if (carriers1 == null && carriers2 == null) {
+            return true;
+        } else if (carriers1 != null && carriers2 == null) {
+            return false;
+        } else if (carriers1 == null) {
+            return false;
+        } else if (carriers1.size() != carriers2.size()) {
+            return false;
+        } else {
+            for (int i = 0; i < carriers1.size(); i++) {
+                if (!areCarrierEntitiesEquals(carriers1.get(i), carriers1.get(i))) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+    private boolean areTransportationEntitiesEquals(Transportation transportation1, Transportation transportation2) {
+        if (transportation1 == null && transportation2 == null) {
+            return true;
+        } else if (transportation1 != null && transportation2 == null) {
+            return false;
+        } else if (transportation1 == null) {
+            return false;
+        } else {
+            return STRING_COMPARATOR.compare(transportation1.getDescription(), transportation2.getDescription()) == 0
+                    && LONG_COMPARATOR.compare(transportation1.getId(), transportation2.getId()) == 0
+                    && STRING_COMPARATOR.compare(transportation1.getBillTo(), transportation2.getBillTo()) == 0;
+            //continue in this way
         }
     }
 
