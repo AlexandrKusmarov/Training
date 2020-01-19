@@ -1,6 +1,8 @@
 package storage.initor;
 
 
+import static common.solutions.utils.CollectionUtils.isNotEmpty;
+
 import application.serviceholder.ServiceHolder;
 import cargo.domain.Cargo;
 import cargo.domain.ClothersCargo;
@@ -15,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
-import static common.solutions.utils.CollectionUtils.isNotEmpty;
 
 public class InMemoryStorageInitor implements StorageInitor {
 

@@ -1,6 +1,10 @@
 package transportation.repo.impl;
 
 
+import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorageById;
+import static storage.Storage.transportationArray;
+import static storage.Storage.transportationIndex;
+
 import common.solutions.utils.ArrayUtils;
 import storage.IdGenerator;
 import transportation.domain.Transportation;
@@ -9,10 +13,6 @@ import transportation.repo.TransportationRepo;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorageById;
-import static storage.Storage.transportationArray;
-import static storage.Storage.transportationIndex;
 
 public class TransportationArrayRepoImpl implements TransportationRepo {
 

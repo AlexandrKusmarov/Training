@@ -1,5 +1,8 @@
 package storage.initor.fileinitor.xml.dom;
 
+import static common.solutions.utils.xml.dom.XmlDomUtils.getOnlyElement;
+import static common.solutions.utils.xml.dom.XmlDomUtils.getOnlyElementTextContent;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -19,17 +22,18 @@ import transportation.domain.Transportation;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.AbstractMap.SimpleEntry;
-import java.util.*;
-
-import static common.solutions.utils.xml.dom.XmlDomUtils.getOnlyElement;
-import static common.solutions.utils.xml.dom.XmlDomUtils.getOnlyElementTextContent;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class XmlDomFileDataInitor extends BaseFileInitor {
 
-  private static final String FILE = "/ru/epam/javacore/lesson_13_sax_parser_recursion/initdata/xmldata.xml";
-
+  private static final String FILE = "D:\\JAVA\\EPAM_SPB\\Training\\initdata\\TransportTable.xml";
 
   @Override
   public void initStorage() throws InitStorageException {
@@ -57,7 +61,8 @@ public class XmlDomFileDataInitor extends BaseFileInitor {
   }
 
   private File getFileWithInitData() throws IOException {
-    return FileUtils.createFileFromResource("init-data", "lesson12", FILE);
+    return FileUtils
+        .createFileFromResource(Paths.get(FILE), "init-data", "lesson12");
   }
 
   private Map<String, Cargo> parseCargos(Document doc) throws ParseException {
@@ -157,7 +162,8 @@ public class XmlDomFileDataInitor extends BaseFileInitor {
     Transportation transportation = new Transportation();
     transportation.setBillTo(getOnlyElementTextContent(transportationElement, "billto"));
     transportation.setDescription(getOnlyElementTextContent(transportationElement, "description"));
-    String beginDataStr = getOnlyElementTextContent(transportationElement, "transportationBeginDate");
+    String beginDataStr = getOnlyElementTextContent(transportationElement,
+        "transportationBeginDate");
     transportation.setTransportationBeginDate(JavaUtilDateUtils.valueOf(beginDataStr));
     result.setTransportation(transportation);
 

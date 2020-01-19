@@ -1,5 +1,12 @@
 package application;
 
+import static java.util.Collections.singletonList;
+import static cargo.domain.CargoField.NAME;
+import static cargo.domain.CargoField.WEIGHT;
+import static common.solutions.search.OrderType.ASC;
+import static common.solutions.search.OrderType.DESC;
+import static storage.initor.StorageInitorFactory.getStorageInitor;
+
 import application.serviceholder.ServiceHolder;
 import application.serviceholder.StorageType;
 import cargo.domain.Cargo;
@@ -21,13 +28,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-
-import static java.util.Collections.singletonList;
-import static cargo.domain.CargoField.NAME;
-import static cargo.domain.CargoField.WEIGHT;
-import static common.solutions.search.OrderType.ASC;
-import static common.solutions.search.OrderType.DESC;
-import static storage.initor.StorageInitorFactory.getStorageInitor;
 
 public class Application {
 

@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.Map;
 
 public class TextFileDataInitor extends BaseFileInitor {
 
-  private static final String FILE = "/ru/epam/javacore/lesson_13_sax_parser_recursion/initdata/textdata.txt";
+  private static final String FILE = "/initdata/TransportTable.txt";
   private static final String CARGO_SECTION_LABEL_IN_FILE = "--Cargo section--";
   private static final String CARRIER_SECTION_LABEL_IN_FILE = "--Carrier section--";
   private static final String TRANSPORTATION_SECTION_LABEL_IN_FILE = "--Transportation section--";
@@ -55,7 +56,8 @@ public class TextFileDataInitor extends BaseFileInitor {
   }
 
   private File getFileWithInitData() throws IOException {
-    return FileUtils.createFileFromResource("init-data", "lesson12", FILE);
+    return FileUtils
+        .createFileFromResource(Paths.get(FILE), "init-data", "lesson12");
   }
 
   private Map<String, Cargo> parseCargosFromFile(File file) throws IOException, ParseException {

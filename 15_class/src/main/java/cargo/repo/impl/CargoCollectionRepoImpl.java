@@ -1,14 +1,18 @@
 package cargo.repo.impl;
 
 
+import static storage.Storage.cargoCollection;
+
 import cargo.domain.Cargo;
 import cargo.search.CargoSearchCondition;
 import common.solutions.utils.CollectionUtils;
 import storage.IdGenerator;
 
-import java.util.*;
-
-import static storage.Storage.cargoCollection;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 public class CargoCollectionRepoImpl extends CommonCargoRepo {
 

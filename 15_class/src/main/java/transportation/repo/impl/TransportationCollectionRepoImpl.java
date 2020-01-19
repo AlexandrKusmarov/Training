@@ -1,14 +1,14 @@
 package transportation.repo.impl;
 
 
+import static storage.Storage.transportationCollection;
+
 import storage.IdGenerator;
 import transportation.domain.Transportation;
 import transportation.repo.TransportationRepo;
 
 import java.util.Iterator;
 import java.util.List;
-
-import static storage.Storage.transportationCollection;
 
 public class TransportationCollectionRepoImpl implements TransportationRepo {
 

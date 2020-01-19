@@ -1,6 +1,9 @@
 package cargo.repo.impl;
 
 
+import static cargo.domain.CargoField.NAME;
+import static cargo.domain.CargoField.WEIGHT;
+
 import cargo.domain.Cargo;
 import cargo.domain.CargoField;
 import cargo.repo.CargoRepo;
@@ -10,9 +13,6 @@ import common.solutions.comparator.SimpleComparator;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-
-import static cargo.domain.CargoField.NAME;
-import static cargo.domain.CargoField.WEIGHT;
 
 public abstract class CommonCargoRepo implements CargoRepo {
 

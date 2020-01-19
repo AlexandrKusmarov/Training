@@ -1,6 +1,10 @@
 package carrier.repo.impl;
 
 
+import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorageById;
+import static storage.Storage.carrierArray;
+import static storage.Storage.carrierIndex;
+
 import carrier.domain.Carrier;
 import carrier.repo.CarrierRepo;
 import common.solutions.utils.ArrayUtils;
@@ -10,10 +14,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorageById;
-import static storage.Storage.carrierArray;
-import static storage.Storage.carrierIndex;
 
 public class CarrierArrayRepoImpl implements CarrierRepo {
 

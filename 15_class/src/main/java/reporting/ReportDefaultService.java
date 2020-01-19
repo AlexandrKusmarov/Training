@@ -1,5 +1,7 @@
 package reporting;
 
+import static common.solutions.utils.CollectionUtils.isNotEmpty;
+
 import cargo.domain.Cargo;
 import cargo.service.CargoService;
 import carrier.domain.Carrier;
@@ -14,8 +16,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static common.solutions.utils.CollectionUtils.isNotEmpty;
 
 public class ReportDefaultService implements ReportService {
 

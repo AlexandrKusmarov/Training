@@ -14,7 +14,13 @@ import storage.initor.fileinitor.BaseFileInitor;
 import transportation.domain.Transportation;
 
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SaxHandler extends DefaultHandler {
     private StringBuilder content = new StringBuilder();

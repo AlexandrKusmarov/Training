@@ -1,6 +1,8 @@
 package carrier.repo.impl;
 
 
+import static storage.Storage.carrierCollection;
+
 import carrier.domain.Carrier;
 import carrier.repo.CarrierRepo;
 import storage.IdGenerator;
@@ -9,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-import static storage.Storage.carrierCollection;
 
 public class CarrierCollectionRepoImpl implements CarrierRepo {
 
