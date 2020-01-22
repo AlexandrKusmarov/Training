@@ -22,6 +22,7 @@ import reporting.ReportDefaultService;
 import reporting.ReportService;
 import storage.initor.InitStorageType;
 import storage.initor.StorageInitor;
+import storage.initor.fileinitor.TextFileDataInitor;
 import transportation.service.TransportationService;
 
 import java.util.Arrays;
@@ -35,6 +36,7 @@ public class Application {
   private static CargoService cargoService;
   private static CarrierService carrierService;
   private static TransportationService transportationService;
+  private static TextFileDataInitor textFileDataInitor;
 
   public static void main(String[] args) {
     try {
@@ -43,7 +45,9 @@ public class Application {
       carrierService = ServiceHolder.getInstance().getCarrierService();
       transportationService = ServiceHolder.getInstance().getTransportationService();
 
-      StorageInitor storageInitor = getStorageInitor(InitStorageType.XML_SAX_FILE);
+      StorageInitor storageInitor = getStorageInitor(InitStorageType.TEXT_FILE);
+      textFileDataInitor = new TextFileDataInitor();
+      textFileDataInitor.run();
       storageInitor.initStorage();
 
       printStorageData();
