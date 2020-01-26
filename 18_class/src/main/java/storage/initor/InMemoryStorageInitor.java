@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class InMemoryStorageInitor implements StorageInitor {
 
@@ -103,9 +104,11 @@ public class InMemoryStorageInitor implements StorageInitor {
     List<Transportation> transportations = transportationService.getAll();
 
     if (isNotEmpty(cargos) && isNotEmpty(transportations)) {
-      for (Cargo cargo : cargos) {
-        appendTransportationsToCargo(cargo, transportations);
-      }
+      cargos.forEach((c) -> appendTransportationsToCargo(c,transportations));
+
+//      for (Cargo cargo : cargos) {
+//        appendTransportationsToCargo(cargo, transportations);
+//      }
     }
   }
 
@@ -117,12 +120,16 @@ public class InMemoryStorageInitor implements StorageInitor {
       cargoTransportations = new ArrayList<>();
     }
 
-    for (Transportation transportation : transportations) {
-      if (transportation.getCargo() != null && transportation.getCargo().getId()
-          .equals(cargo.getId())) {
-        cargoTransportations.add(transportation);
-      }
-    }
+    cargoTransportations = transportations.stream()
+            .filter(t-> t.getCargo()!= null && t.getCargo().getId().equals(cargo.getId()))
+            .collect(Collectors.toList());
+
+//    for (Transportation transportation : transportations) {
+//      if (transportation.getCargo() != null && transportation.getCargo().getId()
+//          .equals(cargo.getId())) {
+//        cargoTransportations.add(transportation);
+//      }
+//    }
 
     cargo.setTransportations(transportations);
   }

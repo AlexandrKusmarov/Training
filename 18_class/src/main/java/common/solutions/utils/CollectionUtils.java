@@ -9,9 +9,11 @@ public final class CollectionUtils {
   }
 
   public static void printCollection(Collection<?> collection) {
-    for (Object obj : collection) {
-      System.out.println(obj.toString());
-    }
+    collection.forEach(System.out::println);
+
+//    for (Object obj : collection) {
+//      System.out.println(obj.toString());
+//    }
   }
 
   public static boolean isNotEmpty(Collection<?> collection) {

@@ -1,5 +1,8 @@
 package common.solutions.utils;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public final class ArrayUtils {
 
   private ArrayUtils() {
@@ -10,11 +13,13 @@ public final class ArrayUtils {
   }
 
   public static void printArray(Object[] arr) {
-    for (Object obj : arr) {
-      if (obj != null) {
-        System.out.println(obj);
-      }
-    }
+    Arrays.stream(arr).forEach(System.out::println);
+    
+//    for (Object obj : arr) {
+//      if (obj != null) {
+//        System.out.println(obj);
+//      }
+//    }
   }
 
   public static void removeElement(Object[] arr, int index) {

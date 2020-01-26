@@ -1,0 +1,5 @@
+USING JAVA 8 API.
+1. common/solutions/utils/CollectionUtils
+2. common/solutions/utils/ArrayUtils
+3. reporting/ReportDefaultService
+4. storage/initor/InMemoryStorageInitor
