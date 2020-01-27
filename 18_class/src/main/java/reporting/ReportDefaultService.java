@@ -76,7 +76,10 @@ public class ReportDefaultService implements ReportService {
 
         List<String> result = Collections.emptyList();
         if (isNotEmpty(cargos)) {
-            result = cargos.stream().filter(Objects::nonNull).map(this::cargoAsString).collect(Collectors.toList());
+            result = cargos.stream()
+                    .filter(Objects::nonNull)
+                    .map(this::cargoAsString)
+                    .collect(Collectors.toList());
 
 //      for (Cargo cargo : cargos) {
 //        if (cargo != null) {
@@ -98,7 +101,10 @@ public class ReportDefaultService implements ReportService {
 
         List<String> result = Collections.emptyList();
         if (isNotEmpty(carriers)) {
-            result = carriers.stream().filter(Objects::nonNull).map(this::carrierAsString).collect(Collectors.toList());
+            result = carriers.stream()
+                    .filter(Objects::nonNull)
+                    .map(this::carrierAsString)
+                    .collect(Collectors.toList());
 
 //      for (Carrier carrier : carriers) {
 //        if (carrier != null) {
@@ -120,7 +126,10 @@ public class ReportDefaultService implements ReportService {
 
         List<String> result = Collections.emptyList();
         if (isNotEmpty(transportations)) {
-            result = transportations.stream().filter(Objects::nonNull).map(this::transportationAsString).collect(Collectors.toList());
+            result = transportations.stream()
+                    .filter(Objects::nonNull)
+                    .map(this::transportationAsString)
+                    .collect(Collectors.toList());
 
 //      for (Transportation transportation : transportations) {
 //        if (transportation != null) {
