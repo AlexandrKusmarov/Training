@@ -8,11 +8,7 @@ import cargo.search.CargoSearchCondition;
 import common.solutions.utils.CollectionUtils;
 import storage.IdGenerator;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class CargoCollectionRepoImpl extends CommonCargoRepo {
 
@@ -50,9 +46,9 @@ public class CargoCollectionRepoImpl extends CommonCargoRepo {
 
   @Override
   public Cargo findById(Long id) {
-    for (Cargo carrier : cargoCollection) {
-      if (id != null && id.equals(carrier.getId())) {
-        return carrier;
+    for (Cargo cargo : cargoCollection) {
+      if (id != null && id.equals(cargo.getId())) {
+        return cargo;
       }
     }
 

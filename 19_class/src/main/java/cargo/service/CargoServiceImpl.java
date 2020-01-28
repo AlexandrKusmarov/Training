@@ -6,9 +6,11 @@ import cargo.repo.CargoRepo;
 import cargo.search.CargoSearchCondition;
 import transportation.domain.Transportation;
 
+import javax.swing.text.html.Option;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class CargoServiceImpl implements CargoService {
 
@@ -25,9 +27,14 @@ public class CargoServiceImpl implements CargoService {
 
   @Override
   public Cargo findById(Long id) {
-    if (id != null) {
+    Optional<Long> optionalLong = Optional.ofNullable(id);
+    if (optionalLong.isPresent()){
       return cargoRepo.findById(id);
     }
+
+//    if (id != null) {
+//      return cargoRepo.findById(id);
+//    }
     return null;
   }
 
@@ -76,16 +83,22 @@ public class CargoServiceImpl implements CargoService {
   public void printAll() {
     List<Cargo> allCargos = cargoRepo.getAll();
 
-    for (Cargo cargo : allCargos) {
-      System.out.println(cargo);
-    }
+    allCargos.forEach(System.out::println);
+
+//    for (Cargo cargo : allCargos) {
+//      System.out.println(cargo);
+//    }
   }
 
   @Override
   public boolean update(Cargo cargo) {
-    if (cargo != null) {
+    Optional<Cargo> optionalCargo = Optional.ofNullable(cargo);
+    if(optionalCargo.isPresent()){
       return cargoRepo.update(cargo);
     }
+//    if (cargo != null) {
+//      return cargoRepo.update(cargo);
+//    }
 
     return false;
   }

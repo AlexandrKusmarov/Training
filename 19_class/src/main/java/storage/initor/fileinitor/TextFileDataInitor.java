@@ -22,19 +22,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class TextFileDataInitor extends BaseFileInitor implements Runnable {
+public class TextFileDataInitor extends BaseFileInitor {
 
     private static final String FILE = "D:\\JAVA\\EPAM_SPB\\Training\\initdata\\textdata.txt";
     private static final String CARGO_SECTION_LABEL_IN_FILE = "--Cargo section--";
     private static final String CARRIER_SECTION_LABEL_IN_FILE = "--Carrier section--";
     private static final String TRANSPORTATION_SECTION_LABEL_IN_FILE = "--Transportation section--";
-
-    @Override
-    public void run() {
-
-    }
 
     @Override
     public void initStorage() throws InitStorageException {
