@@ -13,6 +13,7 @@ import common.solutions.comparator.SimpleComparator;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class CommonCargoRepo implements CargoRepo {
 
@@ -46,10 +47,8 @@ public abstract class CommonCargoRepo implements CargoRepo {
             }
         }
 
-
         return result;
     }
-
 
     private Comparator<Cargo> getComparatorForCargoField(CargoField cargoField) {
         switch (cargoField) {

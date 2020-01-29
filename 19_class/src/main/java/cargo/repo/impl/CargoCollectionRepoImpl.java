@@ -12,85 +12,90 @@ import java.util.*;
 
 public class CargoCollectionRepoImpl extends CommonCargoRepo {
 
-  @Override
-  public Cargo getByIdFetchingTransportations(long id) {
-    return findById(id);
-  }
-
-  @Override
-  public Cargo[] findByName(String name) {
-    List<Cargo> result = new ArrayList<>();
-
-    for (Cargo carrier : cargoCollection) {
-      if (Objects.equals(carrier.getName(), name)) {
-        result.add(carrier);
-      }
+    @Override
+    public Cargo getByIdFetchingTransportations(long id) {
+        return findById(id);
     }
 
-    return result.toArray(new Cargo[0]);
-  }
+    @Override
+    public Cargo[] findByName(String name) {
+        List<Cargo> result = new ArrayList<>();
 
-  @Override
-  public List<Cargo> search(CargoSearchCondition searchCondition) {
-    List<Cargo> cargos = getAll();
+        for (Cargo carrier : cargoCollection) {
+            if (Objects.equals(carrier.getName(), name)) {
+                result.add(carrier);
+            }
+        }
 
-    if (CollectionUtils.isNotEmpty(cargos)) {
-      if (searchCondition.needSorting()) {
-        Comparator<Cargo> cargoComparator = createCargoComparator(searchCondition);
-        cargos.sort(searchCondition.isAscOrdering() ? cargoComparator : cargoComparator.reversed());
-      }
+        return result.toArray(new Cargo[0]);
     }
 
-    return cargos;
-  }
+    @Override
+    public List<Cargo> search(CargoSearchCondition searchCondition) {
+        List<Cargo> cargos = getAll();
 
-  @Override
-  public Cargo findById(Long id) {
-    for (Cargo cargo : cargoCollection) {
-      if (id != null && id.equals(cargo.getId())) {
-        return cargo;
-      }
+        if (CollectionUtils.isNotEmpty(cargos)) {
+            if (searchCondition.needSorting()) {
+                Comparator<Cargo> cargoComparator = createCargoComparator(searchCondition);
+                cargos.sort(searchCondition.isAscOrdering() ? cargoComparator : cargoComparator.reversed());
+            }
+        }
+
+        return cargos;
     }
 
-    return null;
-  }
-
-  @Override
-  public void save(Cargo cargo) {
-    cargo.setId(IdGenerator.generateId());
-    cargoCollection.add(cargo);
-  }
-
-  @Override
-  public boolean update(Cargo entity) {
-    return true;
-  }
-
-  @Override
-  public boolean deleteById(Long id) {
-    Iterator<Cargo> iter = cargoCollection.iterator();
-
-    boolean removed = false;
-    while (iter.hasNext()) {
-      if (id != null && id.equals(iter.next().getId())) {
-        iter.remove();
-        removed = true;
-        break;
-      }
+    @Override
+    public Cargo findById(Long id) {
+        Optional<Long> optionalId = Optional.ofNullable(id);
+        for (Cargo cargo : cargoCollection) {
+            if (optionalId.isPresent() && optionalId.get().equals(cargo.getId())) {
+                return cargo;
+            }
+        }
+        return null;
+//    for (Cargo cargo : cargoCollection) {
+//      if (id != null && id.equals(cargo.getId())) {
+//        return cargo;
+//      }
+//    }
     }
 
-    return removed;
-  }
+    @Override
+    public void save(Cargo cargo) {
+        cargo.setId(IdGenerator.generateId());
+        cargoCollection.add(cargo);
+    }
 
-  @Override
-  public List<Cargo> getAll() {
-    return cargoCollection;
-  }
+    @Override
+    public boolean update(Cargo entity) {
+        return true;
+    }
 
-  @Override
-  public int countAll() {
-    return cargoCollection.size();
-  }
+    @Override
+    public boolean deleteById(Long id) {
+        Iterator<Cargo> iter = cargoCollection.iterator();
+
+        boolean removed = false;
+        while (iter.hasNext()) {
+            if (id != null && id.equals(iter.next().getId())) {
+                iter.remove();
+                removed = true;
+                break;
+            }
+        }
+
+        return removed;
+    }
+
+    @Override
+    public List<Cargo> getAll() {
+        return cargoCollection;
+    }
+
+    @Override
+    public int countAll() {
+        return cargoCollection.size();
+    }
 
 
 }
