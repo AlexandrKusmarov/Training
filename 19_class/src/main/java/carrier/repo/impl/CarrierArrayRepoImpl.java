@@ -5,6 +5,7 @@ import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorag
 import static storage.Storage.carrierArray;
 import static storage.Storage.carrierIndex;
 
+import cargo.domain.Cargo;
 import carrier.domain.Carrier;
 import carrier.repo.CarrierRepo;
 import common.solutions.utils.ArrayUtils;
@@ -98,7 +99,7 @@ public class CarrierArrayRepoImpl implements CarrierRepo {
     }
 
     @Override
-    public Carrier findById(Long id) {
+    public Optional<Cargo> findById(Long id) {
         Optional<Long> optionalId = Optional.ofNullable(id);
         for (Carrier carrier : carrierArray) {
             if (Objects.nonNull(carrier) && optionalId.isPresent()

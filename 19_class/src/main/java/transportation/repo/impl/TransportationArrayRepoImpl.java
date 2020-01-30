@@ -5,6 +5,7 @@ import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorag
 import static storage.Storage.transportationArray;
 import static storage.Storage.transportationIndex;
 
+import cargo.domain.Cargo;
 import common.solutions.utils.ArrayUtils;
 import storage.IdGenerator;
 import transportation.domain.Transportation;
@@ -34,7 +35,7 @@ public class TransportationArrayRepoImpl implements TransportationRepo {
     }
 
     @Override
-    public Transportation findById(Long id) {
+    public Optional<Cargo> findById(Long id) {
         Optional<Long> optionalId = Optional.ofNullable(id);
         for (Transportation transportation : transportationArray) {
             if (transportation != null && optionalId.isPresent()

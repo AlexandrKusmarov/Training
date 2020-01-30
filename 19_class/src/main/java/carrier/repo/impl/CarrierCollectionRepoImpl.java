@@ -3,6 +3,7 @@ package carrier.repo.impl;
 
 import static storage.Storage.carrierCollection;
 
+import cargo.domain.Cargo;
 import carrier.domain.Carrier;
 import carrier.repo.CarrierRepo;
 import storage.IdGenerator;
@@ -18,7 +19,7 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
     }
 
     @Override
-    public Carrier findById(Long id) {
+    public Optional<Cargo> findById(Long id) {
         Optional<Long> optionalId = Optional.ofNullable(id);
         for (Carrier carrier : carrierCollection) {
             if (optionalId.isPresent() && carrier.getId().equals(optionalId.get())) {

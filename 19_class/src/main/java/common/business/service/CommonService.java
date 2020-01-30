@@ -1,9 +1,12 @@
 package common.business.service;
 
+import cargo.domain.Cargo;
+
 import java.util.List;
+import java.util.Optional;
 
 public interface CommonService<TYPE, ID> {
-  TYPE findById(ID id);
+  Optional<Cargo> findById(ID id);
 
   void save(TYPE entity);
 

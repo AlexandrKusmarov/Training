@@ -18,7 +18,7 @@ public class CargoArrayRepoImpl extends CommonCargoRepo {
     private static final Cargo[] EMPTY_CARGO_ARRAY = new Cargo[0];
 
     @Override
-    public Cargo getByIdFetchingTransportations(long id) {
+    public Optional<Cargo> getByIdFetchingTransportations(long id) {
         return findById(id);
     }
 
@@ -90,14 +90,14 @@ public class CargoArrayRepoImpl extends CommonCargoRepo {
     }
 
     @Override
-    public Cargo findById(Long id) {
-        Optional<Long> optionalId = Optional.ofNullable(id);
+    public Optional<Cargo> findById(Long id) {
         for (Cargo cargo : cargoArray) {
-            if (optionalId.isPresent() && optionalId.get().equals(cargo.getId())) {
-                return cargo;
+            Optional<Cargo> optionalCargo = Optional.ofNullable(cargo);
+            if (optionalCargo.isPresent() && optionalCargo.get().getId().equals(id)) {
+                return optionalCargo;
             }
         }
-        return null;
+        return Optional.empty();
 //    for (Cargo cargo : cargoArray) {
 //      if (cargo != null && id != null && id.equals(cargo.getId())) {
 //        return cargo;

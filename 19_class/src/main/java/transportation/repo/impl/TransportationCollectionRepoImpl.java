@@ -3,6 +3,7 @@ package transportation.repo.impl;
 
 import static storage.Storage.transportationCollection;
 
+import cargo.domain.Cargo;
 import storage.IdGenerator;
 import transportation.domain.Transportation;
 import transportation.repo.TransportationRepo;
@@ -21,7 +22,7 @@ public class TransportationCollectionRepoImpl implements TransportationRepo {
     }
 
     @Override
-    public Transportation findById(Long id) {
+    public Optional<Cargo> findById(Long id) {
         Optional<Long> optionalId = Optional.ofNullable(id);
         for (Transportation transportation : transportationCollection) {
             if (optionalId.isPresent() && Objects.nonNull(transportation)

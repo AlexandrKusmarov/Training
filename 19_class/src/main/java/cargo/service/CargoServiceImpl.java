@@ -26,20 +26,16 @@ public class CargoServiceImpl implements CargoService {
     }
 
     @Override
-    public Cargo findById(Long id) {
-        Optional<Long> optionalLong = Optional.ofNullable(id);
-        return optionalLong.map(aLong -> cargoRepo.findById(aLong)).orElse(null);
+    public Optional<Cargo> findById(Long id) {
+        return cargoRepo.findById(id);
 //    if (id != null) {
 //      return cargoRepo.findById(id);
 //    }
     }
 
     @Override
-    public Cargo getByIdFetchingTransportations(Long id) {
-        if (id != null) {
-            return cargoRepo.getByIdFetchingTransportations(id);
-        }
-        return null;
+    public Optional<Cargo> getByIdFetchingTransportations(Long id) {
+        return id != null ? cargoRepo.getByIdFetchingTransportations(id) : Optional.empty();
     }
 
     @Override
@@ -60,19 +56,13 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public boolean deleteById(Long id) {
-        Cargo cargo = this.getByIdFetchingTransportations(id);
-
-        if (cargo != null) {
+        Cargo cargo = this.getByIdFetchingTransportations(id).get();
             List<Transportation> transportations = cargo.getTransportations();
             boolean hasTransportations = transportations != null && transportations.size() > 0;
             if (hasTransportations) {
                 throw new CargoDeleteConstraintViolationException(id);
             }
-
             return cargoRepo.deleteById(id);
-        } else {
-            return false;
-        }
     }
 
     @Override
