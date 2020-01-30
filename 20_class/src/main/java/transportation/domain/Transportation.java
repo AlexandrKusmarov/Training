@@ -4,7 +4,7 @@ import cargo.domain.Cargo;
 import carrier.domain.Carrier;
 import common.business.domain.BaseEntity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Transportation extends BaseEntity {
 
@@ -12,14 +12,14 @@ public class Transportation extends BaseEntity {
   private Carrier carrier;
   private String description;
   private String billTo;
-  private Date transportationBeginDate;
+  private LocalDateTime transportationBeginLocalDateTime;
 
-  public Date getTransportationBeginDate() {
-    return transportationBeginDate;
+  public LocalDateTime getTransportationBeginLocalDateTime() {
+    return transportationBeginLocalDateTime;
   }
 
-  public void setTransportationBeginDate(Date transportationBeginDate) {
-    this.transportationBeginDate = transportationBeginDate;
+  public void setTransportationBeginLocalDateTime(LocalDateTime transportationBeginLocalDateTime) {
+    this.transportationBeginLocalDateTime = transportationBeginLocalDateTime;
   }
 
   public String getDescription() {

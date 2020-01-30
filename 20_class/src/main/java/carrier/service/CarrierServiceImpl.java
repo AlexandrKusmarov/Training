@@ -85,9 +85,9 @@ public class CarrierServiceImpl implements CarrierService {
   }
 
   @Override
-  public boolean update(Carrier carrier) {
+  public boolean upLocalDateTime(Carrier carrier) {
     if (carrier != null) {
-      carrierRepo.update(carrier);
+      carrierRepo.upLocalDateTime(carrier);
     }
 
     return false;

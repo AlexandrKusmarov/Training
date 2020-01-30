@@ -135,8 +135,8 @@ public class SaxHandler extends DefaultHandler {
 
     private void fillFoodCargoWithData(FoodCargo foodCargo, String tagPath, String content) throws ParseException {
         switch (tagPath) {
-            case CargoPaths.EXPIRATION_DATE: {
-                foodCargo.setExpirationDate(JavaUtilDateUtils.valueOf(content));
+            case CargoPaths.EXPIRATION_LocalDateTime: {
+                foodCargo.setExpirationLocalDateTime(JavaUtilDateUtils.valueOf(content));
                 break;
             }
             case CargoPaths.STORE_TEMPERATURE: {
@@ -187,8 +187,8 @@ public class SaxHandler extends DefaultHandler {
                 transportation.setDescription(content);
                 break;
             }
-            case TransportationPaths.TRANSPORTATION_BEGIN_DATE: {
-                transportation.setTransportationBeginDate(JavaUtilDateUtils.valueOf(content));
+            case TransportationPaths.TRANSPORTATION_BEGIN_LocalDateTime: {
+                transportation.setTransportationBeginLocalDateTime(JavaUtilDateUtils.valueOf(content));
                 break;
             }
         }

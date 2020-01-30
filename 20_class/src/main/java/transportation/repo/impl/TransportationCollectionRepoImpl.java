@@ -36,7 +36,7 @@ public class TransportationCollectionRepoImpl implements TransportationRepo {
   }
 
   @Override
-  public boolean update(Transportation transportation) {
+  public boolean upLocalDateTime(Transportation transportation) {
     return true;
   }
 

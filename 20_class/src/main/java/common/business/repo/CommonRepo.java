@@ -9,7 +9,7 @@ public interface CommonRepo<TYPE, ID> {
 
   void save(TYPE entity);
 
-  boolean update(TYPE entity);
+  boolean upLocalDateTime(TYPE entity);
 
   boolean deleteById(ID id);
 

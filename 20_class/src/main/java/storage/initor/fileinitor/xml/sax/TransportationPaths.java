@@ -7,7 +7,7 @@ public final class TransportationPaths {
     public static final String TRANSPORTATIONS = "data/transportations";
     public static final String TRANSPORTATION = TRANSPORTATIONS + "/transportation";
     public static final String BILLTO = TRANSPORTATION + "/billto";
-    public static final String TRANSPORTATION_BEGIN_DATE = TRANSPORTATION + "/transportationBeginDate";
+    public static final String TRANSPORTATION_BEGIN_LocalDateTime = TRANSPORTATION + "/transportationBeginLocalDateTime";
     public static final String DESCRIPTION = TRANSPORTATION + "/description";
     private static final Set<String> ALL_PATHS = new HashSet<>();
 
@@ -15,7 +15,7 @@ public final class TransportationPaths {
         ALL_PATHS.add(TRANSPORTATIONS);
         ALL_PATHS.add(TRANSPORTATION);
         ALL_PATHS.add(BILLTO);
-        ALL_PATHS.add(TRANSPORTATION_BEGIN_DATE);
+        ALL_PATHS.add(TRANSPORTATION_BEGIN_LocalDateTime);
         ALL_PATHS.add(DESCRIPTION);
     }
 

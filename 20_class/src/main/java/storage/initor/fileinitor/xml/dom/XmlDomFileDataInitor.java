@@ -24,9 +24,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,9 +88,9 @@ public class XmlDomFileDataInitor extends BaseFileInitor {
     Cargo cargo;
     if (CargoType.FOOD.equals(cargoType)) {
       FoodCargo foodCargo = new FoodCargo();
-      Date expirationDate = JavaUtilDateUtils
-          .valueOf(getOnlyElementTextContent(cargoElem, "expirationDate"));
-      foodCargo.setExpirationDate(expirationDate);
+      LocalDateTime expirationLocalDateTime = JavaUtilDateUtils
+          .valueOf(getOnlyElementTextContent(cargoElem, "expirationLocalDateTime"));
+      foodCargo.setExpirationLocalDateTime(expirationLocalDateTime);
       foodCargo.setStoreTemperature(
           Integer.parseInt(getOnlyElementTextContent(cargoElem, "storeTemperature")));
       cargo = foodCargo;
@@ -163,8 +163,8 @@ public class XmlDomFileDataInitor extends BaseFileInitor {
     transportation.setBillTo(getOnlyElementTextContent(transportationElement, "billto"));
     transportation.setDescription(getOnlyElementTextContent(transportationElement, "description"));
     String beginDataStr = getOnlyElementTextContent(transportationElement,
-        "transportationBeginDate");
-    transportation.setTransportationBeginDate(JavaUtilDateUtils.valueOf(beginDataStr));
+        "transportationBeginLocalDateTime");
+    transportation.setTransportationBeginLocalDateTime(JavaUtilDateUtils.valueOf(beginDataStr));
     result.setTransportation(transportation);
 
     return result;

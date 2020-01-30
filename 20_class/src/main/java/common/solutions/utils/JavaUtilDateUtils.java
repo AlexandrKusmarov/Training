@@ -1,9 +1,8 @@
 package common.solutions.utils;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public final class JavaUtilDateUtils {
 
@@ -13,12 +12,12 @@ public final class JavaUtilDateUtils {
 
   }
 
-  public static Date valueOf(String dateStr, String pattern) throws ParseException {
-    DateFormat dateFormat = new SimpleDateFormat(pattern);
-    return dateFormat.parse(dateStr);
+  public static LocalDateTime valueOf(String dateStr, String pattern) throws ParseException {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+    return LocalDateTime.parse(dateStr, formatter);
   }
 
-  public static Date valueOf(String dateStr) throws ParseException {
+  public static LocalDateTime valueOf(String dateStr) throws ParseException {
     return valueOf(dateStr, PATTERN);
   }
 

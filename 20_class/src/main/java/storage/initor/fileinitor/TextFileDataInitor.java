@@ -92,7 +92,7 @@ public class TextFileDataInitor extends BaseFileInitor {
         cargo = clothersCargo;
       } else {
         FoodCargo foodCargo = new FoodCargo();
-        foodCargo.setExpirationDate(JavaUtilDateUtils.valueOf(cargoData[index++].trim()));
+        foodCargo.setExpirationLocalDateTime(JavaUtilDateUtils.valueOf(cargoData[index++].trim()));
         foodCargo.setStoreTemperature(Integer.parseInt(cargoData[index].trim()));
         cargo = foodCargo;
       }
@@ -164,7 +164,7 @@ public class TextFileDataInitor extends BaseFileInitor {
       Transportation transportation = new Transportation();
       transportation.setDescription(data[index++].trim());
       transportation.setBillTo(data[index++].trim());
-      transportation.setTransportationBeginDate(JavaUtilDateUtils.valueOf(data[index].trim()));
+      transportation.setTransportationBeginLocalDateTime(JavaUtilDateUtils.valueOf(data[index].trim()));
       result.setTransportation(transportation);
     }
 
