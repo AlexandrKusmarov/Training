@@ -35,11 +35,18 @@ public class TransportationArrayRepoImpl implements TransportationRepo {
 
   @Override
   public Optional<Transportation> findById(Long id) {
-    for (Transportation transportation : transportationArray) {
-      if (transportation != null && transportation.getId().equals(id)) {
-        return Optional.of(transportation);
-      }
-    }
+    Arrays.stream(transportationArray)
+            .filter(transportation -> transportation != null
+                    && id != null
+                    && id.equals(transportation.getId()))
+            .findAny()
+            .orElseThrow(()-> new IllegalArgumentException("Cargo not found"));
+
+//    for (Transportation transportation : transportationArray) {
+//      if (transportation != null && transportation.getId().equals(id)) {
+//        return Optional.of(transportation);
+//      }
+//    }
 
     return Optional.empty();
   }

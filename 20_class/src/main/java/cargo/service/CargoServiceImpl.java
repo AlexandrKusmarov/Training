@@ -76,10 +76,11 @@ public class CargoServiceImpl implements CargoService {
   @Override
   public void printAll() {
     List<Cargo> allCargos = cargoRepo.getAll();
+    allCargos.forEach(System.out::println);
 
-    for (Cargo cargo : allCargos) {
-      System.out.println(cargo);
-    }
+//    for (Cargo cargo : allCargos) {
+//      System.out.println(cargo);
+//    }
   }
 
   @Override

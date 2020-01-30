@@ -70,11 +70,13 @@ public class CarrierArrayRepoImpl implements CarrierRepo {
   private Carrier[] excludeNullableElementsFromArray(Carrier[] carriers) {
     int sizeOfArrWithNotNullElems = 0;
 
-    for (Carrier carrier : carriers) {
-      if (carrier != null) {
-        sizeOfArrWithNotNullElems++;
-      }
-    }
+    sizeOfArrWithNotNullElems = (int)Arrays.stream(carriers).filter(Objects::nonNull).count();
+
+//    for (Carrier carrier : carriers) {
+//      if (carrier != null) {
+//        sizeOfArrWithNotNullElems++;
+//      }
+//    }
 
     if (sizeOfArrWithNotNullElems == 0) {
       return EMPTY_CARRIER_ARRAY;
@@ -104,11 +106,17 @@ public class CarrierArrayRepoImpl implements CarrierRepo {
 
   @Override
   public Optional<Carrier> findById(Long id) {
-    for (Carrier carrier : carrierArray) {
-      if (carrier != null && carrier.getId().equals(id)) {
-        return Optional.of(carrier);
-      }
-    }
+
+    Arrays.stream(carrierArray)
+            .filter(carrier -> carrier != null && id != null && id.equals(carrier.getId()))
+            .findAny()
+            .orElseThrow(()-> new IllegalArgumentException("Cargo not found"));
+
+//    for (Carrier carrier : carrierArray) {
+//      if (carrier != null && carrier.getId().equals(id)) {
+//        return Optional.of(carrier);
+//      }
+//    }
 
     return Optional.empty();
   }

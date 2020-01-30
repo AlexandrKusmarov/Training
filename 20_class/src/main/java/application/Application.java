@@ -69,8 +69,8 @@ public class Application {
     System.out.println(carrierService.findById(8L));
     printSeparator();
 
-    System.out.println("SEARCH CARGOES BY NAME = 'Clothers_Name_1'");
-    CollectionUtils.printCollection(cargoService.findByName("Clothers_Name_1"));
+    System.out.println("SEARCH CARGOES BY NAME = 'APPLE'");
+    CollectionUtils.printCollection(cargoService.findByName("APPLE"));
     printSeparator();
 
     System.out.println("SEARCH CARRIERS BY NAME = 'Carrier_Name'");

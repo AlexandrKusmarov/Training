@@ -1,5 +1,16 @@
-USING JAVA 8 API.
-1. common/solutions/utils/CollectionUtils
-2. common/solutions/utils/ArrayUtils
-3. reporting/ReportDefaultService
-4. storage/initor/InMemoryStorageInitor
+USING JAVA 8 Stream API.
+1. CargoArrRepoImpl -> findById()
+2. storage/initor/InMemoryStorageInitor
+3. CargoCollectionRepoImpl -> findByName
+4. CargoCollectionRepoImpl -> findById
+5. CarrierArrayRepoImpl -> excludeNullableElementsFromArray
+6. CarrierArrayRepoImpl -> findById
+7. CarrierCollectionRepoImpl -> findById
+8. CarrierCollectionRepoImpl -> findByName
+9. TransportationArrayRepoImpl -> findById
+10. TransportationCollectionRepoImpl -> findById
+11. reporting/ReportDefaultService -> getCargosReportData()
+12. reporting/ReportDefaultService -> getCarriersReportData()
+13. reporting/ReportDefaultService -> getTransportationsReportData()
+14. storage/initor/fileinitor/BaseFileInitor -> getTransportationsFromParsedObject()
+ 

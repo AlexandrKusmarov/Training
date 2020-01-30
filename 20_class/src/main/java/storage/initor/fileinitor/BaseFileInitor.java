@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class BaseFileInitor implements StorageInitor {
 
@@ -55,10 +56,14 @@ public abstract class BaseFileInitor implements StorageInitor {
   protected List<Transportation> getTransportationsFromParsedObject(
       List<ParsedTransportation> transportations) {
     List<Transportation> result = new ArrayList<>();
-    for (ParsedTransportation transportation : transportations) {
-      result.add(transportation.transportation);
-    }
 
+    result = transportations.stream()
+            .map(transport -> transport.transportation)
+            .collect(Collectors.toList());
+
+//    for (ParsedTransportation transportation : transportations) {
+//      result.add(transportation.transportation);
+//    }
     return result;
   }
 

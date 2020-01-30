@@ -1,22 +1,17 @@
 package cargo.repo.impl;
 
 
-import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorageById;
-import static storage.Storage.cargoArray;
-import static storage.Storage.cargoIndex;
-
 import cargo.domain.Cargo;
 import cargo.search.CargoSearchCondition;
 import common.solutions.utils.ArrayUtils;
 import common.solutions.utils.CollectionUtils;
 import storage.IdGenerator;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+
+import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorageById;
+import static storage.Storage.cargoArray;
+import static storage.Storage.cargoIndex;
 
 public class CargoArrayRepoImpl extends CommonCargoRepo {
 
@@ -96,11 +91,16 @@ public class CargoArrayRepoImpl extends CommonCargoRepo {
 
   @Override
   public Optional<Cargo> findById(Long id) {
-    for (Cargo cargo : cargoArray) {
-      if (cargo != null && id != null && id.equals(cargo.getId())) {
-        return Optional.of(cargo);
-      }
-    }
+    Arrays.stream(cargoArray)
+            .filter(cargo -> cargo != null && id != null && id.equals(cargo.getId()))
+            .findAny()
+            .orElseThrow(()-> new IllegalArgumentException("Cargo not found"));
+
+//    for (Cargo cargo : cargoArray) {
+//      if (cargo != null && id != null && id.equals(cargo.getId())) {
+//        return Optional.of(cargo);
+//      }
+//    }
 
     return Optional.empty();
   }

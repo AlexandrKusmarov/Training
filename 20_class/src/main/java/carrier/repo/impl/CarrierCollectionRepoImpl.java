@@ -23,13 +23,17 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
 
   @Override
   public Optional<Carrier> findById(Long id) {
-    for (Carrier carrier : carrierCollection) {
-      if (carrier.getId().equals(id)) {
-        return Optional.of(carrier);
-      }
-    }
+    return Optional.of(carrierCollection.stream()
+            .filter(carrier -> id != null && id.equals(carrier.getId()))
+            .findFirst()).get();
 
-    return Optional.empty();
+//    for (Carrier carrier : carrierCollection) {
+//      if (carrier.getId().equals(id)) {
+//        return Optional.of(carrier);
+//      }
+//    }
+//
+//    return Optional.empty();
   }
 
   @Override
@@ -39,15 +43,19 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
 
   @Override
   public Carrier[] findByName(String name) {
-    List<Carrier> result = new ArrayList<>();
 
-    for (Carrier carrier : carrierCollection) {
-      if (Objects.equals(carrier.getName(), name)) {
-        result.add(carrier);
-      }
-    }
-
-    return result.toArray(new Carrier[0]);
+    return carrierCollection.stream()
+            .filter(carrier -> carrier.getName().equals(name))
+            .toArray(Carrier[]::new);
+//    List<Carrier> result = new ArrayList<>();
+//
+//    for (Carrier carrier : carrierCollection) {
+//      if (Objects.equals(carrier.getName(), name)) {
+//        result.add(carrier);
+//      }
+//    }
+//
+//    return result.toArray(new Carrier[0]);
   }
 
   @Override

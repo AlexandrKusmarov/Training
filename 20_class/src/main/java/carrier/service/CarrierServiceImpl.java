@@ -79,9 +79,11 @@ public class CarrierServiceImpl implements CarrierService {
   @Override
   public void printAll() {
     List<Carrier> carriers = carrierRepo.getAll();
-    for (Carrier carrier : carriers) {
-      System.out.println(carrier);
-    }
+    carriers.forEach(System.out::println);
+
+//    for (Carrier carrier : carriers) {
+//      System.out.println(carrier);
+//    }
   }
 
   @Override
