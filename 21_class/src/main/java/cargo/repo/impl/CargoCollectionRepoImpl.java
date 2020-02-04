@@ -1,6 +1,5 @@
 package cargo.repo.impl;
 
-
 import cargo.domain.Cargo;
 import cargo.search.CargoSearchCondition;
 import common.solutions.utils.CollectionUtils;
@@ -26,12 +25,6 @@ public class CargoCollectionRepoImpl extends CommonCargoRepo {
         return cargoCollection.stream()
                 .filter(cargo -> cargo.getName().equals(name))
                 .toArray(Cargo[]::new);
-
-//        for (Cargo carrier : cargoCollection) {
-//            if (Objects.equals(carrier.getName(), name)) {
-//                result.add(carrier);
-//            }
-//        }
     }
 
     @Override
@@ -53,13 +46,6 @@ public class CargoCollectionRepoImpl extends CommonCargoRepo {
         return Optional.of(cargoCollection.stream()
                 .filter(cargo -> id != null && id.equals(cargo.getId()))
                 .findFirst()).get();
-
-//        for (Cargo cargo : cargoCollection) {
-//            if (id != null && id.equals(cargo.getId())) {
-//                return Optional.of(cargo);
-//            }
-//        }
-//        return Optional.empty();
     }
 
     @Override
