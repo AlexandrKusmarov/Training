@@ -1,0 +1,12 @@
+<resource name="jdbc/transport"
+          auth="Container"
+          description="DB Connection"
+          username="root"
+          password="root"
+          type="javax.sql.DataSource"
+          maxActive="100"
+          maxIdle="30"
+          maxWait="10000"
+          driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://localhost:3306/transportation_company?useUnicode=yes&characterEncoding=UTF-8">
+</resource>
