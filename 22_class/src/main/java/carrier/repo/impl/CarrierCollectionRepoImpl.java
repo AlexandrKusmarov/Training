@@ -85,7 +85,7 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
   }
 
   @Override
-  public boolean upLocalDateTime(Carrier carrier) {
+  public boolean update(Carrier carrier) {
     return true;
   }
 

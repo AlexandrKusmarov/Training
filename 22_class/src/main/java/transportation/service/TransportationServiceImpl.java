@@ -44,9 +44,9 @@ public class TransportationServiceImpl implements TransportationService {
   }
 
   @Override
-  public boolean upLocalDateTime(Transportation transportation) {
+  public boolean update(Transportation transportation) {
     if (transportation != null) {
-      return transportationRepo.upLocalDateTime(transportation);
+      return transportationRepo.update(transportation);
     }
 
     return false;

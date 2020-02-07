@@ -55,7 +55,7 @@ public class CargoCollectionRepoImpl extends CommonCargoRepo {
     }
 
     @Override
-    public boolean upLocalDateTime(Cargo entity) {
+    public boolean update(Cargo entity) {
         return true;
     }
 

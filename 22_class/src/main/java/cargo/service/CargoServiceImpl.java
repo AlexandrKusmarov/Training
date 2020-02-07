@@ -84,9 +84,9 @@ public class CargoServiceImpl implements CargoService {
   }
 
   @Override
-  public boolean upLocalDateTime(Cargo cargo) {
+  public boolean update(Cargo cargo) {
     if (cargo != null) {
-      return cargoRepo.upLocalDateTime(cargo);
+      return cargoRepo.update(cargo);
     }
 
     return false;

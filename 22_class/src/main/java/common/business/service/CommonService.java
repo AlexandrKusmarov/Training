@@ -8,7 +8,7 @@ public interface CommonService<TYPE, ID> {
 
   void save(TYPE entity);
 
-  boolean upLocalDateTime(TYPE entity);
+  boolean update(TYPE entity);
 
   boolean deleteById(ID id);
 
