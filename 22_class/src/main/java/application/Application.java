@@ -11,6 +11,9 @@ import application.serviceholder.ServiceHolder;
 import application.serviceholder.StorageType;
 import cargo.domain.Cargo;
 import cargo.domain.CargoField;
+import cargo.domain.CargoType;
+import cargo.domain.FoodCargo;
+import cargo.repo.impl.CargoDBRepoImpl;
 import cargo.search.CargoSearchCondition;
 import cargo.service.CargoService;
 import carrier.service.CarrierService;
@@ -47,18 +50,32 @@ public class Application {
       StorageInitor storageInitor = getStorageInitor(InitStorageType.MULTI_THREAD);
       storageInitor.initStorage();
 
-      printStorageData();
-      demoSearchOperations();
-      demoSortOperations();
-      demoExceptions();
+      demoSQLFindCargosByName();
 
-      demoReportService();
+
+
+//      printStorageData();
+//      demoSearchOperations();
+//      demoSortOperations();
+//      demoExceptions();
+//      demoReportService();
+
     } catch (InitStorageException e) {
       e.getCause().printStackTrace();
     }catch (Exception e){
       e.printStackTrace();
     }
   }
+
+  private static void demoSQLFindCargosByName(){
+    CargoDBRepoImpl cargoDBRepo = new CargoDBRepoImpl();
+    System.out.println("Trying to find Cargo with name=Apple...");
+
+    Cargo[] cargos = cargoDBRepo.findByName("Apple");
+    CollectionUtils.printCollection(Arrays.asList(cargos));
+  }
+
+
 
   private static void demoSearchOperations() {
     System.out.println("SEARCH CARGO BY ID = 1");

@@ -112,10 +112,6 @@ public class InMemoryStorageInitor implements StorageInitor {
 
         if (isNotEmpty(cargos) && isNotEmpty(transportations)) {
             cargos.forEach((c) -> appendTransportationsToCargo(c, transportations));
-
-//      for (Cargo cargo : cargos) {
-//        appendTransportationsToCargo(cargo, transportations);
-//      }
         }
     }
 
@@ -130,12 +126,5 @@ public class InMemoryStorageInitor implements StorageInitor {
         cargoTransportations = transportations.stream()
                 .filter(t -> t.getCargo() != null && t.getCargo().getId().equals(cargo.getId()))
                 .collect(Collectors.toList());
-
-//    for (Transportation transportation : transportations) {
-//      if (transportation.getCargo() != null && transportation.getCargo().getId()
-//          .equals(cargo.getId())) {
-//        cargoTransportations.add(transportation);
-//      }
-//    }
     }
 }

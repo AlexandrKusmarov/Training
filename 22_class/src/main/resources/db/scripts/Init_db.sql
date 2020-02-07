@@ -18,14 +18,14 @@ create table if not exists cargo (
 );
 
 create table if not exists carrier (
-  id          int(8)                                 not null auto_increment primary key,
+  id          int(8)                                 not null primary key,
   name        varchar(255)                           not null,
   address     varchar(255),
   carrierType enum ('SHIP', 'PLANE', 'CAR', 'TRAIN') not null
 );
 
 create table if not exists transportation (
-  id                               int(8) not null auto_increment primary key,
+  id                               int(8) not null primary key,
   idCargo                          int(8),
   idCarrier                        int(8),
   description                      varchar(255),
