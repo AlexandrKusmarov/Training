@@ -5,9 +5,9 @@ import cargo.domain.CargoType;
 import cargo.domain.ClothersCargo;
 import cargo.domain.FoodCargo;
 import common.solutions.utils.JavaUtilDateUtils;
+import common.solutions.utils.db.ConnectionBuilder;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 
 public class ResultSetManager {
@@ -36,5 +36,25 @@ public class ResultSetManager {
         cargo.setWeight(resultSet.getInt("weight"));
 
         return cargo;
+    }
+
+    public static PreparedStatement getFilledPreparedStatement(Cargo entity, PreparedStatement ps) throws SQLException {
+        String cargoType = entity.getCargoType().toString();
+
+        ps.setString(1, entity.getName());
+        ps.setInt(2, entity.getWeight());
+        ps.setString(3, entity.getCargoType().toString());
+
+        if (CargoType.valueOf(cargoType).equals(CargoType.CLOTHERS)) {
+            ps.setString(4, ((ClothersCargo) entity).getSize());
+            ps.setString(5, ((ClothersCargo) entity).getMaterial());
+        } else {
+            Date sqlDate = JavaUtilDateUtils.
+                    convertLocalDateTimeToSqlTime(((FoodCargo) entity).getExpirationLocalDateTime());
+            ps.setDate(4, sqlDate);
+            ps.setInt(5, ((FoodCargo) entity).getStoreTemperature());
+        }
+        ps.setLong(6, entity.getId());
+        return ps;
     }
 }

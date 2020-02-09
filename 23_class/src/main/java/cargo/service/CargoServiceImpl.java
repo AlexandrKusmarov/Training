@@ -6,6 +6,7 @@ import cargo.repo.CargoRepo;
 import cargo.search.CargoSearchCondition;
 import transportation.domain.Transportation;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +47,7 @@ public class CargoServiceImpl implements CargoService {
   }
 
   @Override
-  public int countAll() {
+  public int countAll() throws SQLException {
     return this.cargoRepo.countAll();
   }
 

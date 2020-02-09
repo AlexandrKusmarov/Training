@@ -19,6 +19,7 @@ import storage.initor.InitStorageType;
 import storage.initor.StorageInitor;
 import transportation.service.TransportationService;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -54,6 +55,8 @@ public class Application {
             demoSQLgetAllCargos();
 //            demoSQLDeleteCargoById();
             demoSQLCountAllCargos();
+//            demoSQLInsertCargo();
+            demoSQLgetAllCargos();
 
 //      printStorageData();
 //      demoSearchOperations();
@@ -70,7 +73,11 @@ public class Application {
 
     private static void demoSQLCountAllCargos(){
         CargoDBRepoImpl cargoDBRepo = new CargoDBRepoImpl();
-        System.out.println("Count of cargos: " + cargoDBRepo.countAll());
+        try {
+            System.out.println("Count of cargos: " + cargoDBRepo.countAll());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void demoSQLDeleteCargoById(){
@@ -88,8 +95,8 @@ public class Application {
         CargoDBRepoImpl cargoDBRepo = new CargoDBRepoImpl();
         FoodCargo foodCargo = new FoodCargo();
         foodCargo.setId(3L);
-        foodCargo.setName("Potato");
-        foodCargo.setWeight(1000);
+        foodCargo.setName("Tomat");
+        foodCargo.setWeight(9900);
         foodCargo.setExpirationLocalDateTime(LocalDateTime.of(LocalDate.ofYearDay(2015, 25), LocalTime.now()));
         foodCargo.setStoreTemperature(18);
         System.out.println(cargoDBRepo.update(foodCargo));
@@ -109,6 +116,18 @@ public class Application {
         System.out.println("Trying to find Cargo with id=2...");
         Optional<Cargo> cargo = cargoDBRepo.findById(2L);
         cargo.ifPresent(System.out::println);
+    }
+
+    private static void demoSQLInsertCargo(){
+        CargoDBRepoImpl cargoDBRepo = new CargoDBRepoImpl();
+        System.out.println("Insert new Cargo : ");
+        FoodCargo foodCargo = new FoodCargo();
+        foodCargo.setId(11L);
+        foodCargo.setName("Orange");
+        foodCargo.setWeight(3333);
+        foodCargo.setExpirationLocalDateTime(LocalDateTime.of(LocalDate.ofYearDay(2015, 25), LocalTime.now()));
+        foodCargo.setStoreTemperature(3);
+        cargoDBRepo.save(foodCargo);
     }
 
     private static void demoSearchOperations() {

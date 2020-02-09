@@ -42,4 +42,5 @@ public final class DbUtils {
             throw new RuntimeException(e);
         }
     }
+
 }

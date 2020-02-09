@@ -5,6 +5,7 @@ import carrier.exception.unchecked.CarrierDeleteConstraintViolationException;
 import carrier.repo.CarrierRepo;
 import transportation.domain.Transportation;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -55,7 +56,7 @@ public class CarrierServiceImpl implements CarrierService {
   }
 
   @Override
-  public int countAll() {
+  public int countAll() throws SQLException {
     return this.carrierRepo.countAll();
   }
 

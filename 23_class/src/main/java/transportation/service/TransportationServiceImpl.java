@@ -3,6 +3,7 @@ package transportation.service;
 import transportation.domain.Transportation;
 import transportation.repo.TransportationRepo;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +54,7 @@ public class TransportationServiceImpl implements TransportationService {
   }
 
   @Override
-  public int countAll() {
+  public int countAll() throws SQLException {
     return transportationRepo.countAll();
   }
 }
