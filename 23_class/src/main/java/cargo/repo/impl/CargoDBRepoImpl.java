@@ -7,11 +7,11 @@ import cargo.domain.FoodCargo;
 import cargo.search.CargoSearchCondition;
 import common.solutions.utils.JavaUtilDateUtils;
 import common.solutions.utils.db.ConnectionBuilder;
+import common.solutions.utils.db.DbUtils;
 import common.solutions.utils.db.QuerySql;
-import common.solutions.utils.db.ResultSetManager;
+import db.ResultSetManager;
 
 import java.sql.*;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,11 +31,11 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
 
             ResultSet resultSet = ps.executeQuery();
 
-            while (resultSet.next()) {
-                Optional<Cargo> cargo = ResultSetManager.getCargoFromResultSet(resultSet);
-                cargo.ifPresent(cargos::add);
-            }
-        } catch (SQLException | ParseException e) {
+//            while (resultSet.next()) {
+//                Cargo cargo = ResultSetManager.mapCargo(resultSet);
+//                cargo.ifPresent(cargos::add);
+//            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return cargos.toArray(new Cargo[0]);
@@ -55,9 +55,9 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
             ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
-                return ResultSetManager.getCargoFromResultSet(resultSet);
+                return Optional.of(ResultSetManager.mapCargo(resultSet));
             }
-        } catch (SQLException | ParseException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return Optional.empty();
@@ -119,27 +119,15 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
 
     @Override
     public List<Cargo> getAll() {
-        List<Cargo> cargos = new ArrayList<>();
-        try (Connection con = ConnectionBuilder.getConnection();
-             PreparedStatement ps = con.prepareStatement(QuerySql.SELECT_ALL_CARGOS)) {
-
-            ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()) {
-                Optional<Cargo> cargo = ResultSetManager.getCargoFromResultSet(resultSet);
-                cargo.ifPresent(cargos::add);
-            }
-        } catch (SQLException | ParseException e) {
-            e.printStackTrace();
-        }
-        return cargos;
+        return DbUtils.selectAll(QuerySql.SELECT_ALL_CARGOS, ResultSetManager::mapCargo);
     }
 
     @Override
     public int countAll() {
         try (Connection con = ConnectionBuilder.getConnection();
              PreparedStatement ps = con.prepareStatement(QuerySql.COUNT_ALL_CARGOS)) {
-             ResultSet rs = ps.executeQuery();
-             rs.getRow();
+            ResultSet rs = ps.executeQuery();
+            rs.getRow();
             return rs.getRow();
         } catch (SQLException e) {
             e.printStackTrace();

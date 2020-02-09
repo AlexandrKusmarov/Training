@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface CommonRepo<TYPE, ID> {
 
-  Optional<TYPE> findById(ID id);
+  Optional <TYPE> findById(ID id);
 
   void save(TYPE entity);
 
