@@ -93,7 +93,7 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
                 }
                 psCarrier.executeBatch();
                 con.commit();
-            } 
+            }
         } catch (Exception e) {
             e.printStackTrace();
             con.rollback();

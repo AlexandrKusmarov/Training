@@ -108,8 +108,8 @@ public class Application {
         carrier2.setAddress("jgadf kjhs");
         carrier2.setCarrierType(CarrierType.PLANE);
 
-        carriers.add(carrier);
-        carriers.add(carrier2);
+//        carriers.add(carrier);
+//        carriers.add(carrier2);
 
         try {
             cargoDBRepo.saveAll(cargos, carriers);
