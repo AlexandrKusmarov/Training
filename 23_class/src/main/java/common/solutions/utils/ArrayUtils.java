@@ -13,12 +13,6 @@ public final class ArrayUtils {
 
   public static void printArray(Object[] arr) {
     Arrays.stream(arr).forEach(System.out::println);
-
-//    for (Object obj : arr) {
-//      if (obj != null) {
-//        System.out.println(obj);
-//      }
-//    }
   }
 
   public static void removeElement(Object[] arr, int index) {

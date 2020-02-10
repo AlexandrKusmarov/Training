@@ -3,10 +3,12 @@ package cargo.repo.impl;
 
 import cargo.domain.Cargo;
 import cargo.search.CargoSearchCondition;
+import carrier.domain.Carrier;
 import common.solutions.utils.ArrayUtils;
 import common.solutions.utils.CollectionUtils;
 import storage.IdGenerator;
 
+import java.sql.SQLException;
 import java.util.*;
 
 import static common.business.repo.CommonRepoHelper.findEntityIndexInArrayStorageById;
@@ -82,6 +84,11 @@ public class CargoArrayRepoImpl extends CommonCargoRepo {
         }
 
         return cargos;
+    }
+
+    @Override
+    public void saveAll(List<Cargo> cargos, List<Carrier> carriers) throws SQLException {
+
     }
 
     @Override

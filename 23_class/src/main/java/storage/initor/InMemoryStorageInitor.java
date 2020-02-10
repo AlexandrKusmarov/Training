@@ -11,6 +11,7 @@ import carrier.service.CarrierService;
 import transportation.domain.Transportation;
 import transportation.service.TransportationService;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class InMemoryStorageInitor implements StorageInitor {
     }
 
     @Override
-    public void initStorage() {
+    public void initStorage() throws SQLException {
         initCargos();
         initCarriers();
         initTransportations();
@@ -84,14 +85,14 @@ public class InMemoryStorageInitor implements StorageInitor {
         return carrier;
     }
 
-    private void initTransportations() {
+    private void initTransportations() throws SQLException {
         for (int i = 0; i < TOTAL_ENTITIES_IN_GROUP; i++) {
             Transportation transportation = createTransportation(i + 1, i + 1 + TOTAL_ENTITIES_IN_GROUP);
             transportationService.save(transportation);
         }
     }
 
-    private Transportation createTransportation(long cargoId, long carrierId) {
+    private Transportation createTransportation(long cargoId, long carrierId) throws SQLException {
         Transportation transportation = new Transportation();
 
         Optional<Cargo> cargoOptional = cargoService.findById(cargoId);

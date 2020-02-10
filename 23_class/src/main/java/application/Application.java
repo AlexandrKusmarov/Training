@@ -8,6 +8,8 @@ import cargo.domain.FoodCargo;
 import cargo.repo.impl.CargoDBRepoImpl;
 import cargo.search.CargoSearchCondition;
 import cargo.service.CargoService;
+import carrier.domain.Carrier;
+import carrier.domain.CarrierType;
 import carrier.service.CarrierService;
 import common.business.exception.checked.InitStorageException;
 import common.business.exception.checked.ReportException;
@@ -49,13 +51,14 @@ public class Application {
             StorageInitor storageInitor = getStorageInitor(InitStorageType.MULTI_THREAD);
             storageInitor.initStorage();
 
-            demoSQLFindCargosByName();
-            demoSQLFindById();
+//            demoSQLFindCargosByName();
+//            demoSQLFindById();
             demoSQLUpdateCargo();
             demoSQLgetAllCargos();
 //            demoSQLDeleteCargoById();
             demoSQLCountAllCargos();
 //            demoSQLInsertCargo();
+            demoSQLSaveAllCargosAndCarriers();
             demoSQLgetAllCargos();
 
 //      printStorageData();
@@ -67,6 +70,50 @@ public class Application {
         } catch (InitStorageException e) {
             e.getCause().printStackTrace();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void demoSQLSaveAllCargosAndCarriers(){
+        CargoDBRepoImpl cargoDBRepo = new CargoDBRepoImpl();
+        List<Cargo> cargos = new ArrayList<>();
+        List<Carrier> carriers = new ArrayList<>();
+
+        FoodCargo foodCargo = new FoodCargo();
+        foodCargo.setId(95L);
+        foodCargo.setName("Tomat");
+        foodCargo.setWeight(9900);
+        foodCargo.setExpirationLocalDateTime(LocalDateTime.of(LocalDate.ofYearDay(2015, 25), LocalTime.now()));
+        foodCargo.setStoreTemperature(18);
+
+        FoodCargo foodCargo2 = new FoodCargo();
+        foodCargo2.setId(96L);
+        foodCargo2.setName("Potato");
+        foodCargo2.setWeight(10);
+        foodCargo2.setExpirationLocalDateTime(LocalDateTime.of(LocalDate.ofYearDay(2015, 25), LocalTime.now()));
+        foodCargo2.setStoreTemperature(8);
+
+//        cargos.add(foodCargo);
+//        cargos.add(foodCargo2);
+
+        Carrier carrier = new Carrier();
+        carrier.setId(124L);
+        carrier.setName("TestCarrier55");
+        carrier.setAddress("jgadf kjh");
+        carrier.setCarrierType(CarrierType.CAR);
+
+        Carrier carrier2 = new Carrier();
+        carrier2.setId(123L);
+        carrier2.setName("TestCarrier58");
+        carrier2.setAddress("jgadf kjhs");
+        carrier2.setCarrierType(CarrierType.PLANE);
+
+        carriers.add(carrier);
+        carriers.add(carrier2);
+
+        try {
+            cargoDBRepo.saveAll(cargos, carriers);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -103,7 +150,7 @@ public class Application {
 
     }
 
-    private static void demoSQLFindCargosByName() {
+    private static void demoSQLFindCargosByName() throws SQLException {
         CargoDBRepoImpl cargoDBRepo = new CargoDBRepoImpl();
         System.out.println("Trying to find Cargo with name=Apple...");
 
@@ -111,7 +158,7 @@ public class Application {
         CollectionUtils.printCollection(Arrays.asList(cargos));
     }
 
-    private static void demoSQLFindById() {
+    private static void demoSQLFindById() throws SQLException {
         CargoDBRepoImpl cargoDBRepo = new CargoDBRepoImpl();
         System.out.println("Trying to find Cargo with id=2...");
         Optional<Cargo> cargo = cargoDBRepo.findById(2L);
@@ -130,7 +177,7 @@ public class Application {
         cargoDBRepo.save(foodCargo);
     }
 
-    private static void demoSearchOperations() {
+    private static void demoSearchOperations() throws SQLException {
         System.out.println("SEARCH CARGO BY ID = 1");
         System.out.println(cargoService.findById(1L));
         printSeparator();
@@ -206,7 +253,7 @@ public class Application {
         System.out.println();
     }
 
-    private static void demoExceptions() {
+    private static void demoExceptions() throws SQLException {
         System.out.println("------Demo  exceptions------------");
         Long firstCargo = cargoService.getAll().get(0).getId();
         Optional<Cargo> cargoOptional = cargoService.getByIdFetchingTransportations(firstCargo);

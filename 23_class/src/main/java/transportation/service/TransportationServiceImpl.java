@@ -35,7 +35,7 @@ public class TransportationServiceImpl implements TransportationService {
   }
 
   @Override
-  public Optional<Transportation> findById(Long id) {
+  public Optional<Transportation> findById(Long id) throws SQLException {
     return transportationRepo.findById(id);
   }
 

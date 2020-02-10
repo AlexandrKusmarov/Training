@@ -4,10 +4,13 @@ import cargo.domain.Cargo;
 import cargo.domain.CargoType;
 import cargo.domain.ClothersCargo;
 import cargo.domain.FoodCargo;
+import carrier.domain.Carrier;
 import common.solutions.utils.JavaUtilDateUtils;
-import common.solutions.utils.db.ConnectionBuilder;
 
-import java.sql.*;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class ResultSetManager {
@@ -57,4 +60,14 @@ public class ResultSetManager {
         ps.setLong(6, entity.getId());
         return ps;
     }
+
+    public static PreparedStatement getFilledPreparedStatement(Carrier entity, PreparedStatement ps) throws SQLException {
+        int i = 0;
+        ps.setLong(++i, entity.getId());
+        ps.setString(++i, entity.getName());
+        ps.setString(++i, entity.getAddress());
+        ps.setString(++i, entity.getCarrierType().toString());
+        return ps;
+    }
+
 }

@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface CommonRepo<TYPE, ID> {
 
-  Optional <TYPE> findById(ID id);
+  Optional <TYPE> findById(ID id) throws SQLException;
 
   void save(TYPE entity);
 

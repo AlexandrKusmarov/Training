@@ -17,5 +17,7 @@ public class QuerySql {
     public static final String INSERT_NEW_CARGO_FOOD = "INSERT INTO cargo " +
             "(name, weight, cargoType, expirationLocalDateTime, storeTemperature, id)" +
             " VALUES(?, ?, ?, ?, ?, ?)";
+    public static final String INSERT_NEW_CARRIER = "INSERT INTO carrier (id, name, address, carrierType)" +
+            " VALUES(?, ?, ?, ?)";
 
 }

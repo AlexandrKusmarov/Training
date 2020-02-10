@@ -24,6 +24,19 @@ public final class DbUtils {
         }
     }
 
+    public static ResultSet executeQuery(String sql, JdbcConsumer<PreparedStatement> psConsumer){
+        try {
+            Connection con = ConnectionBuilder.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            psConsumer.accept(ps);
+
+            return ps.executeQuery();
+        } catch (Exception e){
+            throw new RuntimeException(e){};
+        }
+    }
+
+
     public static <T> List<T> selectAll(String sql,
                                         JdbcFunction<ResultSet, T> rsConverter) {
         try (Connection con = ConnectionBuilder.getConnection();
@@ -43,4 +56,20 @@ public final class DbUtils {
         }
     }
 
+    public static <T> T selectById(String sql,Long id,  JdbcFunction<ResultSet, T> rsConverter) {
+        try (Connection con = ConnectionBuilder.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+        ) {
+            ps.setLong(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            T result = null;
+            while (resultSet.next()) {
+                result = rsConverter.apply(resultSet);
+            }
+
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

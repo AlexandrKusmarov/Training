@@ -26,7 +26,7 @@ public class CarrierServiceImpl implements CarrierService {
   }
 
   @Override
-  public Optional<Carrier> findById(Long id) {
+  public Optional<Carrier> findById(Long id) throws SQLException {
     if (id != null) {
       return carrierRepo.findById(id);
     }

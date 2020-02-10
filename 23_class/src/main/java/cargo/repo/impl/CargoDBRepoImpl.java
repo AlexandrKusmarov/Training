@@ -2,41 +2,35 @@ package cargo.repo.impl;
 
 import cargo.domain.Cargo;
 import cargo.domain.CargoType;
-import cargo.domain.ClothersCargo;
-import cargo.domain.FoodCargo;
 import cargo.search.CargoSearchCondition;
-import common.solutions.utils.JavaUtilDateUtils;
+import carrier.domain.Carrier;
 import common.solutions.utils.db.ConnectionBuilder;
 import common.solutions.utils.db.DbUtils;
 import common.solutions.utils.db.QuerySql;
 import db.ResultSetManager;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class CargoDBRepoImpl extends CommonCargoRepo {
     @Override
-    public Optional<Cargo> getByIdFetchingTransportations(long id) {
+    public Optional<Cargo> getByIdFetchingTransportations(long id) throws SQLException {
         return findById(id);
     }
 
     @Override
-    public Cargo[] findByName(String name) {
+    public Cargo[] findByName(String name) throws SQLException {
         List<Cargo> cargos = new ArrayList<>();
-        try (Connection con = ConnectionBuilder.getConnection();
-             PreparedStatement ps = con.prepareStatement(QuerySql.SELECT_CARGOS_BY_NAME)) {
-            ps.setString(1, name);
-
-            ResultSet resultSet = ps.executeQuery();
-
-//            while (resultSet.next()) {
-//                Cargo cargo = ResultSetManager.mapCargo(resultSet);
-//                cargo.ifPresent(cargos::add);
-//            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        ResultSet resultSet = DbUtils.executeQuery(QuerySql.SELECT_CARGOS_BY_NAME, ps ->
+                ps.setString(1, name)
+        );
+        while (resultSet.next()) {
+            cargos.add(ResultSetManager.mapCargo(resultSet));
         }
         return cargos.toArray(new Cargo[0]);
     }
@@ -46,19 +40,14 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
         return null;
     }
 
+
     @Override
-    public Optional<Cargo> findById(Long aLong) {
-        try (Connection con = ConnectionBuilder.getConnection();
-             PreparedStatement ps = con.prepareStatement(QuerySql.SELECT_CARGO_BY_ID)) {
+    public Optional<Cargo> findById(Long aLong) throws SQLException {
+        ResultSet resultSet = DbUtils.executeQuery(QuerySql.SELECT_CARGO_BY_ID, ps -> {
             ps.setLong(1, aLong);
-
-            ResultSet resultSet = ps.executeQuery();
-
-            if (resultSet.next()) {
-                return Optional.of(ResultSetManager.mapCargo(resultSet));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        });
+        if (resultSet.next()) {
+            return Optional.of(ResultSetManager.mapCargo(resultSet));
         }
         return Optional.empty();
     }
@@ -70,6 +59,51 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
         DbUtils.executeUpdate(sql, ps -> {
             ResultSetManager.getFilledPreparedStatement(entity, ps);
         });
+    }
+
+    @Override
+    public void saveAll(List<Cargo> cargos, List<Carrier> carriers) throws SQLException {
+        Connection con = ConnectionBuilder.getConnection();
+        PreparedStatement psCargo = null;
+        PreparedStatement psCarrier = null;
+        con.setAutoCommit(false);
+        try {
+            if (!cargos.isEmpty()) {
+                psCargo = con.prepareStatement(QuerySql.INSERT_NEW_CARGO_CLOTHERS);
+                for (Cargo cargo : cargos) {
+                    if (cargo.getCargoType().equals(CargoType.CLOTHERS)) {
+                        ResultSetManager.getFilledPreparedStatement(cargo, psCargo).addBatch();
+                    }
+                }
+                psCargo.executeBatch();
+                con.commit();
+                psCargo = con.prepareStatement(QuerySql.INSERT_NEW_CARGO_FOOD);
+                for (Cargo cargo : cargos) {
+                    if (cargo.getCargoType().equals(CargoType.FOOD)) {
+                        ResultSetManager.getFilledPreparedStatement(cargo, psCargo).addBatch();
+                    }
+                }
+                psCargo.executeBatch();
+                con.commit();
+            }
+            if (!carriers.isEmpty()) {
+                psCarrier = con.prepareStatement(QuerySql.INSERT_NEW_CARRIER);
+                for (Carrier carrier : carriers) {
+                    ResultSetManager.getFilledPreparedStatement(carrier, psCarrier).addBatch();
+                }
+                psCarrier.executeBatch();
+                con.commit();
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+            con.rollback();
+        } finally {
+            if (psCargo != null && psCarrier != null) {
+                psCargo.close();
+                psCarrier.close();
+            }
+            con.close();
+        }
     }
 
     @Override
@@ -97,7 +131,6 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
 
     @Override
     public int countAll() throws SQLException {
-
         try (Connection con = ConnectionBuilder.getConnection();
              PreparedStatement ps = con.prepareStatement(QuerySql.COUNT_ALL_CARGOS)) {
             ResultSet resultSet = ps.executeQuery();
@@ -107,4 +140,5 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
         }
         return 0;
     }
+
 }
