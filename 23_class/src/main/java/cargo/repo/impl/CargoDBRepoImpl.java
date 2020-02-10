@@ -76,7 +76,6 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
                     }
                 }
                 psCargo.executeBatch();
-                con.commit();
                 psCargo = con.prepareStatement(QuerySql.INSERT_NEW_CARGO_FOOD);
                 for (Cargo cargo : cargos) {
                     if (cargo.getCargoType().equals(CargoType.FOOD)) {
@@ -84,7 +83,6 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
                     }
                 }
                 psCargo.executeBatch();
-                con.commit();
             }
             if (!carriers.isEmpty()) {
                 psCarrier = con.prepareStatement(QuerySql.INSERT_NEW_CARRIER);
@@ -92,8 +90,8 @@ public class CargoDBRepoImpl extends CommonCargoRepo {
                     ResultSetManager.getFilledPreparedStatement(carrier, psCarrier).addBatch();
                 }
                 psCarrier.executeBatch();
-                con.commit();
             }
+            con.commit();
         } catch (Exception e) {
             e.printStackTrace();
             con.rollback();
